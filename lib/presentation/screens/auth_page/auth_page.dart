@@ -23,7 +23,7 @@ class AuthPageState extends ConsumerState<AuthPage> implements AuthView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Authenticate")),
+      appBar: AppBar(title: const Text("Authenticate")),
       body: Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           const Text("Custom token"),

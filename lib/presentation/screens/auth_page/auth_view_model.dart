@@ -19,8 +19,10 @@ class AuthViewModel extends BaseViewModel<AuthView> {
     final _result = await _authRepo.signIn(controller.text);
     _result.fold((l) {
       ///TODO: handle Error
+      print("FAILURE: ${l.title}, ${l.description}");
     }, (r) {
       ///TODO: Handle Success
+      print("SUCCESS");
     });
   }
 }
