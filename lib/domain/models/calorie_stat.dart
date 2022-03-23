@@ -11,17 +11,29 @@ class CalorieStats {
     final DateTime _currentTime = DateTime.now();
     final DateTime _todayDateTime =
         DateTime(_currentTime.year, _currentTime.month, _currentTime.day);
-    // final DateTime _tomorrowDateTime =
-    //     _todayDateTime.add(const Duration(days: 1));
+    final DateTime _tomorrowDateTime =
+        _todayDateTime.add(const Duration(days: 1));
 
     int i = 0; // Track foodEntries index
     int j = -1; // Track weekNo
-    while (i < foodEntries.length && j < 4) {
-      // final DateTime _weekBeforeTomorrowDateTime =
-      //     _tomorrowDateTime.subtract(Duration(days: (j + 1) * 7));
 
+    double sumCalorieIntake = 0.0;
+    List<FoodEntry> weeklyFoodEntries = [];
+    while (
+        i < foodEntries.length && foodEntries[i].time.isAfter(_todayDateTime)) {
+      weeklyFoodEntries.add(foodEntries[i]);
+      sumCalorieIntake += foodEntries[i].calorificValue;
+      i++;
+    }
+    WeeklyCalorieStat stat =
+        WeeklyCalorieStat(-1, weeklyFoodEntries, sumCalorieIntake);
+    weeklyCalorieStats.add(stat);
+
+    j = 0;
+    i = 0;
+    while (i < foodEntries.length && j < 2) {
       final DateTime _weekBeforeTomorrowDateTime =
-          _todayDateTime.subtract(Duration(days: (j + 1) * 7));
+          _tomorrowDateTime.subtract(Duration(days: (j + 1) * 7));
 
       double sumCalorieIntake = 0.0;
       List<FoodEntry> weeklyFoodEntries = [];

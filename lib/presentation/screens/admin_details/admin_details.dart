@@ -212,15 +212,9 @@ class StatsTab extends ConsumerWidget {
                           charts.MaterialPalette.blue.shadeDefault,
                       domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
                           ? 'Today'
-                          : 'Week ' +
-                              (ref
-                                          .watch(adminDetailsViewModel)
-                                          .stats
-                                          .weeklyCalorieStats
-                                          .length -
-                                      stat.weekNo -
-                                      1)
-                                  .toString(),
+                          : (stat.weekNo == 0)
+                              ? 'Last 7 days'
+                              : 'Week before',
                       measureFn: (WeeklyCalorieStat stat, _) =>
                           stat.avgCalorieIntake,
                       data: ref
@@ -255,15 +249,9 @@ class StatsTab extends ConsumerWidget {
                           charts.MaterialPalette.green.shadeDefault,
                       domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
                           ? 'Today'
-                          : 'Week ' +
-                              (ref
-                                          .watch(adminDetailsViewModel)
-                                          .stats
-                                          .weeklyCalorieStats
-                                          .length -
-                                      stat.weekNo -
-                                      1)
-                                  .toString(),
+                          : (stat.weekNo == 0)
+                              ? 'Last 7 days'
+                              : 'Week before',
                       measureFn: (WeeklyCalorieStat stat, _) =>
                           stat.foodEntries.length,
                       data: ref
