@@ -9,20 +9,39 @@ final adminProvider = StateNotifierProvider((ref) =>
 class AdminProvider extends StateNotifier<List<UserProfile>?> {
   final AdminRepo _repo;
   final FoodConsumptionRepo _foodConsumptionRepo;
+
   AdminProvider(List<UserProfile>? value, this._repo, this._foodConsumptionRepo)
       : super(value);
+
   Future<void> fetchUsers() async {
     final result = await _repo.fetchAllUsers();
     state = result;
   }
 
-  Future<void> fetchFoodEntriesForUser(UserProfile user) async {
-    final index = state!.indexWhere((element) => element.userID == user.userID);
-    final foodEntries =
-        await _foodConsumptionRepo.getFoodEntries(overrideUid: user.userID);
+  UserProfile getUserByUID(String uid) {
+    return state!.where((element) => element.userID == uid).toList().first;
+  }
 
-    if (index != -1) {
-      state![index] = state![index].copyWith(foodEntries: foodEntries);
+  Future<void> fetchFoodEntriesForUser(String uid) async {
+    if (state == null) {
+      return;
     }
+    final index = state!.indexWhere((element) => element.userID == uid);
+    final foodEntries =
+        await _foodConsumptionRepo.getFoodEntries(overrideUid: uid);
+
+    foodEntries.fold(
+      (l) {
+        print("ERROR: ${l.title}");
+        if (index != -1) {
+          state![index] = state![index].copyWith(foodEntries: []);
+        }
+      },
+      (r) {
+        if (index != -1) {
+          state![index] = state![index].copyWith(foodEntries: r);
+        }
+      },
+    );
   }
 }

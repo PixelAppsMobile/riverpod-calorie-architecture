@@ -33,20 +33,30 @@ class AdminOverviewState extends ConsumerState<AdminOverview> {
               itemCount: _viewModel.users.length,
               itemBuilder: (context, index) {
                 final UserProfile _profile = _viewModel.users[index];
-                return ListTile(
-                  title: Text("=> " + _profile.userID),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AdminDetailsScreen(
-                          user: _profile,
-                        ),
-                      ),
-                    );
-                  },
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Text('${index + 1}. ${_profile.userID}'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminDetailsScreen(
+                              uid: _profile.userID,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                  ],
                 );
-              }),
+              },
+            ),
     );
   }
 }

@@ -10,10 +10,11 @@ mixin AdminOverviewView {}
 class AdminOverviewViewModel extends BaseViewModel<AdminOverviewView> {
   AdminOverviewViewModel(this._adminProvider);
   List<UserProfile> users = [];
+
   final AdminProvider _adminProvider;
+
   void initialize() async {
     toggleLoadingOn(true);
-    notifyListeners();
     await _adminProvider.fetchUsers();
     users = _adminProvider.state!;
     toggleLoadingOn(false);

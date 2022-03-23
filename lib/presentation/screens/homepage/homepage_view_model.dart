@@ -46,13 +46,21 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
   Future<void> getFoodEntries() async {
     try {
       toggleLoadingOn(true);
-      final data = await _foodConsumptionRepo.getFoodEntries();
+      final either = await _foodConsumptionRepo.getFoodEntries();
+      final data = either.fold<List<FoodEntry>>(
+        (l) {
+          print(l.title);
+          return [];
+        },
+        (r) => r,
+      );
       foodEntries.addAll(data);
       calculateIfCaloriesOvertake();
       toggleLoadingOn(false);
       notifyListeners();
     } catch (e) {
-      view.showSnackbar("Error getting good entries", color: AppColor.errorRed);
+      view!
+          .showSnackbar("Error getting good entries", color: AppColor.errorRed);
     }
   }
 
@@ -61,12 +69,12 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
     final data = await _foodConsumptionRepo.addFoodEntry(FoodEntry(
         name: name, time: consumptionTime, calorificValue: calorificValue));
     data.fold((l) {
-      view.showSnackbar(l.title, color: AppColor.errorRed);
+      view!.showSnackbar(l.title, color: AppColor.errorRed);
     }, (r) {
       foodEntries.add(r);
       foodEntries.sort((a, b) => b.time.compareTo(a.time));
       calculateIfCaloriesOvertake();
-      view.showSnackbar("Entry added succesfully",
+      view!.showSnackbar("Entry added succesfully",
           color: AppColor.successGreen);
       notifyListeners();
     });
@@ -81,10 +89,9 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
   Future<void> updateCalorieLimit(double limit) async {
     final _result = await _userProvider.updateCalorieLimit(limit);
     _result.fold(
-        (l) =>
-            view.showSnackbar("Error Updating Limit", color: AppColor.errorRed),
-        (r) {
-      view.showSnackbar("Daily Limit Updated Successfully",
+        (l) => view!.showSnackbar("Error Updating Limit",
+            color: AppColor.errorRed), (r) {
+      view!.showSnackbar("Daily Limit Updated Successfully",
           color: AppColor.successGreen);
       calculateIfCaloriesOvertake();
       notifyListeners();

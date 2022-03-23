@@ -13,7 +13,11 @@ final authViewModel = ChangeNotifierProvider.autoDispose(
 class AuthViewModel extends BaseViewModel<AuthView> {
   final TextEditingController controller = TextEditingController();
   final UserProvider _authRepo;
-  AuthViewModel(this._authRepo);
+
+  AuthViewModel(this._authRepo) {
+    controller.addListener(_updateUI);
+  }
+
   Future loginUsingToken() async {
     print(controller.text);
     final _result = await _authRepo.signIn(controller.text);
@@ -24,5 +28,15 @@ class AuthViewModel extends BaseViewModel<AuthView> {
       ///TODO: Handle Success
       print("SUCCESS");
     });
+  }
+
+  void _updateUI() {
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_updateUI);
+    super.dispose();
   }
 }
