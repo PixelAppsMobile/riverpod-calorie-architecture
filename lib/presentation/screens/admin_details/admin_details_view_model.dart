@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/base_view_model.dart';
+import 'package:totaltest/domain/models/calorie_stat.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 import 'package:totaltest/domain/models/user_profile_model.dart';
 import 'package:totaltest/domain/providers/admin_provider.dart';
@@ -20,9 +21,13 @@ class AdminDetailsViewModel extends BaseViewModel<AdminDetailsView> {
 
   late TabController tabController;
 
+  late CalorieStats _stats;
+
   AdminDetailsViewModel(this._adminProvider);
 
   UserProfile get currentUser => _currentUser;
+
+  CalorieStats get stats => _stats;
 
   Future<void> initialise(String uid, TickerProvider vsync) async {
     toggleLoadingOn(true);
@@ -30,7 +35,13 @@ class AdminDetailsViewModel extends BaseViewModel<AdminDetailsView> {
     tabController.index = 0;
     await _adminProvider.fetchFoodEntriesForUser(uid);
     _currentUser = _adminProvider.getUserByUID(uid);
+    getStats();
     toggleLoadingOn(false);
+  }
+
+  void getStats() {
+    _stats = CalorieStats.fromFoodEntries(_currentUser.foodEntries!);
+    notifyListeners();
   }
 
   Future<void> deleteFoodEntry(FoodEntry entry) async {
@@ -38,13 +49,13 @@ class AdminDetailsViewModel extends BaseViewModel<AdminDetailsView> {
         await _adminProvider.deleteFoodEntry(entry, _currentUser.userID);
     return either.fold(
       (l) => view!.showAlert(l.title),
-      (r) => r,
+      (r) => getStats(),
     );
   }
 
   Future<void> editFoodEntry(FoodEntry entry) async {
     await view!.openBottomSheet(entry, _currentUser.userID, () {
-      notifyListeners();
+      getStats();
     });
   }
 }
