@@ -210,15 +210,17 @@ class StatsTab extends ConsumerWidget {
                       id: 'Calorie Intake',
                       colorFn: (_, __) =>
                           charts.MaterialPalette.blue.shadeDefault,
-                      domainFn: (WeeklyCalorieStat stat, _) =>
-                          'Week ' +
-                          (ref
-                                      .watch(adminDetailsViewModel)
-                                      .stats
-                                      .weeklyCalorieStats
-                                      .length -
-                                  stat.weekNo)
-                              .toString(),
+                      domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
+                          ? 'Today'
+                          : 'Week ' +
+                              (ref
+                                          .watch(adminDetailsViewModel)
+                                          .stats
+                                          .weeklyCalorieStats
+                                          .length -
+                                      stat.weekNo -
+                                      1)
+                                  .toString(),
                       measureFn: (WeeklyCalorieStat stat, _) =>
                           stat.avgCalorieIntake,
                       data: ref
@@ -251,15 +253,17 @@ class StatsTab extends ConsumerWidget {
                       id: 'No of entries added',
                       colorFn: (_, __) =>
                           charts.MaterialPalette.green.shadeDefault,
-                      domainFn: (WeeklyCalorieStat stat, _) =>
-                          'Week ' +
-                          (ref
-                                      .watch(adminDetailsViewModel)
-                                      .stats
-                                      .weeklyCalorieStats
-                                      .length -
-                                  stat.weekNo)
-                              .toString(),
+                      domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
+                          ? 'Today'
+                          : 'Week ' +
+                              (ref
+                                          .watch(adminDetailsViewModel)
+                                          .stats
+                                          .weeklyCalorieStats
+                                          .length -
+                                      stat.weekNo -
+                                      1)
+                                  .toString(),
                       measureFn: (WeeklyCalorieStat stat, _) =>
                           stat.foodEntries.length,
                       data: ref
