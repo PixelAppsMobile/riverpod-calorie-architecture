@@ -83,12 +83,16 @@ class FirestoreServiceImpl implements DatabaseService {
   Future<Either<AppError, void>> updateFoodEntry(
       String uid, FoodEntry entry) async {
     try {
+      print("UPDATING FOOD ENTRY");
+      print(entry.calorificValue);
+      print(entry.documentID);
       await _firestore
           .collection(FirestoreStrings.usersCollection)
-          .doc()
+          .doc(uid)
           .collection(FirestoreStrings.foodEntryCollection)
           .doc(entry.documentID)
-          .set(entry.toJson().stripDocID);
+          .update(entry.toJson().stripDocID);
+      print("UPDATE COMPLETE");
       return const Right(null);
     } catch (e) {
       return Left(AppError(title: e.toString()));

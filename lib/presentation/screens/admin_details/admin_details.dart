@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/extenstions/datetime_ext.dart';
+import 'package:totaltest/domain/models/food_entry_model.dart';
 import 'package:totaltest/domain/models/user_profile_model.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details_view_model.dart';
+import 'package:totaltest/presentation/screens/admin_details/widgets/update_food_entry_bottom_sheet/update_food_entry_bottom_sheet.dart';
 
 class AdminDetailsScreen extends ConsumerStatefulWidget {
   const AdminDetailsScreen({
@@ -17,7 +19,7 @@ class AdminDetailsScreen extends ConsumerStatefulWidget {
 }
 
 class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AdminDetailsView {
   late AdminDetailsViewModel _viewModel;
 
   @override
@@ -180,7 +182,8 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             onPressed: () {
-                                              //TODO: Edit food entry
+                                              _viewModel.editFoodEntry(
+                                                  user.foodEntries![index]);
                                             },
                                             icon: const Icon(
                                               Icons.edit,
@@ -191,7 +194,8 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             onPressed: () {
-                                              // TODO: Delete food entry
+                                              _viewModel.deleteFoodEntry(
+                                                  user.foodEntries![index]);
                                             },
                                             icon: const Icon(
                                               Icons.delete_forever_rounded,
@@ -220,6 +224,31 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
             );
           },
         ),
+      ),
+    );
+  }
+
+  @override
+  Future<void> showAlert(String message) async {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  Future<void> openBottomSheet(
+      FoodEntry entry, String uid, void Function() onPop) async {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+      ),
+      context: context,
+      builder: (context) => UpdateFoodEntryBottomSheet(
+        foodEntry: entry,
+        uid: uid,
+        onPop: onPop,
       ),
     );
   }
