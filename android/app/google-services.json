@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "828201820459",
+    "project_id": "toptalcaloriemetre",
+    "storage_bucket": "toptalcaloriemetre.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828201820459:android:9b883197151e8b5db6256e",
+        "android_client_info": {
+          "package_name": "com.calorie.meter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828201820459-llm43t3ndc5kvbfj169ss11s35j0g4c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvqt9GS8LsR9taxmlET28fTeq9pKy_SkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828201820459-llm43t3ndc5kvbfj169ss11s35j0g4c6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828201820459-713fumicicre584adhkcs8suqts1od8o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.toptal.caloriemeter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

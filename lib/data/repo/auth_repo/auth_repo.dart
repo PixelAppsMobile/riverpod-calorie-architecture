@@ -4,9 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/helper/prefs_helper/shared_prefs_helper.dart';
 import 'package:totaltest/data/repo/auth_repo/auth_repo_impl.dart';
+import 'package:totaltest/data/services/firestore/database_service.dart';
 import 'package:totaltest/domain/models/app_user.dart';
 
-final authRepo = Provider.autoDispose((ref) => AuthRepoImpl(ref.read(prefs)));
+final authRepo = Provider.autoDispose(
+    (ref) => AuthRepoImpl(ref.read(prefs), ref.read(databaseService)));
 
 abstract class AuthRepo {
   Future<Either<AppError, User>> signInUsingCustomToken(String customToken);
