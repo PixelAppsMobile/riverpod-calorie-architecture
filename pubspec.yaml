@@ -41,7 +41,8 @@ dependencies:
   intl: ^0.17.0
   shared_preferences: ^2.0.13
   syncfusion_flutter_datepicker: ^19.4.56
-
+  mockito: ^5.1.0
+  
 dev_dependencies:
   build_runner: ^2.1.8
   change_app_package_name: ^1.0.0
@@ -51,6 +52,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
   freezed_annotation: ^1.1.0

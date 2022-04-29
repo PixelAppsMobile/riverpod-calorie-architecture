@@ -18,6 +18,9 @@ class AuthPageState extends ConsumerState<AuthPage> implements AuthView {
     // "ref" can be used in all life-cycles of a StatefulWidget.
     _viewModel = ref.read(authViewModel);
     _viewModel.attachView(this);
+    _viewModel.controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
