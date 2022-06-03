@@ -4,7 +4,7 @@ import 'package:totaltest/data/repo/food_consumption_repo/food_consumption_repo.
 import 'package:totaltest/data/services/firestore/database_service.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 
-class FoodConsumptionRepoImpl implements FoodConsumptionRepo {
+class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
   final String uid;
   final DatabaseService _databaseService;
 

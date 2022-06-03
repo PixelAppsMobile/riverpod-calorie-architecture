@@ -33,10 +33,11 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
     if (foodEntries.isEmpty) {
       return 2100;
     } else {
-      return foodEntries
-          .where((element) => element.time.isSameDate(DateTime.now()))
-          .map<double>((e) => e.calorificValue)
-          .reduce((a, b) => a + b);
+      return 100;
+      // return foodEntries
+      //     .where((element) => element.time.isSameDate(DateTime.now()))
+      //     .map<double>((e) => e.calorificValue)
+      //     .reduce((a, b) => a + b);
     }
   }
 
@@ -45,7 +46,7 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
 
   Future<void> getFoodEntries() async {
     try {
-      toggleLoadingOn(true);
+      toggleLoadingOn(true, turnOffNotifyListeners: true);
       final either = await _foodConsumptionRepo.getFoodEntries();
       final data = either.fold<List<FoodEntry>>(
         (l) {

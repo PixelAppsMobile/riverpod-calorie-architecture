@@ -36,6 +36,7 @@ class AuthPageState extends ConsumerState<AuthPage> implements AuthView {
               children: [
                 const Text("Custom token"),
                 TextField(
+                  key: customTokenTextField,
                   controller: _viewModel.controller,
                 ),
                 Buttons.expandedFlatButton(
@@ -57,3 +58,5 @@ class AuthPageState extends ConsumerState<AuthPage> implements AuthView {
         .showSnackBar(SnackBar(content: Text(message), backgroundColor: color));
   }
 }
+
+const customTokenTextField = ValueKey("customTokenTextField");

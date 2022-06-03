@@ -6,9 +6,11 @@ abstract class BaseViewModel<T> extends ChangeNotifier {
   String? errorMessage;
 
   // ignore: avoid_positional_boolean_parameters
-  void toggleLoadingOn(bool on) {
+  ///[turnOffNotifyListeners] should be set to true when notifyListeners() need
+  ///not to be called
+  void toggleLoadingOn(bool on, {bool turnOffNotifyListeners = false}) {
     loading = on;
-    notifyListeners();
+    if (!turnOffNotifyListeners) notifyListeners();
   }
 
   void setErrorMessage(String value) {
