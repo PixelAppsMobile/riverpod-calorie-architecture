@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/services/firestore/firestore_service.dart';
+import 'package:totaltest/data/data_sources/remote/database/remote_database_data_source_impl.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 
-final databaseService = Provider.autoDispose(
-  (ref) => FirestoreServiceImpl(),
+import '../../../../core/result_type.dart';
+
+final remoteDatabaseDataSource = Provider.autoDispose(
+  (ref) => RemoteDatabaseDataSourceImpl(),
 );
 
-abstract class DatabaseService {
+abstract class RemoteDatabaseDataSource {
   Future<Either<AppError, Map<String, dynamic>>> getUser(String uid);
   Future<Either<AppError, void>> updateCalorie(String uid, double calories);
   Future<Either<AppError, List<FoodEntry>>> getFoodEntries(String uid);

@@ -2,10 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:totaltest/data/helper/prefs_helper/shared_prefs_helper.dart';
 import 'package:totaltest/main.dart';
-import 'package:totaltest/main.mocks.dart';
 import 'package:totaltest/presentation/screens/auth_page/auth_page.dart';
 
 ///GoodReads: https://medium.com/swlh/3-tricks-to-test-your-widgets-with-flutter-more-comfortably-88fcae5616cc

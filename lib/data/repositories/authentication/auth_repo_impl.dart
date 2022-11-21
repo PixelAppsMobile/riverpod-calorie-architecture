@@ -1,29 +1,31 @@
-import 'package:totaltest/core/firestore_strings.dart';
-import 'package:totaltest/core/preference_strings.dart';
+import 'package:totaltest/core/constants/firestore_strings.dart';
+import 'package:totaltest/core/constants/preference_strings.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dartz/dartz.dart';
-import 'package:totaltest/data/helper/prefs_helper/shared_prefs_helper.dart';
-import 'package:totaltest/data/repo/auth_repo/auth_repo.dart';
-import 'package:totaltest/data/services/firestore/database_service.dart';
+import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
+import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
+import 'package:totaltest/domain/repositories/authentication/auth_repo.dart';
 import 'package:totaltest/domain/enums/user_role.dart';
 import 'package:totaltest/domain/models/app_user.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  final SharedPreferenceHelper _preferenceHelper;
-  final DatabaseService _databaseService;
+  final LocalStorageDataSource _localStorageDataSource;
+  final RemoteDatabaseDataSource _remoteDatabaseDataSource;
 
-  const AuthRepoImpl(this._preferenceHelper, this._databaseService);
+  const AuthRepoImpl(
+      this._localStorageDataSource, this._remoteDatabaseDataSource);
 
   @override
   AppUser getAppUser() {
-    print(_preferenceHelper.getBool(SharedPreferences.isAdmit));
+    print(_localStorageDataSource.getBool(SharedPreferences.isAdmin));
     return AppUser(
         user: FirebaseAuth.instance.currentUser,
         calorieLimit:
-            _preferenceHelper.getDouble(SharedPreferences.calorieLimit) ??
+            _localStorageDataSource.getDouble(SharedPreferences.calorieLimit) ??
                 2100.0,
-        role: (_preferenceHelper.getBool(SharedPreferences.isAdmit) ?? false)
+        role: (_localStorageDataSource.getBool(SharedPreferences.isAdmin) ??
+                false)
             ? UserRole.Admin
             : UserRole.Normal);
   }
@@ -35,13 +37,15 @@ class AuthRepoImpl implements AuthRepo {
       final userCred =
           await FirebaseAuth.instance.signInWithCustomToken(customToken);
       if (userCred.user != null) {
-        final either = await _databaseService.getUser(userCred.user!.uid);
+        final either =
+            await _remoteDatabaseDataSource.getUser(userCred.user!.uid);
         return either.fold(
           (l) => Left(l),
           (r) async {
-            await _preferenceHelper.setBool(
-                SharedPreferences.isAdmit, r[FirestoreStrings.isAdmin]);
-            await _preferenceHelper.setDouble(SharedPreferences.calorieLimit,
+            await _localStorageDataSource.setBool(
+                SharedPreferences.isAdmin, r[FirestoreStrings.isAdmin]);
+            await _localStorageDataSource.setDouble(
+                SharedPreferences.calorieLimit,
                 r[FirestoreStrings.calorieLimit]);
             return Right(userCred.user!);
           },
@@ -57,18 +61,20 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
-    await _preferenceHelper.clearAll();
+    await _localStorageDataSource.clearAll();
   }
 
   @override
   Future<Either<AppError, AppSuccess>> updateCalorieLimit(
       double calories, String uid) async {
     try {
-      final either = await _databaseService.updateCalorie(uid, calories);
+      final either =
+          await _remoteDatabaseDataSource.updateCalorie(uid, calories);
       return either.fold(
         (l) => Left(l),
         (r) {
-          _preferenceHelper.setDouble(SharedPreferences.calorieLimit, calories);
+          _localStorageDataSource.setDouble(
+              SharedPreferences.calorieLimit, calories);
           return Right(AppSuccess());
         },
       );

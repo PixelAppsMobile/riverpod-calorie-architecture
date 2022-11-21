@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/base_view_model.dart';
+import 'package:totaltest/presentation/providers/base_view_model.dart';
 import 'package:totaltest/domain/models/user_profile_model.dart';
-import 'package:totaltest/domain/providers/admin_provider.dart';
+import 'package:totaltest/presentation/providers/admin_provider.dart';
 
 final adminOverviewViewModel = ChangeNotifierProvider(
     (ref) => AdminOverviewViewModel(ref.read(adminProvider.notifier)));

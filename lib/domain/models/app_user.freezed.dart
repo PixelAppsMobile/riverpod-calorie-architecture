@@ -12,23 +12,7 @@ part of 'app_user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AppUserTearOff {
-  const _$AppUserTearOff();
-
-  _AppUser call({User? user, UserRole? role, double? calorieLimit = 2100.0}) {
-    return _AppUser(
-      user: user,
-      role: role,
-      calorieLimit: calorieLimit,
-    );
-  }
-}
-
-/// @nodoc
-const $AppUser = _$AppUserTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AppUser {
@@ -43,18 +27,22 @@ mixin _$AppUser {
 /// @nodoc
 abstract class $AppUserCopyWith<$Res> {
   factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
-      _$AppUserCopyWithImpl<$Res>;
+      _$AppUserCopyWithImpl<$Res, AppUser>;
+  @useResult
   $Res call({User? user, UserRole? role, double? calorieLimit});
 }
 
 /// @nodoc
-class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
+class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
+    implements $AppUserCopyWith<$Res> {
   _$AppUserCopyWithImpl(this._value, this._then);
 
-  final AppUser _value;
   // ignore: unused_field
-  final $Res Function(AppUser) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = freezed,
@@ -62,55 +50,56 @@ class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
     Object? calorieLimit = freezed,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      role: role == freezed
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as UserRole?,
-      calorieLimit: calorieLimit == freezed
+      calorieLimit: freezed == calorieLimit
           ? _value.calorieLimit
           : calorieLimit // ignore: cast_nullable_to_non_nullable
               as double?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
-  factory _$AppUserCopyWith(_AppUser value, $Res Function(_AppUser) then) =
-      __$AppUserCopyWithImpl<$Res>;
+abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
+  factory _$$_AppUserCopyWith(
+          _$_AppUser value, $Res Function(_$_AppUser) then) =
+      __$$_AppUserCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({User? user, UserRole? role, double? calorieLimit});
 }
 
 /// @nodoc
-class __$AppUserCopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
-    implements _$AppUserCopyWith<$Res> {
-  __$AppUserCopyWithImpl(_AppUser _value, $Res Function(_AppUser) _then)
-      : super(_value, (v) => _then(v as _AppUser));
+class __$$_AppUserCopyWithImpl<$Res>
+    extends _$AppUserCopyWithImpl<$Res, _$_AppUser>
+    implements _$$_AppUserCopyWith<$Res> {
+  __$$_AppUserCopyWithImpl(_$_AppUser _value, $Res Function(_$_AppUser) _then)
+      : super(_value, _then);
 
-  @override
-  _AppUser get _value => super._value as _AppUser;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = freezed,
     Object? role = freezed,
     Object? calorieLimit = freezed,
   }) {
-    return _then(_AppUser(
-      user: user == freezed
+    return _then(_$_AppUser(
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      role: role == freezed
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as UserRole?,
-      calorieLimit: calorieLimit == freezed
+      calorieLimit: freezed == calorieLimit
           ? _value.calorieLimit
           : calorieLimit // ignore: cast_nullable_to_non_nullable
               as double?,
@@ -127,8 +116,8 @@ class _$_AppUser implements _AppUser {
   final User? user;
   @override
   final UserRole? role;
-  @JsonKey()
   @override
+  @JsonKey()
   final double? calorieLimit;
 
   @override
@@ -140,29 +129,28 @@ class _$_AppUser implements _AppUser {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AppUser &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality()
-                .equals(other.calorieLimit, calorieLimit));
+            other is _$_AppUser &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.calorieLimit, calorieLimit) ||
+                other.calorieLimit == calorieLimit));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(calorieLimit));
+  int get hashCode => Object.hash(runtimeType, user, role, calorieLimit);
 
   @JsonKey(ignore: true)
   @override
-  _$AppUserCopyWith<_AppUser> get copyWith =>
-      __$AppUserCopyWithImpl<_AppUser>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_AppUserCopyWith<_$_AppUser> get copyWith =>
+      __$$_AppUserCopyWithImpl<_$_AppUser>(this, _$identity);
 }
 
 abstract class _AppUser implements AppUser {
-  const factory _AppUser({User? user, UserRole? role, double? calorieLimit}) =
-      _$_AppUser;
+  const factory _AppUser(
+      {final User? user,
+      final UserRole? role,
+      final double? calorieLimit}) = _$_AppUser;
 
   @override
   User? get user;
@@ -172,6 +160,6 @@ abstract class _AppUser implements AppUser {
   double? get calorieLimit;
   @override
   @JsonKey(ignore: true)
-  _$AppUserCopyWith<_AppUser> get copyWith =>
+  _$$_AppUserCopyWith<_$_AppUser> get copyWith =>
       throw _privateConstructorUsedError;
 }

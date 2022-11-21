@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/repo/auth_repo/auth_repo.dart';
+import 'package:totaltest/domain/repositories/authentication/auth_repo.dart';
 import 'package:totaltest/domain/models/app_user.dart';
 
 final userProvider = StateNotifierProvider<UserProvider, AppUser?>(

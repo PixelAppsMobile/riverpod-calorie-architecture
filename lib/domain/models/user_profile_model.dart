@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:totaltest/core/firestore_strings.dart';
+import 'package:totaltest/core/constants/firestore_strings.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 
 part 'user_profile_model.freezed.dart';

@@ -1,41 +1,41 @@
 import 'package:dartz/dartz.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/repo/food_consumption_repo/food_consumption_repo.dart';
-import 'package:totaltest/data/services/firestore/database_service.dart';
+import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
+import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 
 class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
   final String uid;
-  final DatabaseService _databaseService;
+  final RemoteDatabaseDataSource _remoteDatabaseDataSource;
 
-  FoodConsumptionRepoImpl(this.uid, this._databaseService);
+  FoodConsumptionRepoImpl(this.uid, this._remoteDatabaseDataSource);
 
   @override
   Future<Either<AppError, FoodEntry>> addFoodEntry(FoodEntry entry,
       {String? overrideUid}) async {
     assert(entry.documentID == null);
 
-    return _databaseService.createFoodEntry(overrideUid ?? uid, entry);
+    return _remoteDatabaseDataSource.createFoodEntry(overrideUid ?? uid, entry);
   }
 
   @override
   Future<Either<AppError, List<FoodEntry>>> getFoodEntries(
       {String? overrideUid}) async {
-    return _databaseService.getFoodEntries(overrideUid ?? uid);
+    return _remoteDatabaseDataSource.getFoodEntries(overrideUid ?? uid);
   }
 
   @override
   Future<Either<AppError, void>> updateFoodEntry(FoodEntry entry,
       {String? overrideUid}) async {
     assert(entry.documentID != null);
-    return _databaseService.updateFoodEntry(overrideUid ?? uid, entry);
+    return _remoteDatabaseDataSource.updateFoodEntry(overrideUid ?? uid, entry);
   }
 
   @override
   Future<Either<AppError, void>> deleteFoodEntry(FoodEntry entry,
       {String? overrideUid}) async {
     assert(entry.documentID != null);
-    return _databaseService.deleteFoodEntry(
+    return _remoteDatabaseDataSource.deleteFoodEntry(
         overrideUid ?? uid, entry.documentID!);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:totaltest/core/firestore_strings.dart';
-import 'package:totaltest/data/repo/admin_repo/admin_repo.dart';
+import 'package:totaltest/core/constants/firestore_strings.dart';
+import 'package:totaltest/domain/repositories/admin/admin_repo.dart';
 import 'package:totaltest/domain/extenstions/export.dart';
 import 'package:totaltest/domain/models/user_profile_model.dart';
 

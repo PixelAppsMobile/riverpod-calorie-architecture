@@ -12,39 +12,11 @@ part of 'user_profile_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return _UserProfile.fromJson(json);
 }
-
-/// @nodoc
-class _$UserProfileTearOff {
-  const _$UserProfileTearOff();
-
-  _UserProfile call(
-      {@JsonKey(name: FirestoreStrings.isAdmin)
-          required bool isAdmin,
-      @JsonKey(name: FirestoreStrings.calorieLimit)
-          required double calorieLimit,
-      @JsonKey(name: "user_id")
-          required String userID,
-      List<FoodEntry>? foodEntries}) {
-    return _UserProfile(
-      isAdmin: isAdmin,
-      calorieLimit: calorieLimit,
-      userID: userID,
-      foodEntries: foodEntries,
-    );
-  }
-
-  UserProfile fromJson(Map<String, Object?> json) {
-    return UserProfile.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $UserProfile = _$UserProfileTearOff();
 
 /// @nodoc
 mixin _$UserProfile {
@@ -66,7 +38,8 @@ mixin _$UserProfile {
 abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
           UserProfile value, $Res Function(UserProfile) then) =
-      _$UserProfileCopyWithImpl<$Res>;
+      _$UserProfileCopyWithImpl<$Res, UserProfile>;
+  @useResult
   $Res call(
       {@JsonKey(name: FirestoreStrings.isAdmin) bool isAdmin,
       @JsonKey(name: FirestoreStrings.calorieLimit) double calorieLimit,
@@ -75,48 +48,52 @@ abstract class $UserProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
+class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
+    implements $UserProfileCopyWith<$Res> {
   _$UserProfileCopyWithImpl(this._value, this._then);
 
-  final UserProfile _value;
   // ignore: unused_field
-  final $Res Function(UserProfile) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAdmin = freezed,
-    Object? calorieLimit = freezed,
-    Object? userID = freezed,
+    Object? isAdmin = null,
+    Object? calorieLimit = null,
+    Object? userID = null,
     Object? foodEntries = freezed,
   }) {
     return _then(_value.copyWith(
-      isAdmin: isAdmin == freezed
+      isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
-      calorieLimit: calorieLimit == freezed
+      calorieLimit: null == calorieLimit
           ? _value.calorieLimit
           : calorieLimit // ignore: cast_nullable_to_non_nullable
               as double,
-      userID: userID == freezed
+      userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
               as String,
-      foodEntries: foodEntries == freezed
+      foodEntries: freezed == foodEntries
           ? _value.foodEntries
           : foodEntries // ignore: cast_nullable_to_non_nullable
               as List<FoodEntry>?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UserProfileCopyWith<$Res>
+abstract class _$$_UserProfileCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
-  factory _$UserProfileCopyWith(
-          _UserProfile value, $Res Function(_UserProfile) then) =
-      __$UserProfileCopyWithImpl<$Res>;
+  factory _$$_UserProfileCopyWith(
+          _$_UserProfile value, $Res Function(_$_UserProfile) then) =
+      __$$_UserProfileCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: FirestoreStrings.isAdmin) bool isAdmin,
       @JsonKey(name: FirestoreStrings.calorieLimit) double calorieLimit,
@@ -125,37 +102,36 @@ abstract class _$UserProfileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
-    implements _$UserProfileCopyWith<$Res> {
-  __$UserProfileCopyWithImpl(
-      _UserProfile _value, $Res Function(_UserProfile) _then)
-      : super(_value, (v) => _then(v as _UserProfile));
+class __$$_UserProfileCopyWithImpl<$Res>
+    extends _$UserProfileCopyWithImpl<$Res, _$_UserProfile>
+    implements _$$_UserProfileCopyWith<$Res> {
+  __$$_UserProfileCopyWithImpl(
+      _$_UserProfile _value, $Res Function(_$_UserProfile) _then)
+      : super(_value, _then);
 
-  @override
-  _UserProfile get _value => super._value as _UserProfile;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAdmin = freezed,
-    Object? calorieLimit = freezed,
-    Object? userID = freezed,
+    Object? isAdmin = null,
+    Object? calorieLimit = null,
+    Object? userID = null,
     Object? foodEntries = freezed,
   }) {
-    return _then(_UserProfile(
-      isAdmin: isAdmin == freezed
+    return _then(_$_UserProfile(
+      isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
-      calorieLimit: calorieLimit == freezed
+      calorieLimit: null == calorieLimit
           ? _value.calorieLimit
           : calorieLimit // ignore: cast_nullable_to_non_nullable
               as double,
-      userID: userID == freezed
+      userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
               as String,
-      foodEntries: foodEntries == freezed
-          ? _value.foodEntries
+      foodEntries: freezed == foodEntries
+          ? _value._foodEntries
           : foodEntries // ignore: cast_nullable_to_non_nullable
               as List<FoodEntry>?,
     ));
@@ -169,7 +145,8 @@ class _$_UserProfile implements _UserProfile {
       {@JsonKey(name: FirestoreStrings.isAdmin) required this.isAdmin,
       @JsonKey(name: FirestoreStrings.calorieLimit) required this.calorieLimit,
       @JsonKey(name: "user_id") required this.userID,
-      this.foodEntries});
+      final List<FoodEntry>? foodEntries})
+      : _foodEntries = foodEntries;
 
   factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
       _$$_UserProfileFromJson(json);
@@ -183,8 +160,14 @@ class _$_UserProfile implements _UserProfile {
   @override
   @JsonKey(name: "user_id")
   final String userID;
+  final List<FoodEntry>? _foodEntries;
   @override
-  final List<FoodEntry>? foodEntries;
+  List<FoodEntry>? get foodEntries {
+    final value = _foodEntries;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
@@ -195,43 +178,43 @@ class _$_UserProfile implements _UserProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserProfile &&
-            const DeepCollectionEquality().equals(other.isAdmin, isAdmin) &&
+            other is _$_UserProfile &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            (identical(other.calorieLimit, calorieLimit) ||
+                other.calorieLimit == calorieLimit) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
             const DeepCollectionEquality()
-                .equals(other.calorieLimit, calorieLimit) &&
-            const DeepCollectionEquality().equals(other.userID, userID) &&
-            const DeepCollectionEquality()
-                .equals(other.foodEntries, foodEntries));
+                .equals(other._foodEntries, _foodEntries));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(isAdmin),
-      const DeepCollectionEquality().hash(calorieLimit),
-      const DeepCollectionEquality().hash(userID),
-      const DeepCollectionEquality().hash(foodEntries));
 
   @JsonKey(ignore: true)
   @override
-  _$UserProfileCopyWith<_UserProfile> get copyWith =>
-      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
+  int get hashCode => Object.hash(runtimeType, isAdmin, calorieLimit, userID,
+      const DeepCollectionEquality().hash(_foodEntries));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
+      __$$_UserProfileCopyWithImpl<_$_UserProfile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserProfileToJson(this);
+    return _$$_UserProfileToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
       {@JsonKey(name: FirestoreStrings.isAdmin)
-          required bool isAdmin,
+          required final bool isAdmin,
       @JsonKey(name: FirestoreStrings.calorieLimit)
-          required double calorieLimit,
+          required final double calorieLimit,
       @JsonKey(name: "user_id")
-          required String userID,
-      List<FoodEntry>? foodEntries}) = _$_UserProfile;
+          required final String userID,
+      final List<FoodEntry>? foodEntries}) = _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$_UserProfile.fromJson;
@@ -249,6 +232,6 @@ abstract class _UserProfile implements UserProfile {
   List<FoodEntry>? get foodEntries;
   @override
   @JsonKey(ignore: true)
-  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }

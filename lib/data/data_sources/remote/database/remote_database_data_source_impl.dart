@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:totaltest/core/firestore_strings.dart';
-import 'package:totaltest/core/result_type.dart';
 import 'package:dartz/dartz.dart';
-import 'package:totaltest/data/services/firestore/database_service.dart';
-import 'package:totaltest/domain/extenstions/export.dart';
+import 'package:totaltest/core/constants/firestore_strings.dart';
+import 'package:totaltest/core/result_type.dart';
+import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
+import 'package:totaltest/domain/extenstions/document_snaphot_extenstion.dart';
+import 'package:totaltest/domain/extenstions/map_extensions.dart';
+import 'package:totaltest/domain/extenstions/query_snapshot_extension.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 
-class FirestoreServiceImpl implements DatabaseService {
+class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override

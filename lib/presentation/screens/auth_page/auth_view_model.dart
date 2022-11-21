@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/base_view_model.dart';
-import 'package:totaltest/domain/providers/user_provider.dart';
+import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
 
 mixin AuthView {
   void showSnackbar(String message, {Color? color});

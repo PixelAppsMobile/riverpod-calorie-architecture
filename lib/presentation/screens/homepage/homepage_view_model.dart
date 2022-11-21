@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/base_view_model.dart';
-import 'package:totaltest/data/repo/food_consumption_repo/food_consumption_repo.dart';
+import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/extenstions/export.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
-import 'package:totaltest/domain/providers/user_provider.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 
 final homePageViewModel = ChangeNotifierProvider.autoDispose((ref) =>

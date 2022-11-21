@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/helper/prefs_helper/shared_prefs_helper.dart';
-import 'package:totaltest/data/repo/auth_repo/auth_repo_impl.dart';
-import 'package:totaltest/data/services/firestore/database_service.dart';
+import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
+import 'package:totaltest/data/repositories/authentication/auth_repo_impl.dart';
+import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 import 'package:totaltest/domain/models/app_user.dart';
 
-final authRepo = Provider.autoDispose(
-    (ref) => AuthRepoImpl(ref.read(prefs), ref.read(databaseService)));
+final authRepo = Provider.autoDispose((ref) => AuthRepoImpl(
+    ref.read(localStorageDataSource), ref.read(remoteDatabaseDataSource)));
 
 abstract class AuthRepo {
   Future<Either<AppError, User>> signInUsingCustomToken(String customToken);

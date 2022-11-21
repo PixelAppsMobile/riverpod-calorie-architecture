@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/repo/admin_repo/admin_repo.dart';
-import 'package:totaltest/data/repo/food_consumption_repo/food_consumption_repo.dart';
+import 'package:totaltest/domain/repositories/admin/admin_repo.dart';
+import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/models/food_entry_model.dart';
 import 'package:totaltest/domain/models/user_profile_model.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:totaltest/data/helper/prefs_helper/shared_prefs_helper.dart';
+import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
 import 'package:totaltest/domain/enums/user_role.dart';
-import 'package:totaltest/domain/providers/user_provider.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/screens/admin_overview/admin_overview.dart';
 import 'package:totaltest/presentation/screens/auth_page/auth_page.dart';
 import 'package:totaltest/presentation/screens/homepage/homepage.dart';
@@ -22,7 +22,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> initailize() async {
-    await ref.read(prefs).init();
+    await ref.read(localStorageDataSource).init();
     print("prefs initialized");
     await ref.read(userProvider.notifier).initialize();
   }
