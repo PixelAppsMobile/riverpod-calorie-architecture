@@ -5,4 +5,5 @@ class FirestoreStrings {
   ///Data Values
   static const String calorieLimit = "calorie_limit";
   static const String isAdmin = "is_admin";
+  static const String userId = "user_id";
 }

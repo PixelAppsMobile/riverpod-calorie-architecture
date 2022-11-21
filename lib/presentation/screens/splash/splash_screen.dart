@@ -43,7 +43,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
         ),
       );
     } else if (appUser.user != null) {
-      if (appUser.role == UserRole.Admin) return const AdminOverview();
+      if (appUser.role == UserRole.admin) return const AdminOverview();
       return const HomePage();
     } else {
       return const AuthPage();

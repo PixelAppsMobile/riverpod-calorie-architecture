@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 
 final foodConsumptionRepo = Provider.autoDispose((ref) =>
     FoodConsumptionRepoImpl(FirebaseAuth.instance.currentUser!.uid,

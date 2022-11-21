@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'food_entry_model.dart';
+part of 'food_entry_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FoodEntry _$$_FoodEntryFromJson(Map<String, dynamic> json) => _$_FoodEntry(
+_$_FoodEntryDto _$$_FoodEntryDtoFromJson(Map<String, dynamic> json) =>
+    _$_FoodEntryDto(
       name: json['name'] as String,
       time: DateTime.parse(json['entry_time'] as String),
       calorificValue: (json['calorificValue'] as num).toDouble(),
@@ -14,7 +15,7 @@ _$_FoodEntry _$$_FoodEntryFromJson(Map<String, dynamic> json) => _$_FoodEntry(
       documentID: json['documentID'] as String?,
     );
 
-Map<String, dynamic> _$$_FoodEntryToJson(_$_FoodEntry instance) {
+Map<String, dynamic> _$$_FoodEntryDtoToJson(_$_FoodEntryDto instance) {
   final val = <String, dynamic>{
     'name': instance.name,
     'entry_time': instance.time.toIso8601String(),

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
 
 class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
   final String uid;

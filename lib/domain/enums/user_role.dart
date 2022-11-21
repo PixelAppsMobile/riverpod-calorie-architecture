@@ -1,3 +1,8 @@
-// ignore_for_file: constant_identifier_names
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum UserRole { Normal, Admin }
+enum UserRole {
+  @JsonValue("normal")
+  normal,
+  @JsonValue("admin")
+  admin
+}

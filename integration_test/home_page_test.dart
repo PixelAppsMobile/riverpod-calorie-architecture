@@ -8,10 +8,10 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
+import 'package:totaltest/domain/entities/app_user.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/enums/user_role.dart';
-import 'package:totaltest/domain/models/app_user.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/main.dart';
 import 'package:totaltest/main.mocks.dart';
@@ -29,7 +29,7 @@ void main() {
     await Firebase.initializeApp();
     final mockUser = MockUser();
     final mockUserProviderInstance = MockUserProvider(
-        AppUser(user: mockUser, calorieLimit: 2100, role: UserRole.Normal));
+        AppUser(user: mockUser, calorieLimit: 2100, role: UserRole.normal));
     final mockFoodConsumptionRepoInstance = MockFoodConsumptionRepoImpl();
 
     final mockUserProvider = StateNotifierProvider<UserProvider, AppUser?>(

@@ -14,12 +14,12 @@ import 'package:shared_preferences/shared_preferences.dart' as _i2;
 import 'package:totaltest/core/result_type.dart' as _i9;
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart'
     as _i6;
+import 'package:totaltest/data/dto/app_user_dto.dart' as _i3;
 import 'package:totaltest/data/repositories/authentication/auth_repo_impl.dart'
     as _i8;
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart'
     as _i10;
-import 'package:totaltest/domain/models/app_user.dart' as _i3;
-import 'package:totaltest/domain/models/food_entry_model.dart' as _i11;
+import 'package:totaltest/domain/entities/food_entry.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -43,8 +43,8 @@ class _FakeSharedPreferences_0 extends _i1.SmartFake
         );
 }
 
-class _FakeAppUser_1 extends _i1.SmartFake implements _i3.AppUser {
-  _FakeAppUser_1(
+class _FakeAppUserDto_1 extends _i1.SmartFake implements _i3.AppUserDto {
+  _FakeAppUserDto_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -248,19 +248,13 @@ class MockAuthRepoImpl extends _i1.Mock implements _i8.AuthRepoImpl {
   }
 
   @override
-  _i3.AppUser getAppUser() => (super.noSuchMethod(
-        Invocation.method(
-          #getAppUser,
-          [],
-        ),
-        returnValue: _FakeAppUser_1(
+  _i3.AppUserDto get getAppUser => (super.noSuchMethod(
+        Invocation.getter(#getAppUser),
+        returnValue: _FakeAppUserDto_1(
           this,
-          Invocation.method(
-            #getAppUser,
-            [],
-          ),
+          Invocation.getter(#getAppUser),
         ),
-      ) as _i3.AppUser);
+      ) as _i3.AppUserDto);
   @override
   _i7.Future<_i4.Either<_i9.AppError, _i5.User>> signInUsingCustomToken(
           String? customToken) =>
@@ -279,14 +273,21 @@ class MockAuthRepoImpl extends _i1.Mock implements _i8.AuthRepoImpl {
         )),
       ) as _i7.Future<_i4.Either<_i9.AppError, _i5.User>>);
   @override
-  _i7.Future<void> logOut() => (super.noSuchMethod(
+  _i7.Future<_i4.Either<_i9.AppError, _i9.AppSuccess>> logOut() =>
+      (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i7.Future<_i4.Either<_i9.AppError, _i9.AppSuccess>>.value(
+            _FakeEither_2<_i9.AppError, _i9.AppSuccess>(
+          this,
+          Invocation.method(
+            #logOut,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i4.Either<_i9.AppError, _i9.AppSuccess>>);
   @override
   _i7.Future<_i4.Either<_i9.AppError, _i9.AppSuccess>> updateCalorieLimit(
     double? calories,

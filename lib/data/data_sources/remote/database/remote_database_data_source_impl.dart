@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:totaltest/core/constants/firestore_strings.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/extenstions/document_snaphot_extenstion.dart';
 import 'package:totaltest/domain/extenstions/map_extensions.dart';
 import 'package:totaltest/domain/extenstions/query_snapshot_extension.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
 
 class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

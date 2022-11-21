@@ -3,11 +3,11 @@ import 'package:totaltest/core/constants/preference_strings.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dartz/dartz.dart';
+import 'package:totaltest/data/dto/app_user_dto.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 import 'package:totaltest/domain/repositories/authentication/auth_repo.dart';
 import 'package:totaltest/domain/enums/user_role.dart';
-import 'package:totaltest/domain/models/app_user.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final LocalStorageDataSource _localStorageDataSource;
@@ -17,17 +17,17 @@ class AuthRepoImpl implements AuthRepo {
       this._localStorageDataSource, this._remoteDatabaseDataSource);
 
   @override
-  AppUser getAppUser() {
+  AppUserDto get getAppUser {
     print(_localStorageDataSource.getBool(SharedPreferences.isAdmin));
-    return AppUser(
+    return AppUserDto(
         user: FirebaseAuth.instance.currentUser,
         calorieLimit:
             _localStorageDataSource.getDouble(SharedPreferences.calorieLimit) ??
                 2100.0,
         role: (_localStorageDataSource.getBool(SharedPreferences.isAdmin) ??
                 false)
-            ? UserRole.Admin
-            : UserRole.Normal);
+            ? UserRole.admin
+            : UserRole.normal);
   }
 
   @override
@@ -59,9 +59,14 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    await _localStorageDataSource.clearAll();
+  Future<Either<AppError, AppSuccess>> logOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      await _localStorageDataSource.clearAll();
+      return Right(AppSuccess());
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
   }
 
   @override

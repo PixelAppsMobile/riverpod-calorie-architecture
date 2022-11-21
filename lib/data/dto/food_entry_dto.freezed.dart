@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'food_entry_model.dart';
+part of 'food_entry_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FoodEntry _$FoodEntryFromJson(Map<String, dynamic> json) {
-  return _FoodEntry.fromJson(json);
+FoodEntryDto _$FoodEntryDtoFromJson(Map<String, dynamic> json) {
+  return _FoodEntryDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FoodEntry {
+mixin _$FoodEntryDto {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: "entry_time")
   DateTime get time => throw _privateConstructorUsedError;
@@ -30,14 +30,15 @@ mixin _$FoodEntry {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FoodEntryCopyWith<FoodEntry> get copyWith =>
+  $FoodEntryDtoCopyWith<FoodEntryDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FoodEntryCopyWith<$Res> {
-  factory $FoodEntryCopyWith(FoodEntry value, $Res Function(FoodEntry) then) =
-      _$FoodEntryCopyWithImpl<$Res, FoodEntry>;
+abstract class $FoodEntryDtoCopyWith<$Res> {
+  factory $FoodEntryDtoCopyWith(
+          FoodEntryDto value, $Res Function(FoodEntryDto) then) =
+      _$FoodEntryDtoCopyWithImpl<$Res, FoodEntryDto>;
   @useResult
   $Res call(
       {String name,
@@ -48,9 +49,9 @@ abstract class $FoodEntryCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FoodEntryCopyWithImpl<$Res, $Val extends FoodEntry>
-    implements $FoodEntryCopyWith<$Res> {
-  _$FoodEntryCopyWithImpl(this._value, this._then);
+class _$FoodEntryDtoCopyWithImpl<$Res, $Val extends FoodEntryDto>
+    implements $FoodEntryDtoCopyWith<$Res> {
+  _$FoodEntryDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -92,10 +93,11 @@ class _$FoodEntryCopyWithImpl<$Res, $Val extends FoodEntry>
 }
 
 /// @nodoc
-abstract class _$$_FoodEntryCopyWith<$Res> implements $FoodEntryCopyWith<$Res> {
-  factory _$$_FoodEntryCopyWith(
-          _$_FoodEntry value, $Res Function(_$_FoodEntry) then) =
-      __$$_FoodEntryCopyWithImpl<$Res>;
+abstract class _$$_FoodEntryDtoCopyWith<$Res>
+    implements $FoodEntryDtoCopyWith<$Res> {
+  factory _$$_FoodEntryDtoCopyWith(
+          _$_FoodEntryDto value, $Res Function(_$_FoodEntryDto) then) =
+      __$$_FoodEntryDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +109,11 @@ abstract class _$$_FoodEntryCopyWith<$Res> implements $FoodEntryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FoodEntryCopyWithImpl<$Res>
-    extends _$FoodEntryCopyWithImpl<$Res, _$_FoodEntry>
-    implements _$$_FoodEntryCopyWith<$Res> {
-  __$$_FoodEntryCopyWithImpl(
-      _$_FoodEntry _value, $Res Function(_$_FoodEntry) _then)
+class __$$_FoodEntryDtoCopyWithImpl<$Res>
+    extends _$FoodEntryDtoCopyWithImpl<$Res, _$_FoodEntryDto>
+    implements _$$_FoodEntryDtoCopyWith<$Res> {
+  __$$_FoodEntryDtoCopyWithImpl(
+      _$_FoodEntryDto _value, $Res Function(_$_FoodEntryDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +125,7 @@ class __$$_FoodEntryCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? documentID = freezed,
   }) {
-    return _then(_$_FoodEntry(
+    return _then(_$_FoodEntryDto(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -150,16 +152,16 @@ class __$$_FoodEntryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FoodEntry implements _FoodEntry {
-  const _$_FoodEntry(
+class _$_FoodEntryDto implements _FoodEntryDto {
+  const _$_FoodEntryDto(
       {required this.name,
       @JsonKey(name: "entry_time") required this.time,
       required this.calorificValue,
       this.imageUrl,
       @JsonKey(includeIfNull: false) this.documentID});
 
-  factory _$_FoodEntry.fromJson(Map<String, dynamic> json) =>
-      _$$_FoodEntryFromJson(json);
+  factory _$_FoodEntryDto.fromJson(Map<String, dynamic> json) =>
+      _$$_FoodEntryDtoFromJson(json);
 
   @override
   final String name;
@@ -176,14 +178,14 @@ class _$_FoodEntry implements _FoodEntry {
 
   @override
   String toString() {
-    return 'FoodEntry(name: $name, time: $time, calorificValue: $calorificValue, imageUrl: $imageUrl, documentID: $documentID)';
+    return 'FoodEntryDto(name: $name, time: $time, calorificValue: $calorificValue, imageUrl: $imageUrl, documentID: $documentID)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FoodEntry &&
+            other is _$_FoodEntryDto &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.calorificValue, calorificValue) ||
@@ -202,27 +204,28 @@ class _$_FoodEntry implements _FoodEntry {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FoodEntryCopyWith<_$_FoodEntry> get copyWith =>
-      __$$_FoodEntryCopyWithImpl<_$_FoodEntry>(this, _$identity);
+  _$$_FoodEntryDtoCopyWith<_$_FoodEntryDto> get copyWith =>
+      __$$_FoodEntryDtoCopyWithImpl<_$_FoodEntryDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FoodEntryToJson(
+    return _$$_FoodEntryDtoToJson(
       this,
     );
   }
 }
 
-abstract class _FoodEntry implements FoodEntry {
-  const factory _FoodEntry(
-      {required final String name,
-      @JsonKey(name: "entry_time") required final DateTime time,
-      required final double calorificValue,
-      final String? imageUrl,
-      @JsonKey(includeIfNull: false) final String? documentID}) = _$_FoodEntry;
+abstract class _FoodEntryDto implements FoodEntryDto {
+  const factory _FoodEntryDto(
+          {required final String name,
+          @JsonKey(name: "entry_time") required final DateTime time,
+          required final double calorificValue,
+          final String? imageUrl,
+          @JsonKey(includeIfNull: false) final String? documentID}) =
+      _$_FoodEntryDto;
 
-  factory _FoodEntry.fromJson(Map<String, dynamic> json) =
-      _$_FoodEntry.fromJson;
+  factory _FoodEntryDto.fromJson(Map<String, dynamic> json) =
+      _$_FoodEntryDto.fromJson;
 
   @override
   String get name;
@@ -238,6 +241,6 @@ abstract class _FoodEntry implements FoodEntry {
   String? get documentID;
   @override
   @JsonKey(ignore: true)
-  _$$_FoodEntryCopyWith<_$_FoodEntry> get copyWith =>
+  _$$_FoodEntryDtoCopyWith<_$_FoodEntryDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

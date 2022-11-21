@@ -1,4 +1,4 @@
-import 'package:totaltest/domain/models/food_entry_model.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 
 class CalorieStats {
   final List<WeeklyCalorieStat> weeklyCalorieStats;

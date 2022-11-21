@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/presentation/providers/base_view_model.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
 
 final updateFoodEntryBottomSheetViewModel = ChangeNotifierProvider((ref) =>

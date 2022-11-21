@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/data/data_sources/remote/database/remote_database_data_source_impl.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
 
 import '../../../../core/result_type.dart';
 
