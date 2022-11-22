@@ -3,26 +3,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/use_cases/admin/get_all_users_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/delete_food_entry_of_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/update_food_entry_of_user_use_case.dart';
 
 final adminProvider = StateNotifierProvider(
   (ref) => AdminProvider(
     [],
-    ref.read(foodConsumptionRepo),
     ref.read(getAllUsersUseCase),
+    ref.read(getFoodEntriesOfUseCase),
+    ref.read(deleteFoodEntryOfUserUseCase),
+    ref.read(updateFoodEntryOfUserUseCase),
   ),
 );
 
 class AdminProvider extends StateNotifier<List<UserProfile>?> {
-  final FoodConsumptionRepo _foodConsumptionRepo;
-
   final GetAllUsersUseCase _getAllUsersUseCase;
+  final GetFoodEntriesOfUseCase _getFoodEntriesOfUseCase;
+  final DeleteFoodEntryOfUserUseCase _deleteFoodEntryOfUserUseCase;
+  final UpdateFoodEntryOfUserUseCase _updateFoodEntryOfUserUseCase;
 
   AdminProvider(
     List<UserProfile>? value,
-    this._foodConsumptionRepo,
     this._getAllUsersUseCase,
+    this._getFoodEntriesOfUseCase,
+    this._deleteFoodEntryOfUserUseCase,
+    this._updateFoodEntryOfUserUseCase,
   ) : super(value);
 
   Future<void> fetchUsers() async {
@@ -43,8 +50,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
       return;
     }
     final index = state!.indexWhere((element) => element.userId == uid);
-    final foodEntries =
-        await _foodConsumptionRepo.getFoodEntries(overrideUid: uid);
+    final foodEntries = await _getFoodEntriesOfUseCase(uid);
 
     foodEntries.fold(
       (l) {
@@ -63,8 +69,12 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
 
   Future<Either<AppError, void>> deleteFoodEntry(
       FoodEntry entry, String uid) async {
-    final either =
-        await _foodConsumptionRepo.deleteFoodEntry(entry, overrideUid: uid);
+    final either = await _deleteFoodEntryOfUserUseCase(
+      DeleteFoodEntryOfUserUseCaseParam(
+        documentId: entry.documentId!,
+        uid: uid,
+      ),
+    );
 
     return either.fold(
       (l) => Left(l),
@@ -76,7 +86,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
             )
             .first;
         int foodEntryIndex = userProfile.foodEntries!
-            .indexWhere((element) => element.documentID == entry.documentID);
+            .indexWhere((element) => element.documentId == entry.documentId);
         userProfile.foodEntries!.removeAt(foodEntryIndex);
 
         return Right(r);
@@ -86,8 +96,12 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
 
   Future<Either<AppError, void>> updateFoodEntry(
       FoodEntry entry, String uid) async {
-    final either =
-        await _foodConsumptionRepo.updateFoodEntry(entry, overrideUid: uid);
+    final either = await _updateFoodEntryOfUserUseCase(
+      UpdateFoodEntryOfUserUseCaseParam(
+        foodEntry: entry,
+        uid: uid,
+      ),
+    );
     return either.fold(
       (l) => Left(l),
       (r) {
@@ -98,7 +112,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
             )
             .first;
         int foodEntryIndex = userProfile.foodEntries!
-            .indexWhere((element) => element.documentID == entry.documentID);
+            .indexWhere((element) => element.documentId == entry.documentId);
 
         userProfile.foodEntries![foodEntryIndex] = entry;
 

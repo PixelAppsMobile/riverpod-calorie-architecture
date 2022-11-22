@@ -13,7 +13,7 @@ class FoodEntry with _$FoodEntry {
     required final DateTime time,
     required final double calorificValue,
     final String? imageUrl,
-    final String? documentID,
+    final String? documentId,
   }) = _FoodEntry;
 
   factory FoodEntry.fromJson(Map<String, dynamic> json) =>
@@ -26,6 +26,6 @@ extension FoodEntryEntityToDtoExtension on FoodEntry {
         time: time,
         calorificValue: calorificValue,
         imageUrl: imageUrl,
-        documentID: documentID,
+        documentId: documentId,
       );
 }

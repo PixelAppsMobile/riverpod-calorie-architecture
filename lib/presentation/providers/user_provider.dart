@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/entities/app_user.dart';
 import 'package:totaltest/domain/use_cases/authentication/get_app_user_use_case.dart';
 import 'package:totaltest/domain/use_cases/authentication/sign_in_using_custom_token_use_case.dart';
 import 'package:totaltest/domain/use_cases/authentication/sign_out_use_case.dart';
-import 'package:totaltest/domain/use_cases/authentication/update_calorie_limit_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/update_calorie_limit_use_case.dart';
 
 final userProvider = StateNotifierProvider<UserProvider, AppUser?>(
   (ref) => UserProvider(
@@ -41,7 +40,12 @@ class UserProvider extends StateNotifier<AppUser?> {
         return Left(l);
       },
       (r) async {
-        state = _getAppUserUseCase();
+        final result = await _getAppUserUseCase();
+
+        state = result.fold(
+          (l) => null,
+          (r) => r,
+        );
 
         return Right(AppSuccess());
       },
@@ -57,12 +61,11 @@ class UserProvider extends StateNotifier<AppUser?> {
   }
 
   Future<void> initialize() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      state = null;
-    } else {
-      state = _getAppUserUseCase();
-    }
+    final result = await _getAppUserUseCase();
+    state = result.fold(
+      (l) => null,
+      (r) => r,
+    );
   }
 
   Future<Either<AppError, AppSuccess>> updateCalorieLimit(double limit) async {

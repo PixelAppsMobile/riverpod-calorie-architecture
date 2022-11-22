@@ -8,16 +8,17 @@ import 'dart:async' as _i6;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:shared_preferences/shared_preferences.dart' as _i2;
-import 'package:totaltest/core/result_type.dart' as _i8;
+import 'package:totaltest/core/result_type.dart' as _i7;
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart'
     as _i5;
-import 'package:totaltest/data/dto/base_user_dto.dart' as _i9;
+import 'package:totaltest/data/dto/app_user_dto.dart' as _i9;
+import 'package:totaltest/data/dto/base_user_dto.dart' as _i10;
+import 'package:totaltest/data/dto/food_entry_dto.dart' as _i12;
 import 'package:totaltest/data/repositories/authentication/auth_repo_impl.dart'
-    as _i7;
+    as _i8;
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart'
-    as _i10;
+    as _i11;
 import 'package:totaltest/domain/entities/base_user.dart' as _i4;
-import 'package:totaltest/domain/entities/food_entry.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -88,21 +89,39 @@ class MockLocalStorageDataSourceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i6.Future<void> init() => (super.noSuchMethod(
+  _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>> init() =>
+      (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>.value(
+            _FakeEither_1<_i7.AppError, _i7.AppSuccess>(
+          this,
+          Invocation.method(
+            #init,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>);
   @override
-  bool? getBool(String? key) => (super.noSuchMethod(Invocation.method(
-        #getBool,
-        [key],
-      )) as bool?);
+  _i6.Future<_i3.Either<_i7.AppError, bool?>> getBool(String? key) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getBool,
+          [key],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool?>>.value(
+            _FakeEither_1<_i7.AppError, bool?>(
+          this,
+          Invocation.method(
+            #getBool,
+            [key],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool?>>);
   @override
-  _i6.Future<bool> setBool(
+  _i6.Future<_i3.Either<_i7.AppError, bool>> setBool(
     String? key,
     bool? value,
   ) =>
@@ -114,15 +133,36 @@ class MockLocalStorageDataSourceImpl extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #setBool,
+            [
+              key,
+              value,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
   @override
-  int? getInt(String? key) => (super.noSuchMethod(Invocation.method(
-        #getInt,
-        [key],
-      )) as int?);
+  _i6.Future<_i3.Either<_i7.AppError, int?>> getInt(String? key) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInt,
+          [key],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, int?>>.value(
+            _FakeEither_1<_i7.AppError, int?>(
+          this,
+          Invocation.method(
+            #getInt,
+            [key],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, int?>>);
   @override
-  _i6.Future<bool> setInt(
+  _i6.Future<_i3.Either<_i7.AppError, bool>> setInt(
     String? key,
     int? value,
   ) =>
@@ -134,15 +174,36 @@ class MockLocalStorageDataSourceImpl extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #setInt,
+            [
+              key,
+              value,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
   @override
-  String? getString(String? key) => (super.noSuchMethod(Invocation.method(
-        #getString,
-        [key],
-      )) as String?);
+  _i6.Future<_i3.Either<_i7.AppError, String?>> getString(String? key) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getString,
+          [key],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, String?>>.value(
+            _FakeEither_1<_i7.AppError, String?>(
+          this,
+          Invocation.method(
+            #getString,
+            [key],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, String?>>);
   @override
-  _i6.Future<bool> setString(
+  _i6.Future<_i3.Either<_i7.AppError, bool>> setString(
     String? key,
     String? value,
   ) =>
@@ -154,18 +215,35 @@ class MockLocalStorageDataSourceImpl extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #setString,
+            [
+              key,
+              value,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
   @override
-  _i6.Future<bool> clearAll() => (super.noSuchMethod(
+  _i6.Future<_i3.Either<_i7.AppError, bool>> clearAll() => (super.noSuchMethod(
         Invocation.method(
           #clearAll,
           [],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #clearAll,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
   @override
-  _i6.Future<bool> setDouble(
+  _i6.Future<_i3.Either<_i7.AppError, bool>> setDouble(
     String? key,
     double? value,
   ) =>
@@ -177,25 +255,63 @@ class MockLocalStorageDataSourceImpl extends _i1.Mock
             value,
           ],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, bool>>.value(
+            _FakeEither_1<_i7.AppError, bool>(
+          this,
+          Invocation.method(
+            #setDouble,
+            [
+              key,
+              value,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, bool>>);
   @override
-  double? getDouble(String? key) => (super.noSuchMethod(Invocation.method(
-        #getDouble,
-        [key],
-      )) as double?);
+  _i6.Future<_i3.Either<_i7.AppError, double?>> getDouble(String? key) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDouble,
+          [key],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, double?>>.value(
+            _FakeEither_1<_i7.AppError, double?>(
+          this,
+          Invocation.method(
+            #getDouble,
+            [key],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, double?>>);
 }
 
 /// A class which mocks [AuthRepoImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepoImpl extends _i1.Mock implements _i7.AuthRepoImpl {
+class MockAuthRepoImpl extends _i1.Mock implements _i8.AuthRepoImpl {
   MockAuthRepoImpl() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.Either<_i8.AppError, _i9.BaseUserDto>> signInUsingCustomToken(
+  _i6.Future<_i3.Either<_i7.AppError, _i9.AppUserDto?>> getAppUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAppUser,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i3.Either<_i7.AppError, _i9.AppUserDto?>>.value(
+                _FakeEither_1<_i7.AppError, _i9.AppUserDto?>(
+          this,
+          Invocation.method(
+            #getAppUser,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i9.AppUserDto?>>);
+  @override
+  _i6.Future<_i3.Either<_i7.AppError, _i10.BaseUserDto>> signInUsingCustomToken(
           String? customToken) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -203,38 +319,38 @@ class MockAuthRepoImpl extends _i1.Mock implements _i7.AuthRepoImpl {
           [customToken],
         ),
         returnValue:
-            _i6.Future<_i3.Either<_i8.AppError, _i9.BaseUserDto>>.value(
-                _FakeEither_1<_i8.AppError, _i9.BaseUserDto>(
+            _i6.Future<_i3.Either<_i7.AppError, _i10.BaseUserDto>>.value(
+                _FakeEither_1<_i7.AppError, _i10.BaseUserDto>(
           this,
           Invocation.method(
             #signInUsingCustomToken,
             [customToken],
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, _i9.BaseUserDto>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i10.BaseUserDto>>);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>> logOut() =>
+  _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>> logOut() =>
       (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>>.value(
-            _FakeEither_1<_i8.AppError, _i8.AppSuccess>(
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>.value(
+            _FakeEither_1<_i7.AppError, _i7.AppSuccess>(
           this,
           Invocation.method(
             #logOut,
             [],
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>);
 }
 
 /// A class which mocks [FoodConsumptionRepoImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFoodConsumptionRepoImpl extends _i1.Mock
-    implements _i10.FoodConsumptionRepoImpl {
+    implements _i11.FoodConsumptionRepoImpl {
   MockFoodConsumptionRepoImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -245,8 +361,8 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
         returnValue: '',
       ) as String);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, _i11.FoodEntry>> addFoodEntry(
-    _i11.FoodEntry? entry, {
+  _i6.Future<_i3.Either<_i7.AppError, _i12.FoodEntryDto>> addFoodEntry(
+    _i12.FoodEntryDto? entry, {
     String? overrideUid,
   }) =>
       (super.noSuchMethod(
@@ -255,8 +371,9 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
           [entry],
           {#overrideUid: overrideUid},
         ),
-        returnValue: _i6.Future<_i3.Either<_i8.AppError, _i11.FoodEntry>>.value(
-            _FakeEither_1<_i8.AppError, _i11.FoodEntry>(
+        returnValue:
+            _i6.Future<_i3.Either<_i7.AppError, _i12.FoodEntryDto>>.value(
+                _FakeEither_1<_i7.AppError, _i12.FoodEntryDto>(
           this,
           Invocation.method(
             #addFoodEntry,
@@ -264,9 +381,9 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
             {#overrideUid: overrideUid},
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, _i11.FoodEntry>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i12.FoodEntryDto>>);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, List<_i11.FoodEntry>>> getFoodEntries(
+  _i6.Future<_i3.Either<_i7.AppError, List<_i12.FoodEntryDto>>> getFoodEntries(
           {String? overrideUid}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -275,8 +392,8 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
           {#overrideUid: overrideUid},
         ),
         returnValue:
-            _i6.Future<_i3.Either<_i8.AppError, List<_i11.FoodEntry>>>.value(
-                _FakeEither_1<_i8.AppError, List<_i11.FoodEntry>>(
+            _i6.Future<_i3.Either<_i7.AppError, List<_i12.FoodEntryDto>>>.value(
+                _FakeEither_1<_i7.AppError, List<_i12.FoodEntryDto>>(
           this,
           Invocation.method(
             #getFoodEntries,
@@ -284,10 +401,10 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
             {#overrideUid: overrideUid},
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, List<_i11.FoodEntry>>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, List<_i12.FoodEntryDto>>>);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, void>> updateFoodEntry(
-    _i11.FoodEntry? entry, {
+  _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>> updateFoodEntry(
+    _i12.FoodEntryDto? entry, {
     String? overrideUid,
   }) =>
       (super.noSuchMethod(
@@ -296,8 +413,8 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
           [entry],
           {#overrideUid: overrideUid},
         ),
-        returnValue: _i6.Future<_i3.Either<_i8.AppError, void>>.value(
-            _FakeEither_1<_i8.AppError, void>(
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>.value(
+            _FakeEither_1<_i7.AppError, _i7.AppSuccess>(
           this,
           Invocation.method(
             #updateFoodEntry,
@@ -305,30 +422,30 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
             {#overrideUid: overrideUid},
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, void>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, void>> deleteFoodEntry(
-    _i11.FoodEntry? entry, {
+  _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>> deleteFoodEntry(
+    String? documentId, {
     String? overrideUid,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteFoodEntry,
-          [entry],
+          [documentId],
           {#overrideUid: overrideUid},
         ),
-        returnValue: _i6.Future<_i3.Either<_i8.AppError, void>>.value(
-            _FakeEither_1<_i8.AppError, void>(
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>.value(
+            _FakeEither_1<_i7.AppError, _i7.AppSuccess>(
           this,
           Invocation.method(
             #deleteFoodEntry,
-            [entry],
+            [documentId],
             {#overrideUid: overrideUid},
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, void>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>);
   @override
-  _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>> updateCalorieLimit(
+  _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>> updateCalorieLimit(
     double? calories,
     String? uid,
   ) =>
@@ -340,8 +457,8 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
             uid,
           ],
         ),
-        returnValue: _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>>.value(
-            _FakeEither_1<_i8.AppError, _i8.AppSuccess>(
+        returnValue: _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>.value(
+            _FakeEither_1<_i7.AppError, _i7.AppSuccess>(
           this,
           Invocation.method(
             #updateCalorieLimit,
@@ -351,7 +468,7 @@ class MockFoodConsumptionRepoImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i6.Future<_i3.Either<_i8.AppError, _i8.AppSuccess>>);
+      ) as _i6.Future<_i3.Either<_i7.AppError, _i7.AppSuccess>>);
 }
 
 /// A class which mocks [BaseUser].

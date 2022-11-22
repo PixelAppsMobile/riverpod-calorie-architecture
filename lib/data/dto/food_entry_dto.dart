@@ -11,7 +11,7 @@ class FoodEntryDto with _$FoodEntryDto {
     @JsonKey(name: "entry_time") required final DateTime time,
     required final double calorificValue,
     final String? imageUrl,
-    @JsonKey(includeIfNull: false) final String? documentID,
+    @JsonKey(includeIfNull: false) final String? documentId,
   }) = _FoodEntryDto;
 
   factory FoodEntryDto.fromJson(Map<String, dynamic> json) =>
@@ -24,6 +24,6 @@ extension FoodEntryDtoToEntityExtension on FoodEntryDto {
         time: time,
         calorificValue: calorificValue,
         imageUrl: imageUrl,
-        documentID: documentID,
+        documentId: documentId,
       );
 }

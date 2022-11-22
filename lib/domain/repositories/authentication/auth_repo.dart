@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
@@ -17,6 +16,6 @@ final authRepo = Provider.autoDispose((ref) => AuthRepoImpl(
 abstract class AuthRepo {
   Future<Either<AppError, BaseUserDto>> signInUsingCustomToken(
       String customToken);
-  AppUserDto? get getAppUser;
+  Future<Either<AppError, AppUserDto?>> getAppUser();
   Future<Either<AppError, AppSuccess>> logOut();
 }

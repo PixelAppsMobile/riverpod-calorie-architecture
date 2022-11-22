@@ -24,7 +24,7 @@ mixin _$FoodEntry {
   DateTime get time => throw _privateConstructorUsedError;
   double get calorificValue => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
-  String? get documentID => throw _privateConstructorUsedError;
+  String? get documentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $FoodEntryCopyWith<$Res> {
       DateTime time,
       double calorificValue,
       String? imageUrl,
-      String? documentID});
+      String? documentId});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$FoodEntryCopyWithImpl<$Res, $Val extends FoodEntry>
     Object? time = null,
     Object? calorificValue = null,
     Object? imageUrl = freezed,
-    Object? documentID = freezed,
+    Object? documentId = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -81,9 +81,9 @@ class _$FoodEntryCopyWithImpl<$Res, $Val extends FoodEntry>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      documentID: freezed == documentID
-          ? _value.documentID
-          : documentID // ignore: cast_nullable_to_non_nullable
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -101,7 +101,7 @@ abstract class _$$_FoodEntryCopyWith<$Res> implements $FoodEntryCopyWith<$Res> {
       DateTime time,
       double calorificValue,
       String? imageUrl,
-      String? documentID});
+      String? documentId});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$_FoodEntryCopyWithImpl<$Res>
     Object? time = null,
     Object? calorificValue = null,
     Object? imageUrl = freezed,
-    Object? documentID = freezed,
+    Object? documentId = freezed,
   }) {
     return _then(_$_FoodEntry(
       name: null == name
@@ -138,9 +138,9 @@ class __$$_FoodEntryCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      documentID: freezed == documentID
-          ? _value.documentID
-          : documentID // ignore: cast_nullable_to_non_nullable
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -154,7 +154,7 @@ class _$_FoodEntry implements _FoodEntry {
       required this.time,
       required this.calorificValue,
       this.imageUrl,
-      this.documentID});
+      this.documentId});
 
   factory _$_FoodEntry.fromJson(Map<String, dynamic> json) =>
       _$$_FoodEntryFromJson(json);
@@ -168,11 +168,11 @@ class _$_FoodEntry implements _FoodEntry {
   @override
   final String? imageUrl;
   @override
-  final String? documentID;
+  final String? documentId;
 
   @override
   String toString() {
-    return 'FoodEntry(name: $name, time: $time, calorificValue: $calorificValue, imageUrl: $imageUrl, documentID: $documentID)';
+    return 'FoodEntry(name: $name, time: $time, calorificValue: $calorificValue, imageUrl: $imageUrl, documentId: $documentId)';
   }
 
   @override
@@ -186,14 +186,14 @@ class _$_FoodEntry implements _FoodEntry {
                 other.calorificValue == calorificValue) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.documentID, documentID) ||
-                other.documentID == documentID));
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, time, calorificValue, imageUrl, documentID);
+      runtimeType, name, time, calorificValue, imageUrl, documentId);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +215,7 @@ abstract class _FoodEntry implements FoodEntry {
       required final DateTime time,
       required final double calorificValue,
       final String? imageUrl,
-      final String? documentID}) = _$_FoodEntry;
+      final String? documentId}) = _$_FoodEntry;
 
   factory _FoodEntry.fromJson(Map<String, dynamic> json) =
       _$_FoodEntry.fromJson;
@@ -229,7 +229,7 @@ abstract class _FoodEntry implements FoodEntry {
   @override
   String? get imageUrl;
   @override
-  String? get documentID;
+  String? get documentId;
   @override
   @JsonKey(ignore: true)
   _$$_FoodEntryCopyWith<_$_FoodEntry> get copyWith =>

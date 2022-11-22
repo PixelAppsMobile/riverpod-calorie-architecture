@@ -9,11 +9,17 @@ import 'package:totaltest/domain/repositories/authentication/auth_repo.dart';
 final getAppUserUseCase =
     Provider((ref) => GetAppUserUseCase(ref.read(authRepo)));
 
-class GetAppUserUseCase implements NoParamUseCaseSimple<AppUser?> {
+class GetAppUserUseCase implements NoParamUseCase<AppUser?> {
   final AuthRepo _authRepo;
 
   GetAppUserUseCase(this._authRepo);
 
   @override
-  AppUser? call() => _authRepo.getAppUser?.toEntity;
+  Future<Either<AppError, AppUser?>> call() async {
+    final result = await _authRepo.getAppUser();
+    return result.fold(
+      (l) => Left(l),
+      (r) => Right(r?.toEntity),
+    );
+  }
 }

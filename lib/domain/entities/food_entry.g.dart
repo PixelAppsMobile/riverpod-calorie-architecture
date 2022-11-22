@@ -11,7 +11,7 @@ _$_FoodEntry _$$_FoodEntryFromJson(Map<String, dynamic> json) => _$_FoodEntry(
       time: DateTime.parse(json['time'] as String),
       calorificValue: (json['calorificValue'] as num).toDouble(),
       imageUrl: json['imageUrl'] as String?,
-      documentID: json['documentID'] as String?,
+      documentId: json['documentId'] as String?,
     );
 
 Map<String, dynamic> _$$_FoodEntryToJson(_$_FoodEntry instance) =>
@@ -20,5 +20,5 @@ Map<String, dynamic> _$$_FoodEntryToJson(_$_FoodEntry instance) =>
       'time': instance.time.toIso8601String(),
       'calorificValue': instance.calorificValue,
       'imageUrl': instance.imageUrl,
-      'documentID': instance.documentID,
+      'documentId': instance.documentId,
     };

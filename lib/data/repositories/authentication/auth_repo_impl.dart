@@ -22,22 +22,37 @@ class AuthRepoImpl implements AuthRepo {
   );
 
   @override
-  AppUserDto? get getAppUser {
+  Future<Either<AppError, AppUserDto?>> getAppUser() async {
     BaseUserDto? _baseUser = _authenticationDataSource.currentUser;
 
     if (_baseUser != null) {
-      return AppUserDto(
-        user: _baseUser,
-        calorieLimit:
-            _localStorageDataSource.getDouble(SharedPreferences.calorieLimit) ??
-                2100.0,
-        role: (_localStorageDataSource.getBool(SharedPreferences.isAdmin) ??
-                false)
-            ? UserRole.admin
-            : UserRole.normal,
+      final getCalorieLimitResult = await _localStorageDataSource
+          .getDouble(SharedPreferences.calorieLimit);
+
+      return getCalorieLimitResult.fold(
+        (l) => Left(l),
+        (r) async {
+          double calorieLimit = r ?? 2100.0;
+          final isAdminResult =
+              await _localStorageDataSource.getBool(SharedPreferences.isAdmin);
+
+          return isAdminResult.fold(
+            (l) => Left(l),
+            (r) {
+              bool isAdmin = r ?? false;
+
+              return Right(AppUserDto(
+                user: _baseUser,
+                calorieLimit: calorieLimit,
+                role: isAdmin ? UserRole.admin : UserRole.normal,
+              ));
+            },
+          );
+        },
       );
+    } else {
+      return const Right(null);
     }
-    return null;
   }
 
   @override

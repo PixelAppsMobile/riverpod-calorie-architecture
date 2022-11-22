@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
 
 final localStorageDataSource = Provider((ref) => LocalStorageDataSourceImpl());
@@ -8,38 +10,102 @@ class LocalStorageDataSourceImpl implements LocalStorageDataSource {
   late SharedPreferences preferences;
 
   @override
-  Future<void> init() async {
-    preferences = await SharedPreferences.getInstance();
+  Future<Either<AppError, AppSuccess>> init() async {
+    try {
+      preferences = await SharedPreferences.getInstance();
+      return Right(AppSuccess());
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
   }
 
   @override
-  bool? getBool(String key) => preferences.getBool(key);
+  Future<Either<AppError, bool?>> getBool(String key) async {
+    try {
+      bool? result = preferences.getBool(key);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  Future<bool> setBool(String key, bool value) async =>
-      preferences.setBool(key, value);
+  Future<Either<AppError, bool>> setBool(String key, bool value) async {
+    try {
+      bool result = await preferences.setBool(key, value);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  int? getInt(String key) => preferences.getInt(key);
+  Future<Either<AppError, int?>> getInt(String key) async {
+    try {
+      int? result = preferences.getInt(key);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  Future<bool> setInt(String key, int value) async =>
-      preferences.setInt(key, value);
+  Future<Either<AppError, bool>> setInt(String key, int value) async {
+    try {
+      bool result = await preferences.setInt(key, value);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  String? getString(String key) => preferences.getString(key);
+  Future<Either<AppError, String?>> getString(String key) async {
+    try {
+      String? result = preferences.getString(key);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  Future<bool> setString(String key, String value) async =>
-      preferences.setString(key, value);
+  Future<Either<AppError, bool>> setString(String key, String value) async {
+    try {
+      bool result = await preferences.setString(key, value);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  Future<bool> clearAll() async => preferences.clear();
+  Future<Either<AppError, bool>> clearAll() async {
+    try {
+      bool result = await preferences.clear();
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  Future<bool> setDouble(String key, double value) async =>
-      preferences.setDouble(key, value);
+  Future<Either<AppError, bool>> setDouble(String key, double value) async {
+    try {
+      bool result = await preferences.setDouble(key, value);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 
   @override
-  double? getDouble(String key) => preferences.getDouble(key);
+  Future<Either<AppError, double?>> getDouble(String key) async {
+    try {
+      double? result = preferences.getDouble(key);
+      return Right(result);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
 }
