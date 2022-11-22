@@ -37,12 +37,13 @@ void main() {
 
     when(mockFoodConsumptionRepoInstance.getFoodEntries()).thenAnswer(
         (realInvocation) =>
-            Future.delayed(Duration(milliseconds: Random().nextInt(500))).then(
-                (value) => Right([
+            Future.delayed(Duration(milliseconds: Random().nextInt(500)))
+                .then((value) => Right([
                       FoodEntry(
-                          name: "Banana",
-                          time: DateTime.now(),
-                          calorificValue: 2100)
+                        name: "Banana",
+                        time: DateTime.now(),
+                        calorificValue: 2100,
+                      ).toDto
                     ])));
     await tester.pumpWidget(ProviderScope(overrides: [
       foodConsumptionRepo.overrideWithValue(mockFoodConsumptionRepoInstance),
