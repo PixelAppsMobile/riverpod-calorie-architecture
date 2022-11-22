@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:totaltest/core/constants/firestore_strings.dart';
 import 'package:totaltest/core/result_type.dart';
+import 'package:totaltest/data/dto/user_profile_dto.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/extenstions/document_snaphot_extenstion.dart';
@@ -96,6 +97,22 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
           .update(entry.toJson().stripDocID);
       print("UPDATE COMPLETE");
       return const Right(null);
+    } catch (e) {
+      return Left(AppError(title: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<UserProfileDto>>> fetchAllUsers() async {
+    try {
+      final snapshots = await FirebaseFirestore.instance
+          .collection(FirestoreStrings.usersCollection)
+          .get();
+      List<UserProfileDto> usersDtoList = snapshots.docs
+          .map<UserProfileDto>((e) => e.userProfileFromDocSnapshot)
+          .toList();
+
+      return Right(usersDtoList);
     } catch (e) {
       return Left(AppError(title: e.toString()));
     }

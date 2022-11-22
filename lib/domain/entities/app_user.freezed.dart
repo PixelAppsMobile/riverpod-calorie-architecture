@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppUser {
-  User? get user => throw _privateConstructorUsedError;
+  BaseUser get user => throw _privateConstructorUsedError;
   UserRole? get role => throw _privateConstructorUsedError;
   double? get calorieLimit => throw _privateConstructorUsedError;
 
@@ -29,7 +29,9 @@ abstract class $AppUserCopyWith<$Res> {
   factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
       _$AppUserCopyWithImpl<$Res, AppUser>;
   @useResult
-  $Res call({User? user, UserRole? role, double? calorieLimit});
+  $Res call({BaseUser user, UserRole? role, double? calorieLimit});
+
+  $BaseUserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -45,15 +47,15 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
     Object? role = freezed,
     Object? calorieLimit = freezed,
   }) {
     return _then(_value.copyWith(
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as BaseUser,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -64,6 +66,14 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
               as double?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseUserCopyWith<$Res> get user {
+    return $BaseUserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -73,7 +83,10 @@ abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
       __$$_AppUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, UserRole? role, double? calorieLimit});
+  $Res call({BaseUser user, UserRole? role, double? calorieLimit});
+
+  @override
+  $BaseUserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -86,15 +99,15 @@ class __$$_AppUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
     Object? role = freezed,
     Object? calorieLimit = freezed,
   }) {
     return _then(_$_AppUser(
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as BaseUser,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -110,10 +123,10 @@ class __$$_AppUserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppUser implements _AppUser {
-  const _$_AppUser({this.user, this.role, this.calorieLimit = 2100.0});
+  const _$_AppUser({required this.user, this.role, this.calorieLimit = 2100.0});
 
   @override
-  final User? user;
+  final BaseUser user;
   @override
   final UserRole? role;
   @override
@@ -148,12 +161,12 @@ class _$_AppUser implements _AppUser {
 
 abstract class _AppUser implements AppUser {
   const factory _AppUser(
-      {final User? user,
+      {required final BaseUser user,
       final UserRole? role,
       final double? calorieLimit}) = _$_AppUser;
 
   @override
-  User? get user;
+  BaseUser get user;
   @override
   UserRole? get role;
   @override

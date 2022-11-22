@@ -27,7 +27,7 @@ void main() {
       "A logged in user sees home page with food list items after opening the app",
       (WidgetTester tester) async {
     await Firebase.initializeApp();
-    final mockUser = MockUser();
+    final mockUser = MockBaseUser();
     final mockUserProviderInstance = MockUserProvider(
         AppUser(user: mockUser, calorieLimit: 2100, role: UserRole.normal));
     final mockFoodConsumptionRepoInstance = MockFoodConsumptionRepoImpl();

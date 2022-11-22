@@ -1,25 +1,37 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/data/dto/user_profile_dto.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/domain/repositories/admin/admin_repo.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
+import 'package:totaltest/domain/use_cases/admin/get_all_users_use_case.dart';
 
-final adminProvider = StateNotifierProvider((ref) =>
-    AdminProvider([], ref.read(adminRepo), ref.read(foodConsumptionRepo)));
+final adminProvider = StateNotifierProvider(
+  (ref) => AdminProvider(
+    [],
+    ref.read(foodConsumptionRepo),
+    ref.read(getAllUsersUseCase),
+  ),
+);
 
 class AdminProvider extends StateNotifier<List<UserProfile>?> {
-  final AdminRepo _repo;
   final FoodConsumptionRepo _foodConsumptionRepo;
 
-  AdminProvider(List<UserProfile>? value, this._repo, this._foodConsumptionRepo)
-      : super(value);
+  final GetAllUsersUseCase _getAllUsersUseCase;
+
+  AdminProvider(
+    List<UserProfile>? value,
+    this._foodConsumptionRepo,
+    this._getAllUsersUseCase,
+  ) : super(value);
 
   Future<void> fetchUsers() async {
-    final result = await _repo.fetchAllUsers();
-    state = result.map((e) => e.toEntity).toList().cast<UserProfile>();
+    final result = await _getAllUsersUseCase();
+
+    result.fold(
+      (l) => null,
+      (r) => state = r.map((e) => e).toList().cast<UserProfile>(),
+    );
   }
 
   UserProfile getUserByUID(String uid) {

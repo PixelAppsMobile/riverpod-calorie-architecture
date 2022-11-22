@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppUserDto {
-  User? get user => throw _privateConstructorUsedError;
+  BaseUserDto get user => throw _privateConstructorUsedError;
   UserRole? get role => throw _privateConstructorUsedError;
   double? get calorieLimit => throw _privateConstructorUsedError;
 
@@ -31,7 +31,9 @@ abstract class $AppUserDtoCopyWith<$Res> {
           AppUserDto value, $Res Function(AppUserDto) then) =
       _$AppUserDtoCopyWithImpl<$Res, AppUserDto>;
   @useResult
-  $Res call({User? user, UserRole? role, double? calorieLimit});
+  $Res call({BaseUserDto user, UserRole? role, double? calorieLimit});
+
+  $BaseUserDtoCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -47,15 +49,15 @@ class _$AppUserDtoCopyWithImpl<$Res, $Val extends AppUserDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
     Object? role = freezed,
     Object? calorieLimit = freezed,
   }) {
     return _then(_value.copyWith(
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as BaseUserDto,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -65,6 +67,14 @@ class _$AppUserDtoCopyWithImpl<$Res, $Val extends AppUserDto>
           : calorieLimit // ignore: cast_nullable_to_non_nullable
               as double?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseUserDtoCopyWith<$Res> get user {
+    return $BaseUserDtoCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -76,7 +86,10 @@ abstract class _$$_AppUserDtoCopyWith<$Res>
       __$$_AppUserDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, UserRole? role, double? calorieLimit});
+  $Res call({BaseUserDto user, UserRole? role, double? calorieLimit});
+
+  @override
+  $BaseUserDtoCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -90,15 +103,15 @@ class __$$_AppUserDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
     Object? role = freezed,
     Object? calorieLimit = freezed,
   }) {
     return _then(_$_AppUserDto(
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as BaseUserDto,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -114,10 +127,11 @@ class __$$_AppUserDtoCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppUserDto implements _AppUserDto {
-  const _$_AppUserDto({this.user, this.role, this.calorieLimit = 2100.0});
+  const _$_AppUserDto(
+      {required this.user, this.role, this.calorieLimit = 2100.0});
 
   @override
-  final User? user;
+  final BaseUserDto user;
   @override
   final UserRole? role;
   @override
@@ -152,12 +166,12 @@ class _$_AppUserDto implements _AppUserDto {
 
 abstract class _AppUserDto implements AppUserDto {
   const factory _AppUserDto(
-      {final User? user,
+      {required final BaseUserDto user,
       final UserRole? role,
       final double? calorieLimit}) = _$_AppUserDto;
 
   @override
-  User? get user;
+  BaseUserDto get user;
   @override
   UserRole? get role;
   @override
