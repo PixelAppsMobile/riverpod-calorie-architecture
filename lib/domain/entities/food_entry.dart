@@ -20,7 +20,7 @@ class FoodEntry with _$FoodEntry {
       _$FoodEntryFromJson(json);
 }
 
-extension FoodEntryEntityToDtoExtension on FoodEntryDto {
+extension FoodEntryEntityToDtoExtension on FoodEntry {
   FoodEntryDto get toDto => FoodEntryDto(
         name: name,
         time: time,
