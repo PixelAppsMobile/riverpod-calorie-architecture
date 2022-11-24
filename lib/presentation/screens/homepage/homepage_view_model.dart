@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/base_view_model.dart';
-import 'package:totaltest/data/repo/food_consumption_repo/food_consumption_repo.dart';
-import 'package:totaltest/domain/extenstions/export.dart';
-import 'package:totaltest/domain/models/food_entry_model.dart';
-import 'package:totaltest/domain/providers/user_provider.dart';
+import 'package:totaltest/data/dto/food_entry_dto.dart';
+import 'package:totaltest/domain/entities/food_entry.dart';
+import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 
 final homePageViewModel = ChangeNotifierProvider.autoDispose((ref) =>
@@ -53,7 +53,7 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
           print(l.title);
           return [];
         },
-        (r) => r,
+        (r) => r.map((e) => e.toEntity).toList().cast<FoodEntry>(),
       );
       foodEntries.addAll(data);
       calculateIfCaloriesOvertake();
@@ -68,11 +68,12 @@ class HomePageViewModel extends BaseViewModel<HomePageView> {
   Future<void> addNewEntry(
       String name, double calorificValue, DateTime consumptionTime) async {
     final data = await _foodConsumptionRepo.addFoodEntry(FoodEntry(
-        name: name, time: consumptionTime, calorificValue: calorificValue));
+            name: name, time: consumptionTime, calorificValue: calorificValue)
+        .toDto);
     data.fold((l) {
       view!.showSnackbar(l.title, color: AppColor.errorRed);
     }, (r) {
-      foodEntries.add(r);
+      foodEntries.add(r.toEntity);
       foodEntries.sort((a, b) => b.time.compareTo(a.time));
       calculateIfCaloriesOvertake();
       view!.showSnackbar("Entry added succesfully",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/core/base_view_model.dart';
-import 'package:totaltest/domain/providers/user_provider.dart';
+import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
 
 mixin AuthView {
   void showSnackbar(String message, {Color? color});
@@ -12,15 +12,15 @@ final authViewModel = ChangeNotifierProvider.autoDispose(
 
 class AuthViewModel extends BaseViewModel<AuthView> {
   final TextEditingController controller = TextEditingController();
-  final UserProvider _authRepo;
+  final UserProvider _userProvider;
 
-  AuthViewModel(this._authRepo) {
+  AuthViewModel(this._userProvider) {
     controller.addListener(_updateUI);
   }
 
   Future loginUsingToken() async {
     print(controller.text);
-    final _result = await _authRepo.signIn(controller.text);
+    final _result = await _userProvider.signIn(controller.text);
     _result.fold((l) {
       ///TODO: handle Error
       print("FAILURE: ${l.title}, ${l.description}");
