@@ -1,42 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 
-mixin AuthView {
-  void showSnackbar(String message, {Color? color});
-}
-
-final authViewModel = ChangeNotifierProvider.autoDispose(
-    (ref) => AuthViewModel(ref.read(userProvider.notifier)));
-
-class AuthViewModel extends BaseViewModel<AuthView> {
+class AuthViewModel extends StateNotifier<AuthPageViewState> {
   final TextEditingController controller = TextEditingController();
   final UserProvider _userProvider;
 
-  AuthViewModel(this._userProvider) {
-    controller.addListener(_updateUI);
-  }
+  AuthViewModel(this._userProvider) : super(const AuthPageViewState.ready());
 
   Future loginUsingToken() async {
-    print(controller.text);
-    final _result = await _userProvider.signIn(controller.text);
-    _result.fold((l) {
-      ///TODO: handle Error
-      print("FAILURE: ${l.title}, ${l.description}");
-    }, (r) {
-      ///TODO: Handle Success
-      print("SUCCESS");
-    });
-  }
+    state = const AuthPageViewState.loading();
 
-  void _updateUI() {
-    notifyListeners();
+    final _result = await _userProvider.signIn(controller.text);
+    _result.fold(
+      (l) {
+        state = AuthPageViewState.error(l.title);
+      },
+      (r) {
+        state = const AuthPageViewState.ready();
+      },
+    );
   }
 
   @override
   void dispose() {
-    controller.removeListener(_updateUI);
+    controller.dispose();
     super.dispose();
   }
 }

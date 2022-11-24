@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/calorie_stat.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/presentation/providers/base_view_change_notifier.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
 
 final adminDetailsViewModel = ChangeNotifierProvider(
@@ -15,7 +15,7 @@ mixin AdminDetailsView {
       FoodEntry entry, String uid, void Function() onPop);
 }
 
-class AdminDetailsViewModel extends BaseViewModel<AdminDetailsView> {
+class AdminDetailsViewModel extends BaseViewChangeNotifier<AdminDetailsView> {
   late UserProfile _currentUser;
   final AdminProvider _adminProvider;
 

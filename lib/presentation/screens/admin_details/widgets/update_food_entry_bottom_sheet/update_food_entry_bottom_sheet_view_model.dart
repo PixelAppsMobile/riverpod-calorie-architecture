@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
+import 'package:totaltest/presentation/providers/base_view_change_notifier.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
 
 final updateFoodEntryBottomSheetViewModel = ChangeNotifierProvider((ref) =>
@@ -12,7 +12,7 @@ mixin UpdateFoodEntryBottomSheetView {
   void pop();
 }
 
-class UpdateFoodEntryBottomSheetViewModel extends BaseViewModel {
+class UpdateFoodEntryBottomSheetViewModel extends BaseViewChangeNotifier {
   final AdminProvider _adminProvider;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

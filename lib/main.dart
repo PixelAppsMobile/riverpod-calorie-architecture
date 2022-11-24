@@ -5,7 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart';
 import 'package:totaltest/domain/entities/base_user.dart';
-import 'package:totaltest/presentation/screens/splash/splash_screen.dart';
+import 'package:totaltest/presentation/screens/splash/splash_page.dart';
 
 import 'data/repositories/authentication/auth_repo_impl.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const SplashPage(),
     );
   }
 }

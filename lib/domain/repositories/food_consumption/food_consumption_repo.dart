@@ -5,11 +5,12 @@ import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
 import 'package:totaltest/data/dto/food_entry_dto.dart';
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart';
+import 'package:totaltest/domain/data_sources/remote/authentication/authentication_data_source.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 
-final foodConsumptionRepo = Provider.autoDispose(
+final foodConsumptionRepo = Provider(
   (ref) => FoodConsumptionRepoImpl(
-    FirebaseAuth.instance.currentUser!.uid,
+    ref.read(authenticationDataSource),
     ref.read(remoteDatabaseDataSource),
     ref.read(localStorageDataSource),
   ),

@@ -1,29 +1,35 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:totaltest/domain/entities/app_user.dart';
 import 'package:totaltest/domain/use_cases/init_services/init_local_storage_use_case.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/presentation/screens/splash/state/splash_page_view_state.dart';
 
-final splashScreenViewModel =
-    StateNotifierProvider<SplashScreenViewModel, bool>(
-  (ref) => SplashScreenViewModel(
+final splashPageViewModel =
+    StateNotifierProvider<SplashPageViewModel, SplashPageViewState>(
+  (ref) => SplashPageViewModel(
     ref.read(userProvider.notifier),
     ref.read(initLocalStorageUseCase),
   ),
 );
 
-class SplashScreenViewModel extends StateNotifier<bool> {
+class SplashPageViewModel extends StateNotifier<SplashPageViewState> {
   final InitLocalStorageUseCase _initLocalStorageUseCase;
 
   final UserProvider _userProvider;
 
-  SplashScreenViewModel(this._userProvider, this._initLocalStorageUseCase)
-      : super(false);
+  SplashPageViewModel(this._userProvider, this._initLocalStorageUseCase)
+      : super(const SplashPageViewState.loading()) {
+    _initialize();
+  }
 
-  Future initialize() async {
-    state = true;
+  Future _initialize() async {
+    state = const SplashPageViewState.loading();
 
     await _initLocalStorageUseCase();
     await _userProvider.initialize();
 
-    state = false;
+    AppUser? user = _userProvider.state;
+
+    state = SplashPageViewState.ready(user);
   }
 }

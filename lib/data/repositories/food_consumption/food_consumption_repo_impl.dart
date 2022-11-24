@@ -2,21 +2,24 @@ import 'package:dartz/dartz.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/dto/food_entry_dto.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
+import 'package:totaltest/domain/data_sources/remote/authentication/authentication_data_source.dart';
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 
 import '../../../core/constants/preference_strings.dart';
 
 class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
-  final String uid;
+  final AuthenticationDataSource _authenticationDataSource;
   final RemoteDatabaseDataSource _remoteDatabaseDataSource;
   final LocalStorageDataSource _localStorageDataSource;
 
   FoodConsumptionRepoImpl(
-    this.uid,
+    this._authenticationDataSource,
     this._remoteDatabaseDataSource,
     this._localStorageDataSource,
   );
+
+  String get uid => _authenticationDataSource.currentUser!.uid;
 
   @override
   Future<Either<AppError, FoodEntryDto>> addFoodEntry(FoodEntryDto entry,
