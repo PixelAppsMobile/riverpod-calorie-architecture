@@ -6,7 +6,7 @@ import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/screens/admin_overview/admin_overview.dart';
 import 'package:totaltest/presentation/screens/auth_page/auth_page.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page.dart';
-import 'package:totaltest/presentation/screens/splash/splash_view_model.dart';
+import 'package:totaltest/presentation/screens/splash/splash_page_view_model.dart';
 import 'package:totaltest/presentation/screens/splash/state/splash_page_view_state.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -25,7 +25,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
     splashPageViewModel =
         StateNotifierProvider<SplashPageViewModel, SplashPageViewState>(
       (ref) => SplashPageViewModel(
-        ref.read(userProvider.notifier),
+        ref.watch(userProvider.notifier),
         ref.read(initLocalStorageUseCase),
       ),
     );

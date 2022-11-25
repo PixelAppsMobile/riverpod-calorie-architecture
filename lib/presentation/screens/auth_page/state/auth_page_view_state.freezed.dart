@@ -18,21 +18,24 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthPageViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() ready,
+    required TResult Function() init,
+    required TResult Function(TextEditingController controller) ready,
     required TResult Function(String errorText) error,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? ready,
+    TResult? Function()? init,
+    TResult? Function(TextEditingController controller)? ready,
     TResult? Function(String errorText)? error,
     TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? ready,
+    TResult Function()? init,
+    TResult Function(TextEditingController controller)? ready,
     TResult Function(String errorText)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -40,6 +43,7 @@ mixin _$AuthPageViewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthPageViewStateInit value) init,
     required TResult Function(_AuthPageViewStateReady value) ready,
     required TResult Function(_AuthPageViewStateError value) error,
     required TResult Function(_AuthPageViewStateLoading value) loading,
@@ -47,6 +51,7 @@ mixin _$AuthPageViewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthPageViewStateInit value)? init,
     TResult? Function(_AuthPageViewStateReady value)? ready,
     TResult? Function(_AuthPageViewStateError value)? error,
     TResult? Function(_AuthPageViewStateLoading value)? loading,
@@ -54,6 +59,7 @@ mixin _$AuthPageViewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthPageViewStateInit value)? init,
     TResult Function(_AuthPageViewStateReady value)? ready,
     TResult Function(_AuthPageViewStateError value)? error,
     TResult Function(_AuthPageViewStateLoading value)? loading,
@@ -81,10 +87,126 @@ class _$AuthPageViewStateCopyWithImpl<$Res, $Val extends AuthPageViewState>
 }
 
 /// @nodoc
+abstract class _$$_AuthPageViewStateInitCopyWith<$Res> {
+  factory _$$_AuthPageViewStateInitCopyWith(_$_AuthPageViewStateInit value,
+          $Res Function(_$_AuthPageViewStateInit) then) =
+      __$$_AuthPageViewStateInitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AuthPageViewStateInitCopyWithImpl<$Res>
+    extends _$AuthPageViewStateCopyWithImpl<$Res, _$_AuthPageViewStateInit>
+    implements _$$_AuthPageViewStateInitCopyWith<$Res> {
+  __$$_AuthPageViewStateInitCopyWithImpl(_$_AuthPageViewStateInit _value,
+      $Res Function(_$_AuthPageViewStateInit) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AuthPageViewStateInit implements _AuthPageViewStateInit {
+  const _$_AuthPageViewStateInit();
+
+  @override
+  String toString() {
+    return 'AuthPageViewState.init()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AuthPageViewStateInit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(TextEditingController controller) ready,
+    required TResult Function(String errorText) error,
+    required TResult Function() loading,
+  }) {
+    return init();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(TextEditingController controller)? ready,
+    TResult? Function(String errorText)? error,
+    TResult? Function()? loading,
+  }) {
+    return init?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(TextEditingController controller)? ready,
+    TResult Function(String errorText)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthPageViewStateInit value) init,
+    required TResult Function(_AuthPageViewStateReady value) ready,
+    required TResult Function(_AuthPageViewStateError value) error,
+    required TResult Function(_AuthPageViewStateLoading value) loading,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthPageViewStateInit value)? init,
+    TResult? Function(_AuthPageViewStateReady value)? ready,
+    TResult? Function(_AuthPageViewStateError value)? error,
+    TResult? Function(_AuthPageViewStateLoading value)? loading,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthPageViewStateInit value)? init,
+    TResult Function(_AuthPageViewStateReady value)? ready,
+    TResult Function(_AuthPageViewStateError value)? error,
+    TResult Function(_AuthPageViewStateLoading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthPageViewStateInit implements AuthPageViewState {
+  const factory _AuthPageViewStateInit() = _$_AuthPageViewStateInit;
+}
+
+/// @nodoc
 abstract class _$$_AuthPageViewStateReadyCopyWith<$Res> {
   factory _$$_AuthPageViewStateReadyCopyWith(_$_AuthPageViewStateReady value,
           $Res Function(_$_AuthPageViewStateReady) then) =
       __$$_AuthPageViewStateReadyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TextEditingController controller});
 }
 
 /// @nodoc
@@ -94,58 +216,86 @@ class __$$_AuthPageViewStateReadyCopyWithImpl<$Res>
   __$$_AuthPageViewStateReadyCopyWithImpl(_$_AuthPageViewStateReady _value,
       $Res Function(_$_AuthPageViewStateReady) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? controller = null,
+  }) {
+    return _then(_$_AuthPageViewStateReady(
+      null == controller
+          ? _value.controller
+          : controller // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_AuthPageViewStateReady implements _AuthPageViewStateReady {
-  const _$_AuthPageViewStateReady();
+  const _$_AuthPageViewStateReady(this.controller);
+
+  @override
+  final TextEditingController controller;
 
   @override
   String toString() {
-    return 'AuthPageViewState.ready()';
+    return 'AuthPageViewState.ready(controller: $controller)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthPageViewStateReady);
+            other is _$_AuthPageViewStateReady &&
+            (identical(other.controller, controller) ||
+                other.controller == controller));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, controller);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AuthPageViewStateReadyCopyWith<_$_AuthPageViewStateReady> get copyWith =>
+      __$$_AuthPageViewStateReadyCopyWithImpl<_$_AuthPageViewStateReady>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() ready,
+    required TResult Function() init,
+    required TResult Function(TextEditingController controller) ready,
     required TResult Function(String errorText) error,
     required TResult Function() loading,
   }) {
-    return ready();
+    return ready(controller);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? ready,
+    TResult? Function()? init,
+    TResult? Function(TextEditingController controller)? ready,
     TResult? Function(String errorText)? error,
     TResult? Function()? loading,
   }) {
-    return ready?.call();
+    return ready?.call(controller);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? ready,
+    TResult Function()? init,
+    TResult Function(TextEditingController controller)? ready,
     TResult Function(String errorText)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready();
+      return ready(controller);
     }
     return orElse();
   }
@@ -153,6 +303,7 @@ class _$_AuthPageViewStateReady implements _AuthPageViewStateReady {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthPageViewStateInit value) init,
     required TResult Function(_AuthPageViewStateReady value) ready,
     required TResult Function(_AuthPageViewStateError value) error,
     required TResult Function(_AuthPageViewStateLoading value) loading,
@@ -163,6 +314,7 @@ class _$_AuthPageViewStateReady implements _AuthPageViewStateReady {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthPageViewStateInit value)? init,
     TResult? Function(_AuthPageViewStateReady value)? ready,
     TResult? Function(_AuthPageViewStateError value)? error,
     TResult? Function(_AuthPageViewStateLoading value)? loading,
@@ -173,6 +325,7 @@ class _$_AuthPageViewStateReady implements _AuthPageViewStateReady {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthPageViewStateInit value)? init,
     TResult Function(_AuthPageViewStateReady value)? ready,
     TResult Function(_AuthPageViewStateError value)? error,
     TResult Function(_AuthPageViewStateLoading value)? loading,
@@ -186,7 +339,13 @@ class _$_AuthPageViewStateReady implements _AuthPageViewStateReady {
 }
 
 abstract class _AuthPageViewStateReady implements AuthPageViewState {
-  const factory _AuthPageViewStateReady() = _$_AuthPageViewStateReady;
+  const factory _AuthPageViewStateReady(
+      final TextEditingController controller) = _$_AuthPageViewStateReady;
+
+  TextEditingController get controller;
+  @JsonKey(ignore: true)
+  _$$_AuthPageViewStateReadyCopyWith<_$_AuthPageViewStateReady> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -255,7 +414,8 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() ready,
+    required TResult Function() init,
+    required TResult Function(TextEditingController controller) ready,
     required TResult Function(String errorText) error,
     required TResult Function() loading,
   }) {
@@ -265,7 +425,8 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? ready,
+    TResult? Function()? init,
+    TResult? Function(TextEditingController controller)? ready,
     TResult? Function(String errorText)? error,
     TResult? Function()? loading,
   }) {
@@ -275,7 +436,8 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? ready,
+    TResult Function()? init,
+    TResult Function(TextEditingController controller)? ready,
     TResult Function(String errorText)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -289,6 +451,7 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthPageViewStateInit value) init,
     required TResult Function(_AuthPageViewStateReady value) ready,
     required TResult Function(_AuthPageViewStateError value) error,
     required TResult Function(_AuthPageViewStateLoading value) loading,
@@ -299,6 +462,7 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthPageViewStateInit value)? init,
     TResult? Function(_AuthPageViewStateReady value)? ready,
     TResult? Function(_AuthPageViewStateError value)? error,
     TResult? Function(_AuthPageViewStateLoading value)? loading,
@@ -309,6 +473,7 @@ class _$_AuthPageViewStateError implements _AuthPageViewStateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthPageViewStateInit value)? init,
     TResult Function(_AuthPageViewStateReady value)? ready,
     TResult Function(_AuthPageViewStateError value)? error,
     TResult Function(_AuthPageViewStateLoading value)? loading,
@@ -371,7 +536,8 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() ready,
+    required TResult Function() init,
+    required TResult Function(TextEditingController controller) ready,
     required TResult Function(String errorText) error,
     required TResult Function() loading,
   }) {
@@ -381,7 +547,8 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? ready,
+    TResult? Function()? init,
+    TResult? Function(TextEditingController controller)? ready,
     TResult? Function(String errorText)? error,
     TResult? Function()? loading,
   }) {
@@ -391,7 +558,8 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? ready,
+    TResult Function()? init,
+    TResult Function(TextEditingController controller)? ready,
     TResult Function(String errorText)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -405,6 +573,7 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthPageViewStateInit value) init,
     required TResult Function(_AuthPageViewStateReady value) ready,
     required TResult Function(_AuthPageViewStateError value) error,
     required TResult Function(_AuthPageViewStateLoading value) loading,
@@ -415,6 +584,7 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthPageViewStateInit value)? init,
     TResult? Function(_AuthPageViewStateReady value)? ready,
     TResult? Function(_AuthPageViewStateError value)? error,
     TResult? Function(_AuthPageViewStateLoading value)? loading,
@@ -425,6 +595,7 @@ class _$_AuthPageViewStateLoading implements _AuthPageViewStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthPageViewStateInit value)? init,
     TResult Function(_AuthPageViewStateReady value)? ready,
     TResult Function(_AuthPageViewStateError value)? error,
     TResult Function(_AuthPageViewStateLoading value)? loading,

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
-import 'package:totaltest/presentation/screens/auth_page/auth_view_model.dart';
+import 'package:totaltest/presentation/screens/auth_page/auth_page_view_model.dart';
 import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 import 'package:totaltest/presentation/shared_widgets/buttons.dart';
 
@@ -13,22 +13,20 @@ class AuthPage extends ConsumerStatefulWidget {
 }
 
 class AuthPageState extends ConsumerState<AuthPage> {
-  late final StateNotifierProvider<AuthViewModel, AuthPageViewState>
-      authViewModel;
-  late final AuthViewModel _viewModel;
+  late final StateNotifierProvider<AuthPageViewModel, AuthPageViewState>
+      authPageViewModel;
+  late final AuthPageViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    authViewModel = StateNotifierProvider<AuthViewModel, AuthPageViewState>(
-      (ref) => AuthViewModel(
+    authPageViewModel =
+        StateNotifierProvider<AuthPageViewModel, AuthPageViewState>(
+      (ref) => AuthPageViewModel(
         ref.read(userProvider.notifier),
       ),
     );
-    _viewModel = ref.read(authViewModel.notifier);
-    _viewModel.controller.addListener(() {
-      setState(() {});
-    });
+    _viewModel = ref.read(authPageViewModel.notifier);
   }
 
   @override
@@ -40,7 +38,7 @@ class AuthPageState extends ConsumerState<AuthPage> {
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthPageViewState>(
-      authViewModel,
+      authPageViewModel,
       (_, state) => state.whenOrNull(
         error: (error) => ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(error)),
@@ -48,9 +46,10 @@ class AuthPageState extends ConsumerState<AuthPage> {
       ),
     );
 
-    AuthPageViewState state = ref.watch(authViewModel);
+    AuthPageViewState state = ref.watch(authPageViewModel);
 
     return state.when<Widget>(
+      init: () => Container(),
       loading: () => const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -61,7 +60,7 @@ class AuthPageState extends ConsumerState<AuthPage> {
           child: Text(error.toString()),
         ),
       ),
-      ready: () => SafeArea(
+      ready: (controller) => SafeArea(
         child: Scaffold(
           appBar: AppBar(title: const Text("Authenticate")),
           body: Padding(
@@ -73,12 +72,10 @@ class AuthPageState extends ConsumerState<AuthPage> {
                   const Text("Custom token"),
                   TextField(
                     key: customTokenTextField,
-                    controller: _viewModel.controller,
+                    controller: controller,
                   ),
                   Buttons.expandedFlatButton(
-                    _viewModel.controller.text.isEmpty
-                        ? null
-                        : _viewModel.loginUsingToken,
+                    controller.text.isEmpty ? null : _viewModel.loginUsingToken,
                     "Sign in",
                   )
                 ],
