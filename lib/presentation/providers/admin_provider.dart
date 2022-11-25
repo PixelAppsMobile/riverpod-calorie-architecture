@@ -32,12 +32,18 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
     this._updateFoodEntryOfUserUseCase,
   ) : super(value);
 
-  Future<void> fetchUsers() async {
+  Future<Either<AppError, List<UserProfile>>> fetchUsers() async {
     final result = await _getAllUsersUseCase();
 
-    result.fold(
-      (l) => null,
-      (r) => state = r.map((e) => e).toList().cast<UserProfile>(),
+    return result.fold(
+      (l) {
+        state = [];
+        return Left(l);
+      },
+      (r) {
+        state = r.map((e) => e).toList().cast<UserProfile>();
+        return Right(state!);
+      },
     );
   }
 
