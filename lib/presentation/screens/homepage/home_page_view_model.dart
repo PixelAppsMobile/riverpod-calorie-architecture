@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:totaltest/data/dto/food_entry_dto.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
-import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
 import 'package:totaltest/presentation/providers/base_view_state_notifier.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
@@ -17,12 +17,14 @@ class HomePageViewModel
   final List<FoodEntry> foodEntries = [];
   bool _showCalorieWarning = false;
 
-  //Interacting Classes
-  final FoodConsumptionRepo _foodConsumptionRepo;
+  final GetFoodEntriesOfUseCase _getFoodEntriesOfUseCase;
+  final AddFoodEntryOfUserUseCase _addFoodEntryOfUserUseCase;
+
   final UserProvider _userProvider;
 
   HomePageViewModel(
-    this._foodConsumptionRepo,
+    this._getFoodEntriesOfUseCase,
+    this._addFoodEntryOfUserUseCase,
     this._userProvider,
   ) : super(const HomePageViewState.init()) {
     _initialize();
@@ -47,14 +49,14 @@ class HomePageViewModel
     try {
       state = const HomePageViewState.loading();
 
-      final either = await _foodConsumptionRepo.getFoodEntries();
+      final either =
+          await _getFoodEntriesOfUseCase(_userProvider.state!.user.uid);
       either.fold(
         (l) {
           state = HomePageViewState.error(l.title);
         },
         (r) {
-          List<FoodEntry> data =
-              r.map((e) => e.toEntity).toList().cast<FoodEntry>();
+          List<FoodEntry> data = r.map((e) => e).toList().cast<FoodEntry>();
           foodEntries.addAll(data);
           calculateIfCaloriesOvertake();
           _emitReady();
@@ -68,19 +70,21 @@ class HomePageViewModel
 
   Future<void> addNewEntry(
       String name, double calorificValue, DateTime consumptionTime) async {
-    final data = await _foodConsumptionRepo.addFoodEntry(
-      FoodEntry(
-        name: name,
-        time: consumptionTime,
-        calorificValue: calorificValue,
-      ).toDto,
+    final data = await _addFoodEntryOfUserUseCase(
+      AddFoodEntryOfUserUseCaseParam(
+          foodEntry: FoodEntry(
+            name: name,
+            time: consumptionTime,
+            calorificValue: calorificValue,
+          ),
+          uid: _userProvider.state!.user.uid),
     );
     data.fold(
       (l) {
         view!.showSnackbar(l.title, color: AppColor.errorRed);
       },
       (r) {
-        foodEntries.add(r.toEntity);
+        foodEntries.add(r);
         foodEntries.sort((a, b) => b.time.compareTo(a.time));
         calculateIfCaloriesOvertake();
         view!.showSnackbar(

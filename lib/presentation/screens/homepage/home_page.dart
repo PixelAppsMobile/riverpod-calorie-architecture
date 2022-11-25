@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
 import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page_view_model.dart';
@@ -28,7 +29,8 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
     homePageViewModel =
         StateNotifierProvider<HomePageViewModel, HomePageViewState>(
       (ref) => HomePageViewModel(
-        ref.read(foodConsumptionRepo),
+        ref.read(getFoodEntriesOfUseCase),
+        ref.read(addFoodEntryOfUserUseCase),
         ref.read(userProvider.notifier),
       ),
     );
