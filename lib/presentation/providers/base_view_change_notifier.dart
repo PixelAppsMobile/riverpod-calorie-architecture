@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-abstract class BaseViewModel<T> extends ChangeNotifier {
+abstract class BaseViewChangeNotifier<T> extends ChangeNotifier {
   late T? view;
   bool loading = false;
   String? errorMessage;
@@ -22,6 +22,6 @@ abstract class BaseViewModel<T> extends ChangeNotifier {
   }
 
   void detachView() {
-    this.view = null;
+    view = null;
   }
 }

@@ -5,7 +5,7 @@ import 'package:totaltest/data/dto/user_profile_dto.dart';
 extension QuerySnapshotExt on QuerySnapshot {
   List<FoodEntryDto> get foodEntriesFromSnapshot => docs
       .map((e) => FoodEntryDto.fromJson(
-          (e.data() as Map<String, dynamic>)..addAll({'documentID': e.id})))
+          (e.data() as Map<String, dynamic>)..addAll({'document_id': e.id})))
       .toList();
 }
 

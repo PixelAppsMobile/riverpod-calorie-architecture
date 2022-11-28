@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:totaltest/presentation/screens/auth_page/auth_view_model.dart';
+import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/presentation/screens/auth_page/auth_page_view_model.dart';
+import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 import 'package:totaltest/presentation/shared_widgets/buttons.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
@@ -10,52 +12,79 @@ class AuthPage extends ConsumerStatefulWidget {
   AuthPageState createState() => AuthPageState();
 }
 
-class AuthPageState extends ConsumerState<AuthPage> implements AuthView {
-  late final AuthViewModel _viewModel;
+class AuthPageState extends ConsumerState<AuthPage> {
+  late final StateNotifierProvider<AuthPageViewModel, AuthPageViewState>
+      authPageViewModel;
+  late final AuthPageViewModel _viewModel;
+
   @override
   void initState() {
     super.initState();
-    // "ref" can be used in all life-cycles of a StatefulWidget.
-    _viewModel = ref.read(authViewModel);
-    _viewModel.attachView(this);
-    _viewModel.controller.addListener(() {
-      setState(() {});
-    });
+    authPageViewModel =
+        StateNotifierProvider<AuthPageViewModel, AuthPageViewState>(
+      (ref) => AuthPageViewModel(
+        ref.read(userProvider.notifier),
+      ),
+    );
+    _viewModel = ref.read(authPageViewModel.notifier);
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: const Text("Authenticate")),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text("Custom token"),
-                TextField(
-                  key: customTokenTextField,
-                  controller: _viewModel.controller,
-                ),
-                Buttons.expandedFlatButton(
-                    _viewModel.controller.text.isEmpty
-                        ? null
-                        : _viewModel.loginUsingToken,
-                    "Sign in")
-              ],
+    ref.listen<AuthPageViewState>(
+      authPageViewModel,
+      (_, state) => state.whenOrNull(
+        error: (error) => ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error)),
+        ),
+      ),
+    );
+
+    AuthPageViewState state = ref.watch(authPageViewModel);
+
+    return state.when<Widget>(
+      init: () => Container(),
+      loading: () => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      error: (error) => Scaffold(
+        body: Center(
+          child: Text(error.toString()),
+        ),
+      ),
+      ready: (controller) => SafeArea(
+        child: Scaffold(
+          appBar: AppBar(title: const Text("Authenticate")),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text("Custom token"),
+                  TextField(
+                    key: customTokenTextField,
+                    controller: controller,
+                  ),
+                  Buttons.expandedFlatButton(
+                    controller.text.isEmpty ? null : _viewModel.loginUsingToken,
+                    "Sign in",
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void showSnackbar(String message, {Color? color}) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message), backgroundColor: color));
   }
 }
 

@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
+import 'package:totaltest/presentation/screens/admin_details/widgets/update_food_entry_bottom_sheet/state/update_food_entry_bottom_sheet_view_state.dart';
 
-final updateFoodEntryBottomSheetViewModel = ChangeNotifierProvider((ref) =>
-    UpdateFoodEntryBottomSheetViewModel(ref.read(adminProvider.notifier)));
-
-mixin UpdateFoodEntryBottomSheetView {
-  void showAlert(String message);
-  void pop();
-}
-
-class UpdateFoodEntryBottomSheetViewModel extends BaseViewModel {
+class UpdateFoodEntryBottomSheetViewModel
+    extends StateNotifier<UpdateFoodEntryBottomSheetViewState> {
   final AdminProvider _adminProvider;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController calorificValueController =
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _calorificValueController =
       TextEditingController();
 
-  final FocusNode nameFocusNode = FocusNode();
-  final FocusNode calorificValueFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _calorificValueFocusNode = FocusNode();
 
-  UpdateFoodEntryBottomSheetViewModel(this._adminProvider) {
-    FocusManager.instance.addListener(_focusListener);
+  late UpdateFoodEntryBottomSheetViewState cachedState;
+
+  UpdateFoodEntryBottomSheetViewModel(FoodEntry entry, this._adminProvider)
+      : super(const UpdateFoodEntryBottomSheetViewState.init()) {
+    FocusManager.instance.addListener(_emitReady);
+    _nameController.text = entry.name;
+    _calorificValueController.text = entry.calorificValue.toString();
+
+    _emitReady();
   }
 
-  void _focusListener() {
-    notifyListeners();
+  void _emitReady() {
+    state = UpdateFoodEntryBottomSheetViewState.ready(
+      calorificValueController: _calorificValueController,
+      calorificValueNode: _calorificValueFocusNode,
+      foodNameController: _nameController,
+      foodNameNode: _nameFocusNode,
+    );
   }
 
   Future<void> submit(
@@ -37,14 +42,18 @@ class UpdateFoodEntryBottomSheetViewModel extends BaseViewModel {
     if (formKey.currentState!.validate()) {
       final either = await _adminProvider.updateFoodEntry(
           entry.copyWith(
-            calorificValue: double.parse(calorificValueController.text),
-            name: nameController.text,
+            calorificValue: double.parse(_calorificValueController.text),
+            name: _nameController.text,
           ),
           uid);
       return either.fold(
-        (l) => view!.showAlert(l.title),
+        (l) {
+          cachedState = state;
+          state = UpdateFoodEntryBottomSheetViewState.showAlert(l.title);
+          state = cachedState;
+        },
         (r) {
-          view!.pop();
+          state = const UpdateFoodEntryBottomSheetViewState.pop();
           onPop();
         },
       );
@@ -53,13 +62,13 @@ class UpdateFoodEntryBottomSheetViewModel extends BaseViewModel {
 
   @override
   void dispose() {
-    FocusManager.instance.removeListener(_focusListener);
+    FocusManager.instance.removeListener(_emitReady);
 
-    nameFocusNode.dispose();
-    calorificValueFocusNode.dispose();
+    _nameFocusNode.dispose();
+    _calorificValueFocusNode.dispose();
 
-    nameController.dispose();
-    calorificValueController.dispose();
+    _nameController.dispose();
+    _calorificValueController.dispose();
     super.dispose();
   }
 }

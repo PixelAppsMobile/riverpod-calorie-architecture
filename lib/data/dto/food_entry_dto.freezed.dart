@@ -25,7 +25,7 @@ mixin _$FoodEntryDto {
   DateTime get time => throw _privateConstructorUsedError;
   double get calorificValue => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: "document_id")
   String? get documentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $FoodEntryDtoCopyWith<$Res> {
       @JsonKey(name: "entry_time") DateTime time,
       double calorificValue,
       String? imageUrl,
-      @JsonKey(includeIfNull: false) String? documentId});
+      @JsonKey(name: "document_id") String? documentId});
 }
 
 /// @nodoc
@@ -105,7 +105,7 @@ abstract class _$$_FoodEntryDtoCopyWith<$Res>
       @JsonKey(name: "entry_time") DateTime time,
       double calorificValue,
       String? imageUrl,
-      @JsonKey(includeIfNull: false) String? documentId});
+      @JsonKey(name: "document_id") String? documentId});
 }
 
 /// @nodoc
@@ -158,7 +158,7 @@ class _$_FoodEntryDto implements _FoodEntryDto {
       @JsonKey(name: "entry_time") required this.time,
       required this.calorificValue,
       this.imageUrl,
-      @JsonKey(includeIfNull: false) this.documentId});
+      @JsonKey(name: "document_id") this.documentId});
 
   factory _$_FoodEntryDto.fromJson(Map<String, dynamic> json) =>
       _$$_FoodEntryDtoFromJson(json);
@@ -173,7 +173,7 @@ class _$_FoodEntryDto implements _FoodEntryDto {
   @override
   final String? imageUrl;
   @override
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: "document_id")
   final String? documentId;
 
   @override
@@ -221,7 +221,7 @@ abstract class _FoodEntryDto implements FoodEntryDto {
           @JsonKey(name: "entry_time") required final DateTime time,
           required final double calorificValue,
           final String? imageUrl,
-          @JsonKey(includeIfNull: false) final String? documentId}) =
+          @JsonKey(name: "document_id") final String? documentId}) =
       _$_FoodEntryDto;
 
   factory _FoodEntryDto.fromJson(Map<String, dynamic> json) =
@@ -237,7 +237,7 @@ abstract class _FoodEntryDto implements FoodEntryDto {
   @override
   String? get imageUrl;
   @override
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: "document_id")
   String? get documentId;
   @override
   @JsonKey(ignore: true)

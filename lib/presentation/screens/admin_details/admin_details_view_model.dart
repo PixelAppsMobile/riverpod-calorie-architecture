@@ -3,59 +3,80 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/calorie_stat.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
+import 'package:totaltest/presentation/screens/admin_details/state/admin_details_view_state.dart';
 
-final adminDetailsViewModel = ChangeNotifierProvider(
-    (ref) => AdminDetailsViewModel(ref.read(adminProvider.notifier)));
-
-mixin AdminDetailsView {
-  Future<void> showAlert(String message);
-  Future<void> openBottomSheet(
-      FoodEntry entry, String uid, void Function() onPop);
-}
-
-class AdminDetailsViewModel extends BaseViewModel<AdminDetailsView> {
+class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
   late UserProfile _currentUser;
   final AdminProvider _adminProvider;
 
-  late TabController tabController;
+  final String _uid;
+  final TickerProvider _vsync;
+  late TabController _tabController;
 
   late CalorieStats _stats;
 
-  AdminDetailsViewModel(this._adminProvider);
+  late AdminDetailsViewState cachedState;
+
+  AdminDetailsViewModel(this._uid, this._adminProvider, this._vsync)
+      : super(const AdminDetailsViewState.init()) {
+    _initialize();
+  }
 
   UserProfile get currentUser => _currentUser;
 
   CalorieStats get stats => _stats;
 
-  Future<void> initialise(String uid, TickerProvider vsync) async {
-    toggleLoadingOn(true);
-    tabController = TabController(length: 2, vsync: vsync);
-    tabController.index = 0;
-    await _adminProvider.fetchFoodEntriesForUser(uid);
-    _currentUser = _adminProvider.getUserByUID(uid);
+  Future<void> _initialize() async {
+    state = const AdminDetailsViewState.loading();
+
+    _tabController = TabController(initialIndex: 0, length: 2, vsync: _vsync);
+
+    await _adminProvider.fetchFoodEntriesForUser(_uid);
+
+    _updateFoodEntries();
+
+    _adminProvider.addListener((state) => _updateFoodEntries());
+  }
+
+  void _updateFoodEntries() {
+    _currentUser = _adminProvider.getUserByUID(_uid);
     getStats();
-    toggleLoadingOn(false);
   }
 
   void getStats() {
     _stats = CalorieStats.fromFoodEntries(_currentUser.foodEntries!);
-    notifyListeners();
+    _emitReady();
+  }
+
+  void _emitReady() {
+    state = AdminDetailsViewState.ready(
+      controller: _tabController,
+      user: _currentUser,
+      stats: stats,
+    );
   }
 
   Future<void> deleteFoodEntry(FoodEntry entry) async {
     final either =
         await _adminProvider.deleteFoodEntry(entry, _currentUser.userId);
     return either.fold(
-      (l) => view!.showAlert(l.title),
+      (l) {
+        cachedState = state;
+        state = AdminDetailsViewState.showAlert(l.title);
+        state = cachedState;
+      },
       (r) => getStats(),
     );
   }
 
   Future<void> editFoodEntry(FoodEntry entry) async {
-    await view!.openBottomSheet(entry, _currentUser.userId, () {
-      getStats();
-    });
+    cachedState = state;
+    state = AdminDetailsViewState.openBottomSheet(
+      entry: entry,
+      uid: _currentUser.userId,
+      onPop: () => getStats(),
+    );
+    state = cachedState;
   }
 }

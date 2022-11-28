@@ -1,23 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/presentation/providers/base_view_model.dart';
 import 'package:totaltest/presentation/providers/admin_provider.dart';
+import 'package:totaltest/presentation/screens/admin_overview/state/admin_overview_view_state.dart';
 
-final adminOverviewViewModel = ChangeNotifierProvider(
-    (ref) => AdminOverviewViewModel(ref.read(adminProvider.notifier)));
-mixin AdminOverviewView {}
-
-class AdminOverviewViewModel extends BaseViewModel<AdminOverviewView> {
-  AdminOverviewViewModel(this._adminProvider);
+class AdminOverviewViewModel extends StateNotifier<AdminOverviewViewState> {
+  AdminOverviewViewModel(this._adminProvider)
+      : super(const AdminOverviewViewState.init()) {
+    _initialize();
+  }
   List<UserProfile> users = [];
 
   final AdminProvider _adminProvider;
 
-  void initialize() async {
-    toggleLoadingOn(true);
-    await _adminProvider.fetchUsers();
-    users = _adminProvider.state!;
-    toggleLoadingOn(false);
-    notifyListeners();
+  void _initialize() async {
+    state = const AdminOverviewViewState.loading();
+
+    final result = await _adminProvider.fetchUsers();
+
+    result.fold(
+      (l) => state = AdminOverviewViewState.error(l.title),
+      (r) => state = AdminOverviewViewState.ready(r),
+    );
   }
 }
