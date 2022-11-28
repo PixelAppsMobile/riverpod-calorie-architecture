@@ -17,6 +17,8 @@ class UpdateFoodEntryBottomSheetViewModel
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _calorificValueFocusNode = FocusNode();
 
+  late UpdateFoodEntryBottomSheetViewState cachedState;
+
   UpdateFoodEntryBottomSheetViewModel(FoodEntry entry, this._adminProvider)
       : super(const UpdateFoodEntryBottomSheetViewState.init()) {
     FocusManager.instance.addListener(_emitReady);
@@ -45,7 +47,11 @@ class UpdateFoodEntryBottomSheetViewModel
           ),
           uid);
       return either.fold(
-        (l) => state = UpdateFoodEntryBottomSheetViewState.showAlert(l.title),
+        (l) {
+          cachedState = state;
+          state = UpdateFoodEntryBottomSheetViewState.showAlert(l.title);
+          state = cachedState;
+        },
         (r) {
           state = const UpdateFoodEntryBottomSheetViewState.pop();
           onPop();

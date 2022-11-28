@@ -112,15 +112,27 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
       (l) => Left(l),
       (r) {
         // Update local record
-        UserProfile userProfile = state!
-            .where(
-              (element) => element.userId == uid,
-            )
-            .first;
+        int userProfileIndex = state!.indexWhere(
+          (element) => element.userId == uid,
+        );
+
+        UserProfile userProfile = state![userProfileIndex];
+
         int foodEntryIndex = userProfile.foodEntries!
             .indexWhere((element) => element.documentId == entry.documentId);
 
-        userProfile.foodEntries![foodEntryIndex] = entry;
+        List<FoodEntry> newFoodEntries = [...userProfile.foodEntries!];
+
+        newFoodEntries[foodEntryIndex] = entry;
+
+        UserProfile newUserProfile =
+            userProfile.copyWith(foodEntries: newFoodEntries);
+
+        List<UserProfile> newUserProfileListState = [...state!];
+
+        newUserProfileListState[userProfileIndex] = newUserProfile;
+
+        state = newUserProfileListState;
 
         return Right(r);
       },

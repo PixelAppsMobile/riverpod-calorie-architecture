@@ -16,6 +16,8 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
 
   late CalorieStats _stats;
 
+  late AdminDetailsViewState cachedState;
+
   AdminDetailsViewModel(this._uid, this._adminProvider, this._vsync)
       : super(const AdminDetailsViewState.init()) {
     _initialize();
@@ -31,6 +33,13 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
     _tabController = TabController(initialIndex: 0, length: 2, vsync: _vsync);
 
     await _adminProvider.fetchFoodEntriesForUser(_uid);
+
+    _updateFoodEntries();
+
+    _adminProvider.addListener((state) => _updateFoodEntries());
+  }
+
+  void _updateFoodEntries() {
     _currentUser = _adminProvider.getUserByUID(_uid);
     getStats();
   }
@@ -52,16 +61,22 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
     final either =
         await _adminProvider.deleteFoodEntry(entry, _currentUser.userId);
     return either.fold(
-      (l) => state = AdminDetailsViewState.showAlert(l.title),
+      (l) {
+        cachedState = state;
+        state = AdminDetailsViewState.showAlert(l.title);
+        state = cachedState;
+      },
       (r) => getStats(),
     );
   }
 
   Future<void> editFoodEntry(FoodEntry entry) async {
+    cachedState = state;
     state = AdminDetailsViewState.openBottomSheet(
       entry: entry,
       uid: _currentUser.userId,
       onPop: () => getStats(),
     );
+    state = cachedState;
   }
 }

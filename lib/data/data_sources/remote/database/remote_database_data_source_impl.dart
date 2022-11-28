@@ -57,7 +57,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
           .orderBy("entry_time", descending: true)
           .get();
 
-      return Right(snapshot.foodEntriesFromSnapshot);
+      List<FoodEntryDto> entries = snapshot.foodEntriesFromSnapshot;
+
+      return Right(entries);
     } catch (e) {
       return Left(AppError(title: e.toString()));
     }
