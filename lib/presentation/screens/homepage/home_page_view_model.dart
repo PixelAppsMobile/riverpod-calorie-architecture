@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
 import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
-import 'package:totaltest/presentation/providers/base_view_state_notifier.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/core/base_notifier/base_view_state_notifier.dart';
+import 'package:totaltest/domain/providers/user/user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/presentation/providers/admin_provider.dart';
+import 'package:totaltest/domain/providers/admin/admin_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details.dart';
 import 'package:totaltest/presentation/screens/admin_overview/admin_overview_view_model.dart';
 import 'package:totaltest/presentation/screens/admin_overview/state/admin_overview_view_state.dart';

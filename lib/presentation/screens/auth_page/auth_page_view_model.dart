@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/domain/providers/user/user_provider.dart';
 import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 
 class AuthPageViewModel extends StateNotifier<AuthPageViewState> {

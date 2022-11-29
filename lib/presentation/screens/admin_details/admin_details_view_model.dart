@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/calorie_stat.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
-import 'package:totaltest/presentation/providers/admin_provider.dart';
+import 'package:totaltest/domain/providers/admin/admin_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/state/admin_details_view_state.dart';
 
 class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {

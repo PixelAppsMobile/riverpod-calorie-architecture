@@ -10,9 +10,9 @@ import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
 import 'package:totaltest/domain/entities/app_user.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
+import 'package:totaltest/domain/providers/user/user_provider.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 import 'package:totaltest/domain/enums/user_role.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
 import 'package:totaltest/main.dart';
 import 'package:totaltest/main.mocks.dart';
 

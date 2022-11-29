@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/entities/app_user.dart';
-import 'package:totaltest/domain/use_cases/authentication/get_app_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/authentication/sign_in_using_custom_token_use_case.dart';
-import 'package:totaltest/domain/use_cases/authentication/sign_out_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/update_calorie_limit_use_case.dart';
+import 'package:totaltest/domain/use_cases/user/get_app_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/user/sign_in_using_custom_token_use_case.dart';
+import 'package:totaltest/domain/use_cases/user/sign_out_use_case.dart';
+import 'package:totaltest/domain/use_cases/user/update_calorie_limit_use_case.dart';
 
 final userProvider = StateNotifierProvider<UserProvider, AppUser?>(
   (ref) => UserProvider(
