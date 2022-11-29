@@ -19,29 +19,38 @@ mixin _$HomePageViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,8 +60,16 @@ mixin _$HomePageViewState {
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,7 +78,13 @@ mixin _$HomePageViewState {
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,7 +93,13 @@ mixin _$HomePageViewState {
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -133,11 +162,14 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) {
     return init();
   }
@@ -146,10 +178,13 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
     return init?.call();
   }
@@ -158,10 +193,13 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -177,8 +215,16 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) {
     return init(this);
   }
@@ -190,7 +236,13 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) {
     return init?.call(this);
   }
@@ -202,7 +254,13 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -221,8 +279,6 @@ abstract class _$$_HomePageViewStateReadyCopyWith<$Res> {
   factory _$$_HomePageViewStateReadyCopyWith(_$_HomePageViewStateReady value,
           $Res Function(_$_HomePageViewStateReady) then) =
       __$$_HomePageViewStateReadyCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool loading, bool showCalorieWarning});
 }
 
 /// @nodoc
@@ -232,99 +288,74 @@ class __$$_HomePageViewStateReadyCopyWithImpl<$Res>
   __$$_HomePageViewStateReadyCopyWithImpl(_$_HomePageViewStateReady _value,
       $Res Function(_$_HomePageViewStateReady) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? loading = null,
-    Object? showCalorieWarning = null,
-  }) {
-    return _then(_$_HomePageViewStateReady(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showCalorieWarning: null == showCalorieWarning
-          ? _value.showCalorieWarning
-          : showCalorieWarning // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_HomePageViewStateReady implements _HomePageViewStateReady {
-  const _$_HomePageViewStateReady(
-      {required this.loading, required this.showCalorieWarning});
-
-  @override
-  final bool loading;
-  @override
-  final bool showCalorieWarning;
+  const _$_HomePageViewStateReady();
 
   @override
   String toString() {
-    return 'HomePageViewState.ready(loading: $loading, showCalorieWarning: $showCalorieWarning)';
+    return 'HomePageViewState.ready()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomePageViewStateReady &&
-            (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.showCalorieWarning, showCalorieWarning) ||
-                other.showCalorieWarning == showCalorieWarning));
+            other is _$_HomePageViewStateReady);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading, showCalorieWarning);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_HomePageViewStateReadyCopyWith<_$_HomePageViewStateReady> get copyWith =>
-      __$$_HomePageViewStateReadyCopyWithImpl<_$_HomePageViewStateReady>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) {
-    return ready(this.loading, showCalorieWarning);
+    return ready();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
-    return ready?.call(this.loading, showCalorieWarning);
+    return ready?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready(this.loading, showCalorieWarning);
+      return ready();
     }
     return orElse();
   }
@@ -336,8 +367,16 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) {
     return ready(this);
   }
@@ -349,7 +388,13 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) {
     return ready?.call(this);
   }
@@ -361,7 +406,13 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -372,15 +423,7 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
 }
 
 abstract class _HomePageViewStateReady implements HomePageViewState {
-  const factory _HomePageViewStateReady(
-      {required final bool loading,
-      required final bool showCalorieWarning}) = _$_HomePageViewStateReady;
-
-  bool get loading;
-  bool get showCalorieWarning;
-  @JsonKey(ignore: true)
-  _$$_HomePageViewStateReadyCopyWith<_$_HomePageViewStateReady> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _HomePageViewStateReady() = _$_HomePageViewStateReady;
 }
 
 /// @nodoc
@@ -424,11 +467,14 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) {
     return loading();
   }
@@ -437,10 +483,13 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
     return loading?.call();
   }
@@ -449,10 +498,13 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -468,8 +520,16 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) {
     return loading(this);
   }
@@ -481,7 +541,13 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) {
     return loading?.call(this);
   }
@@ -493,7 +559,13 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -573,11 +645,14 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) {
     return error(message);
   }
@@ -586,10 +661,13 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
     return error?.call(message);
   }
@@ -598,10 +676,13 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -617,8 +698,16 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) {
     return error(this);
   }
@@ -630,7 +719,13 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) {
     return error?.call(this);
   }
@@ -642,7 +737,13 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -660,6 +761,167 @@ abstract class _HomePageViewStateError implements HomePageViewState {
   @JsonKey(ignore: true)
   _$$_HomePageViewStateErrorCopyWith<_$_HomePageViewStateError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWith<
+    $Res> {
+  factory _$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWith(
+          _$_HomePageViewStateShowCaloriesLimitExceededWarning value,
+          $Res Function(_$_HomePageViewStateShowCaloriesLimitExceededWarning)
+              then) =
+      __$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWithImpl<$Res>
+    extends _$HomePageViewStateCopyWithImpl<$Res,
+        _$_HomePageViewStateShowCaloriesLimitExceededWarning>
+    implements
+        _$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWith<$Res> {
+  __$$_HomePageViewStateShowCaloriesLimitExceededWarningCopyWithImpl(
+      _$_HomePageViewStateShowCaloriesLimitExceededWarning _value,
+      $Res Function(_$_HomePageViewStateShowCaloriesLimitExceededWarning) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_HomePageViewStateShowCaloriesLimitExceededWarning
+    implements _HomePageViewStateShowCaloriesLimitExceededWarning {
+  const _$_HomePageViewStateShowCaloriesLimitExceededWarning();
+
+  @override
+  String toString() {
+    return 'HomePageViewState.showCaloriesLimitExceededWarning()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HomePageViewStateShowCaloriesLimitExceededWarning);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
+    required TResult Function(String message, Color backgroundColor)
+        showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
+  }) {
+    return showCaloriesLimitExceededWarning();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
+    TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
+  }) {
+    return showCaloriesLimitExceededWarning?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
+    TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showCaloriesLimitExceededWarning != null) {
+      return showCaloriesLimitExceededWarning();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomePageViewStateInit value) init,
+    required TResult Function(_HomePageViewStateReady value) ready,
+    required TResult Function(_HomePageViewStateLoading value) loading,
+    required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
+    required TResult Function(_HomePageViewStateShowSnackBar value)
+        showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showCaloriesLimitExceededWarning(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomePageViewStateInit value)? init,
+    TResult? Function(_HomePageViewStateReady value)? ready,
+    TResult? Function(_HomePageViewStateLoading value)? loading,
+    TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showCaloriesLimitExceededWarning?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomePageViewStateInit value)? init,
+    TResult Function(_HomePageViewStateReady value)? ready,
+    TResult Function(_HomePageViewStateLoading value)? loading,
+    TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showCaloriesLimitExceededWarning != null) {
+      return showCaloriesLimitExceededWarning(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomePageViewStateShowCaloriesLimitExceededWarning
+    implements HomePageViewState {
+  const factory _HomePageViewStateShowCaloriesLimitExceededWarning() =
+      _$_HomePageViewStateShowCaloriesLimitExceededWarning;
 }
 
 /// @nodoc
@@ -742,11 +1004,14 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool loading, bool showCalorieWarning) ready,
+    required TResult Function() ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
     required TResult Function(String message, Color backgroundColor)
         showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
   }) {
     return showSnackBar(message, backgroundColor);
   }
@@ -755,10 +1020,13 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool loading, bool showCalorieWarning)? ready,
+    TResult? Function()? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
     TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
     return showSnackBar?.call(message, backgroundColor);
   }
@@ -767,10 +1035,13 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool loading, bool showCalorieWarning)? ready,
+    TResult Function()? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
     TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (showSnackBar != null) {
@@ -786,8 +1057,16 @@ class _$_HomePageViewStateShowSnackBar
     required TResult Function(_HomePageViewStateReady value) ready,
     required TResult Function(_HomePageViewStateLoading value) loading,
     required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
     required TResult Function(_HomePageViewStateShowSnackBar value)
         showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
   }) {
     return showSnackBar(this);
   }
@@ -799,7 +1078,13 @@ class _$_HomePageViewStateShowSnackBar
     TResult? Function(_HomePageViewStateReady value)? ready,
     TResult? Function(_HomePageViewStateLoading value)? loading,
     TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
   }) {
     return showSnackBar?.call(this);
   }
@@ -811,7 +1096,13 @@ class _$_HomePageViewStateShowSnackBar
     TResult Function(_HomePageViewStateReady value)? ready,
     TResult Function(_HomePageViewStateLoading value)? loading,
     TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
     TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
     required TResult orElse(),
   }) {
     if (showSnackBar != null) {
@@ -831,4 +1122,320 @@ abstract class _HomePageViewStateShowSnackBar implements HomePageViewState {
   @JsonKey(ignore: true)
   _$$_HomePageViewStateShowSnackBarCopyWith<_$_HomePageViewStateShowSnackBar>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_HomePageViewStateShowFoodEntrySheetCopyWith<$Res> {
+  factory _$$_HomePageViewStateShowFoodEntrySheetCopyWith(
+          _$_HomePageViewStateShowFoodEntrySheet value,
+          $Res Function(_$_HomePageViewStateShowFoodEntrySheet) then) =
+      __$$_HomePageViewStateShowFoodEntrySheetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_HomePageViewStateShowFoodEntrySheetCopyWithImpl<$Res>
+    extends _$HomePageViewStateCopyWithImpl<$Res,
+        _$_HomePageViewStateShowFoodEntrySheet>
+    implements _$$_HomePageViewStateShowFoodEntrySheetCopyWith<$Res> {
+  __$$_HomePageViewStateShowFoodEntrySheetCopyWithImpl(
+      _$_HomePageViewStateShowFoodEntrySheet _value,
+      $Res Function(_$_HomePageViewStateShowFoodEntrySheet) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_HomePageViewStateShowFoodEntrySheet
+    implements _HomePageViewStateShowFoodEntrySheet {
+  const _$_HomePageViewStateShowFoodEntrySheet();
+
+  @override
+  String toString() {
+    return 'HomePageViewState.showAddFoodEntrySheet()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HomePageViewStateShowFoodEntrySheet);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
+    required TResult Function(String message, Color backgroundColor)
+        showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
+  }) {
+    return showAddFoodEntrySheet();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
+    TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
+  }) {
+    return showAddFoodEntrySheet?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
+    TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showAddFoodEntrySheet != null) {
+      return showAddFoodEntrySheet();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomePageViewStateInit value) init,
+    required TResult Function(_HomePageViewStateReady value) ready,
+    required TResult Function(_HomePageViewStateLoading value) loading,
+    required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
+    required TResult Function(_HomePageViewStateShowSnackBar value)
+        showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showAddFoodEntrySheet(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomePageViewStateInit value)? init,
+    TResult? Function(_HomePageViewStateReady value)? ready,
+    TResult? Function(_HomePageViewStateLoading value)? loading,
+    TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showAddFoodEntrySheet?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomePageViewStateInit value)? init,
+    TResult Function(_HomePageViewStateReady value)? ready,
+    TResult Function(_HomePageViewStateLoading value)? loading,
+    TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showAddFoodEntrySheet != null) {
+      return showAddFoodEntrySheet(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomePageViewStateShowFoodEntrySheet
+    implements HomePageViewState {
+  const factory _HomePageViewStateShowFoodEntrySheet() =
+      _$_HomePageViewStateShowFoodEntrySheet;
+}
+
+/// @nodoc
+abstract class _$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWith<$Res> {
+  factory _$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWith(
+          _$_HomePageViewStateShowCalorieLimitUpdateSheet value,
+          $Res Function(_$_HomePageViewStateShowCalorieLimitUpdateSheet) then) =
+      __$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWithImpl<$Res>
+    extends _$HomePageViewStateCopyWithImpl<$Res,
+        _$_HomePageViewStateShowCalorieLimitUpdateSheet>
+    implements _$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWith<$Res> {
+  __$$_HomePageViewStateShowCalorieLimitUpdateSheetCopyWithImpl(
+      _$_HomePageViewStateShowCalorieLimitUpdateSheet _value,
+      $Res Function(_$_HomePageViewStateShowCalorieLimitUpdateSheet) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_HomePageViewStateShowCalorieLimitUpdateSheet
+    implements _HomePageViewStateShowCalorieLimitUpdateSheet {
+  const _$_HomePageViewStateShowCalorieLimitUpdateSheet();
+
+  @override
+  String toString() {
+    return 'HomePageViewState.showCalorieLimitUpdateSheet()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HomePageViewStateShowCalorieLimitUpdateSheet);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function() showCaloriesLimitExceededWarning,
+    required TResult Function(String message, Color backgroundColor)
+        showSnackBar,
+    required TResult Function() showAddFoodEntrySheet,
+    required TResult Function() showCalorieLimitUpdateSheet,
+  }) {
+    return showCalorieLimitUpdateSheet();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function(String message)? error,
+    TResult? Function()? showCaloriesLimitExceededWarning,
+    TResult? Function(String message, Color backgroundColor)? showSnackBar,
+    TResult? Function()? showAddFoodEntrySheet,
+    TResult? Function()? showCalorieLimitUpdateSheet,
+  }) {
+    return showCalorieLimitUpdateSheet?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function()? showCaloriesLimitExceededWarning,
+    TResult Function(String message, Color backgroundColor)? showSnackBar,
+    TResult Function()? showAddFoodEntrySheet,
+    TResult Function()? showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showCalorieLimitUpdateSheet != null) {
+      return showCalorieLimitUpdateSheet();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomePageViewStateInit value) init,
+    required TResult Function(_HomePageViewStateReady value) ready,
+    required TResult Function(_HomePageViewStateLoading value) loading,
+    required TResult Function(_HomePageViewStateError value) error,
+    required TResult Function(
+            _HomePageViewStateShowCaloriesLimitExceededWarning value)
+        showCaloriesLimitExceededWarning,
+    required TResult Function(_HomePageViewStateShowSnackBar value)
+        showSnackBar,
+    required TResult Function(_HomePageViewStateShowFoodEntrySheet value)
+        showAddFoodEntrySheet,
+    required TResult Function(
+            _HomePageViewStateShowCalorieLimitUpdateSheet value)
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showCalorieLimitUpdateSheet(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomePageViewStateInit value)? init,
+    TResult? Function(_HomePageViewStateReady value)? ready,
+    TResult? Function(_HomePageViewStateLoading value)? loading,
+    TResult? Function(_HomePageViewStateError value)? error,
+    TResult? Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult? Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult? Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult? Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+  }) {
+    return showCalorieLimitUpdateSheet?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomePageViewStateInit value)? init,
+    TResult Function(_HomePageViewStateReady value)? ready,
+    TResult Function(_HomePageViewStateLoading value)? loading,
+    TResult Function(_HomePageViewStateError value)? error,
+    TResult Function(_HomePageViewStateShowCaloriesLimitExceededWarning value)?
+        showCaloriesLimitExceededWarning,
+    TResult Function(_HomePageViewStateShowSnackBar value)? showSnackBar,
+    TResult Function(_HomePageViewStateShowFoodEntrySheet value)?
+        showAddFoodEntrySheet,
+    TResult Function(_HomePageViewStateShowCalorieLimitUpdateSheet value)?
+        showCalorieLimitUpdateSheet,
+    required TResult orElse(),
+  }) {
+    if (showCalorieLimitUpdateSheet != null) {
+      return showCalorieLimitUpdateSheet(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomePageViewStateShowCalorieLimitUpdateSheet
+    implements HomePageViewState {
+  const factory _HomePageViewStateShowCalorieLimitUpdateSheet() =
+      _$_HomePageViewStateShowCalorieLimitUpdateSheet;
 }

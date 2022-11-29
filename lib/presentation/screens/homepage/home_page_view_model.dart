@@ -22,6 +22,8 @@ class HomePageViewModel
 
   final UserProvider _userProvider;
 
+  late HomePageViewState _cachedState;
+
   HomePageViewModel(
     this._getFoodEntriesOfUseCase,
     this._addFoodEntryOfUserUseCase,
@@ -81,17 +83,22 @@ class HomePageViewModel
     );
     data.fold(
       (l) {
+        _cachedState = state;
         view!.showSnackbar(l.title, color: AppColor.errorRed);
+        state = _cachedState;
       },
       (r) {
         foodEntries.add(r);
         foodEntries.sort((a, b) => b.time.compareTo(a.time));
         calculateIfCaloriesOvertake();
+
+        _cachedState = state;
+
         view!.showSnackbar(
           "Entry added succesfully",
           color: AppColor.successGreen,
         );
-        _emitReady();
+        state = _cachedState;
       },
     );
   }
@@ -99,30 +106,48 @@ class HomePageViewModel
   void calculateIfCaloriesOvertake() {
     _showCalorieWarning =
         todayCalories > (_userProvider.state!.calorieLimit ?? 2100);
+    if (_showCalorieWarning) {
+      state = const HomePageViewState.showCaloriesLimitExceededWarning();
+    }
   }
 
   Future<void> updateCalorieLimit(double limit) async {
     final _result = await _userProvider.updateCalorieLimit(limit);
     _result.fold(
-      (l) =>
-          view!.showSnackbar("Error Updating Limit", color: AppColor.errorRed),
+      (l) {
+        _cachedState = state;
+        view!.showSnackbar("Error Updating Limit", color: AppColor.errorRed);
+        state = _cachedState;
+      },
       (r) {
+        _cachedState = state;
+
         view!.showSnackbar("Daily Limit Updated Successfully",
             color: AppColor.successGreen);
+        state = _cachedState;
+
         calculateIfCaloriesOvertake();
-        _emitReady();
       },
     );
+  }
+
+  void openAddFoodEntrySheet() {
+    _cachedState = state;
+    state = const HomePageViewState.showAddFoodEntrySheet();
+    state = _cachedState;
+  }
+
+  void openUpdateCalorieLimitSheet() {
+    _cachedState = state;
+    state = const HomePageViewState.showCalorieLimitUpdateSheet();
+    state = _cachedState;
   }
 
   Future<void> logOut() async {
     await _userProvider.signOut();
   }
 
-  _emitReady({bool loading = false}) {
-    state = HomePageViewState.ready(
-      loading: loading,
-      showCalorieWarning: _showCalorieWarning,
-    );
+  _emitReady() {
+    state = const HomePageViewState.ready();
   }
 }

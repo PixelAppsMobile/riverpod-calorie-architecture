@@ -43,31 +43,82 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
     HomePageViewState state = ref.watch(homePageViewModel);
 
     ref.listen<HomePageViewState>(
-        homePageViewModel,
-        (_, state) => state.maybeWhen(
-              showSnackBar: (message, backgroundColor) =>
-                  ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: backgroundColor,
-                ),
-              ),
-              orElse: () => null,
-            ));
-
-    return state.maybeMap(
-      init: (value) => Container(),
-      ready: (state) => Scaffold(
-        appBar: AppBar(
-          title: InkWell(
-            child: const Text("Your Intake Overview"),
-            onTap: _viewModel.logOut,
+      homePageViewModel,
+      (_, state) => state.maybeWhen(
+        showSnackBar: (message, backgroundColor) =>
+            ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(message),
+            backgroundColor: backgroundColor,
           ),
         ),
-        body: Column(
-          children: [
-            if (state.showCalorieWarning)
-              Container(
+        showAddFoodEntrySheet: () => showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          enableDrag: true,
+          builder: (context) {
+            return FoodEntryForm(_viewModel.addNewEntry);
+          },
+        ),
+        showCalorieLimitUpdateSheet: () => showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          enableDrag: true,
+          builder: (context) {
+            return CalorieEntryForm(_viewModel.updateCalorieLimit);
+          },
+        ),
+        orElse: () => null,
+      ),
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Your Intake Overview"),
+        actions: state.maybeWhen(
+          ready: () => [
+            IconButton(
+              onPressed: () => _viewModel.logOut,
+              icon: const Icon(Icons.exit_to_app),
+            ),
+          ],
+          orElse: () => null,
+        ),
+      ),
+      floatingActionButton: state.maybeWhen(
+        ready: () => FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => _viewModel.openAddFoodEntrySheet(),
+        ),
+        orElse: () => null,
+      ),
+      body: Column(
+        children: [
+          Builder(
+            builder: (context) => state.maybeWhen(
+              loading: () =>
+                  const Center(child: LoadingIndicators.basicLoadingIndicator),
+              ready: () => Expanded(
+                child: ListView.builder(
+                  itemCount: _viewModel.foodEntries.length,
+                  itemBuilder: (context, index) {
+                    final foodEntry = _viewModel.foodEntries[index];
+                    return ListTile(
+                      title: Text(foodEntry.name),
+                      subtitle:
+                          Text(DateFormat.yMMMMEEEEd().format(foodEntry.time)),
+                      leading: Text(
+                        "${foodEntry.calorificValue} C",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              showCaloriesLimitExceededWarning: () => Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                 color: AppColor.errorRed,
@@ -80,79 +131,23 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
                       ),
                     ),
                     Buttons.whiteElevatedButton(
-                      () => _openCalorieUpdateSheet(context),
+                      () => _viewModel.openUpdateCalorieLimitSheet(),
                       "Change",
                       context,
                     )
                   ],
                 ),
               ),
-            Expanded(
-              child: state.loading
-                  ? const Center(child: LoadingIndicators.basicLoadingIndicator)
-                  : ListView.builder(
-                      itemCount: _viewModel.foodEntries.length,
-                      itemBuilder: (context, index) {
-                        final foodEntry = _viewModel.foodEntries[index];
-                        return ListTile(
-                          title: Text(foodEntry.name),
-                          subtitle: Text(
-                              DateFormat.yMMMMEEEEd().format(foodEntry.time)),
-                          leading: Text(
-                            "${foodEntry.calorificValue} C",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+              error: (message) => Center(
+                child: Text(message),
+              ),
+              orElse: () => Container(),
             ),
-          ],
-        ),
-
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => _openFoodEntrySheet(context),
-        ),
-        // resizeToAvoidBottomInset: true,
+          ),
+        ],
       ),
-      loading: (value) => const Scaffold(
-        body: LoadingIndicators.basicLoadingIndicator,
-      ),
-      error: (state) => Scaffold(
-        body: Center(
-          child: Text(state.message),
-        ),
-      ),
-      orElse: () => Container(),
     );
   }
-
-  void _openFoodEntrySheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: true,
-      builder: (context) {
-        return FoodEntryForm(_viewModel.addNewEntry);
-      },
-    );
-  }
-
-  void _openCalorieUpdateSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: true,
-      builder: (context) {
-        return CalorieEntryForm(_viewModel.updateCalorieLimit);
-      },
-    );
-  }
-
-  void showDateRange() {}
 
   @override
   void showSnackbar(String message, {Color? color}) {
