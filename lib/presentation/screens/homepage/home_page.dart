@@ -78,7 +78,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         actions: state.maybeWhen(
           ready: (_) => [
             IconButton(
-              onPressed: () => _viewModel.logOut,
+              onPressed: () => _viewModel.logOut(),
               icon: const Icon(Icons.exit_to_app),
             ),
           ],
