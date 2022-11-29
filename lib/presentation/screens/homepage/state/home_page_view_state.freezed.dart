@@ -19,7 +19,7 @@ mixin _$HomePageViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -32,7 +32,7 @@ mixin _$HomePageViewState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -44,7 +44,7 @@ mixin _$HomePageViewState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -162,7 +162,7 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -178,7 +178,7 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -193,7 +193,7 @@ class _$_HomePageViewStateInit implements _HomePageViewStateInit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -279,6 +279,8 @@ abstract class _$$_HomePageViewStateReadyCopyWith<$Res> {
   factory _$$_HomePageViewStateReadyCopyWith(_$_HomePageViewStateReady value,
           $Res Function(_$_HomePageViewStateReady) then) =
       __$$_HomePageViewStateReadyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<FoodEntry> foodEntries});
 }
 
 /// @nodoc
@@ -288,33 +290,64 @@ class __$$_HomePageViewStateReadyCopyWithImpl<$Res>
   __$$_HomePageViewStateReadyCopyWithImpl(_$_HomePageViewStateReady _value,
       $Res Function(_$_HomePageViewStateReady) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? foodEntries = null,
+  }) {
+    return _then(_$_HomePageViewStateReady(
+      null == foodEntries
+          ? _value._foodEntries
+          : foodEntries // ignore: cast_nullable_to_non_nullable
+              as List<FoodEntry>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_HomePageViewStateReady implements _HomePageViewStateReady {
-  const _$_HomePageViewStateReady();
+  const _$_HomePageViewStateReady(final List<FoodEntry> foodEntries)
+      : _foodEntries = foodEntries;
+
+  final List<FoodEntry> _foodEntries;
+  @override
+  List<FoodEntry> get foodEntries {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_foodEntries);
+  }
 
   @override
   String toString() {
-    return 'HomePageViewState.ready()';
+    return 'HomePageViewState.ready(foodEntries: $foodEntries)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomePageViewStateReady);
+            other is _$_HomePageViewStateReady &&
+            const DeepCollectionEquality()
+                .equals(other._foodEntries, _foodEntries));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_foodEntries));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HomePageViewStateReadyCopyWith<_$_HomePageViewStateReady> get copyWith =>
+      __$$_HomePageViewStateReadyCopyWithImpl<_$_HomePageViewStateReady>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -323,14 +356,14 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     required TResult Function() showAddFoodEntrySheet,
     required TResult Function() showCalorieLimitUpdateSheet,
   }) {
-    return ready();
+    return ready(foodEntries);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -338,14 +371,14 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     TResult? Function()? showAddFoodEntrySheet,
     TResult? Function()? showCalorieLimitUpdateSheet,
   }) {
-    return ready?.call();
+    return ready?.call(foodEntries);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -355,7 +388,7 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready();
+      return ready(foodEntries);
     }
     return orElse();
   }
@@ -423,7 +456,13 @@ class _$_HomePageViewStateReady implements _HomePageViewStateReady {
 }
 
 abstract class _HomePageViewStateReady implements HomePageViewState {
-  const factory _HomePageViewStateReady() = _$_HomePageViewStateReady;
+  const factory _HomePageViewStateReady(final List<FoodEntry> foodEntries) =
+      _$_HomePageViewStateReady;
+
+  List<FoodEntry> get foodEntries;
+  @JsonKey(ignore: true)
+  _$$_HomePageViewStateReadyCopyWith<_$_HomePageViewStateReady> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -467,7 +506,7 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -483,7 +522,7 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -498,7 +537,7 @@ class _$_HomePageViewStateLoading implements _HomePageViewStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -645,7 +684,7 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -661,7 +700,7 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -676,7 +715,7 @@ class _$_HomePageViewStateError implements _HomePageViewStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -810,7 +849,7 @@ class _$_HomePageViewStateShowCaloriesLimitExceededWarning
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -826,7 +865,7 @@ class _$_HomePageViewStateShowCaloriesLimitExceededWarning
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -841,7 +880,7 @@ class _$_HomePageViewStateShowCaloriesLimitExceededWarning
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -1004,7 +1043,7 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -1020,7 +1059,7 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -1035,7 +1074,7 @@ class _$_HomePageViewStateShowSnackBar
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -1168,7 +1207,7 @@ class _$_HomePageViewStateShowFoodEntrySheet
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -1184,7 +1223,7 @@ class _$_HomePageViewStateShowFoodEntrySheet
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -1199,7 +1238,7 @@ class _$_HomePageViewStateShowFoodEntrySheet
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,
@@ -1326,7 +1365,7 @@ class _$_HomePageViewStateShowCalorieLimitUpdateSheet
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() ready,
+    required TResult Function(List<FoodEntry> foodEntries) ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function() showCaloriesLimitExceededWarning,
@@ -1342,7 +1381,7 @@ class _$_HomePageViewStateShowCalorieLimitUpdateSheet
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function()? ready,
+    TResult? Function(List<FoodEntry> foodEntries)? ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function()? showCaloriesLimitExceededWarning,
@@ -1357,7 +1396,7 @@ class _$_HomePageViewStateShowCalorieLimitUpdateSheet
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? ready,
+    TResult Function(List<FoodEntry> foodEntries)? ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function()? showCaloriesLimitExceededWarning,

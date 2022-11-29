@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/domain/entities/app_user.dart';
-import 'package:totaltest/domain/use_cases/user/get_app_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/user/sign_in_using_custom_token_use_case.dart';
-import 'package:totaltest/domain/use_cases/user/sign_out_use_case.dart';
-import 'package:totaltest/domain/use_cases/user/update_calorie_limit_use_case.dart';
+import 'package:totaltest/domain/use_cases/app_user/get_app_user_use_case.dart';
+import 'package:totaltest/domain/use_cases/app_user/sign_in_using_custom_token_use_case.dart';
+import 'package:totaltest/domain/use_cases/app_user/sign_out_use_case.dart';
+import 'package:totaltest/domain/use_cases/app_user/update_calorie_limit_use_case.dart';
 
-final userProvider = StateNotifierProvider<UserProvider, AppUser?>(
-  (ref) => UserProvider(
+final appUserProvider = StateNotifierProvider<AppUserProvider, AppUser?>(
+  (ref) => AppUserProvider(
     ref.read(getAppUserUseCase),
     ref.read(signOutUseCase),
     ref.read(signInUsingCustomTokenUseCase),
@@ -17,13 +17,13 @@ final userProvider = StateNotifierProvider<UserProvider, AppUser?>(
   ),
 );
 
-class UserProvider extends StateNotifier<AppUser?> {
+class AppUserProvider extends StateNotifier<AppUser?> {
   final GetAppUserUseCase _getAppUserUseCase;
   final SignOutUseCase _signOutUseCase;
   final SignInUsingCustomTokenUseCase _signInUsingCustomTokenUseCase;
   final UpdateCalorieLimitUseCase _updateCalorieLimitUseCase;
 
-  UserProvider(
+  AppUserProvider(
     this._getAppUserUseCase,
     this._signOutUseCase,
     this._signInUsingCustomTokenUseCase,
@@ -72,9 +72,12 @@ class UserProvider extends StateNotifier<AppUser?> {
     final _result = await _updateCalorieLimitUseCase(
       UpdateCalorieLimitUseCaseParam(limit, state!.user.uid),
     );
-    return _result.fold((l) => Left(l), (r) {
-      state = state!.copyWith(calorieLimit: limit);
-      return Right(r);
-    });
+    return _result.fold(
+      (l) => Left(l),
+      (r) {
+        state = state!.copyWith(calorieLimit: limit);
+        return Right(r);
+      },
+    );
   }
 }

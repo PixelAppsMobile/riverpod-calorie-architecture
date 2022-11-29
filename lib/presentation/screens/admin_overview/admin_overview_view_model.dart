@@ -19,7 +19,7 @@ class AdminOverviewViewModel extends StateNotifier<AdminOverviewViewState> {
 
     result.fold(
       (l) => state = AdminOverviewViewState.error(l.title),
-      (r) => state = AdminOverviewViewState.ready(r),
+      (r) => state = AdminOverviewViewState.ready(_adminProvider.state!),
     );
   }
 }

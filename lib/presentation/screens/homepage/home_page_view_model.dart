@@ -1,132 +1,106 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
-import 'package:totaltest/core/base_notifier/base_view_state_notifier.dart';
-import 'package:totaltest/domain/providers/user/user_provider.dart';
+import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
+import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
 
-mixin HomePageView {
-  void showSnackbar(String message, {Color? color});
-}
-
-class HomePageViewModel
-    extends BaseViewStateNotifier<HomePageView, HomePageViewState> {
-  //DataElements
-  final List<FoodEntry> foodEntries = [];
-  bool _showCalorieWarning = false;
-
-  final GetFoodEntriesOfUseCase _getFoodEntriesOfUseCase;
-  final AddFoodEntryOfUserUseCase _addFoodEntryOfUserUseCase;
-
-  final UserProvider _userProvider;
+class HomePageViewModel extends StateNotifier<HomePageViewState> {
+  final AppUserProvider _appUserProvider;
+  final UserFoodConsumptionProvider _userFoodConsumptionProvider;
 
   late HomePageViewState _cachedState;
 
   HomePageViewModel(
-    this._getFoodEntriesOfUseCase,
-    this._addFoodEntryOfUserUseCase,
-    this._userProvider,
+    this._appUserProvider,
+    this._userFoodConsumptionProvider,
   ) : super(const HomePageViewState.init()) {
     _initialize();
   }
+
+  double get extraCalories => _userFoodConsumptionProvider.extraCalories;
 
   void _initialize() {
     getFoodEntries();
   }
 
-  double get todayCalories {
-    if (foodEntries.isEmpty) {
-      return 2100;
-    } else {
-      return 100;
-    }
-  }
-
-  double get extraCalories =>
-      todayCalories - (_userProvider.state!.calorieLimit ?? 2100);
-
   Future<void> getFoodEntries() async {
-    try {
-      state = const HomePageViewState.loading();
+    state = const HomePageViewState.loading();
 
-      final either =
-          await _getFoodEntriesOfUseCase(_userProvider.state!.user.uid);
-      either.fold(
-        (l) {
-          state = HomePageViewState.error(l.title);
-        },
-        (r) {
-          List<FoodEntry> data = r.map((e) => e).toList().cast<FoodEntry>();
-          foodEntries.addAll(data);
-          calculateIfCaloriesOvertake();
-          _emitReady();
-        },
-      );
-    } catch (e) {
-      view!
-          .showSnackbar("Error getting good entries", color: AppColor.errorRed);
-    }
+    final either = await _userFoodConsumptionProvider.getFoodEntries();
+    either.fold(
+      (l) {
+        state = HomePageViewState.error(l.title);
+      },
+      (r) {
+        checkIfCalorieIntakeIsExceededing();
+        _emitReady();
+      },
+    );
   }
 
   Future<void> addNewEntry(
-      String name, double calorificValue, DateTime consumptionTime) async {
-    final data = await _addFoodEntryOfUserUseCase(
-      AddFoodEntryOfUserUseCaseParam(
-          foodEntry: FoodEntry(
-            name: name,
-            time: consumptionTime,
-            calorificValue: calorificValue,
-          ),
-          uid: _userProvider.state!.user.uid),
+    String name,
+    double calorificValue,
+    DateTime consumptionTime,
+  ) async {
+    final result = await _userFoodConsumptionProvider.addNewFoodEntry(
+      FoodEntry(
+        name: name,
+        time: consumptionTime,
+        calorificValue: calorificValue,
+      ),
     );
-    data.fold(
+    result.fold(
       (l) {
         _cachedState = state;
-        view!.showSnackbar(l.title, color: AppColor.errorRed);
+        state = HomePageViewState.error(l.title);
         state = _cachedState;
       },
       (r) {
-        foodEntries.add(r);
-        foodEntries.sort((a, b) => b.time.compareTo(a.time));
-        calculateIfCaloriesOvertake();
+        checkIfCalorieIntakeIsExceededing();
 
         _cachedState = state;
 
-        view!.showSnackbar(
-          "Entry added succesfully",
-          color: AppColor.successGreen,
+        state = const HomePageViewState.showSnackBar(
+          message: "Entry added succesfully",
+          backgroundColor: AppColor.successGreen,
         );
+
         state = _cachedState;
       },
     );
   }
 
-  void calculateIfCaloriesOvertake() {
-    _showCalorieWarning =
-        todayCalories > (_userProvider.state!.calorieLimit ?? 2100);
-    if (_showCalorieWarning) {
+  void checkIfCalorieIntakeIsExceededing() {
+    if (_userFoodConsumptionProvider.isCalorieIntakeExceeded) {
       state = const HomePageViewState.showCaloriesLimitExceededWarning();
+    } else {
+      _emitReady();
     }
   }
 
   Future<void> updateCalorieLimit(double limit) async {
-    final _result = await _userProvider.updateCalorieLimit(limit);
+    final _result = await _appUserProvider.updateCalorieLimit(limit);
     _result.fold(
       (l) {
         _cachedState = state;
-        view!.showSnackbar("Error Updating Limit", color: AppColor.errorRed);
+        state = const HomePageViewState.showSnackBar(
+          message: "Error Updating Limit",
+          backgroundColor: AppColor.errorRed,
+        );
         state = _cachedState;
       },
       (r) {
         _cachedState = state;
 
-        view!.showSnackbar("Daily Limit Updated Successfully",
-            color: AppColor.successGreen);
+        state = const HomePageViewState.showSnackBar(
+          message: "Daily Limit Updated Successfully",
+          backgroundColor: AppColor.successGreen,
+        );
         state = _cachedState;
 
-        calculateIfCaloriesOvertake();
+        checkIfCalorieIntakeIsExceededing();
       },
     );
   }
@@ -144,10 +118,10 @@ class HomePageViewModel
   }
 
   Future<void> logOut() async {
-    await _userProvider.signOut();
+    await _appUserProvider.signOut();
   }
 
   _emitReady() {
-    state = const HomePageViewState.ready();
+    state = HomePageViewState.ready(_userFoodConsumptionProvider.state);
   }
 }

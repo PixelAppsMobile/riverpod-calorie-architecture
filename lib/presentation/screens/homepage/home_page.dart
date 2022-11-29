@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
 import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
 import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
-import 'package:totaltest/domain/providers/user/user_provider.dart';
+import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page_view_model.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
@@ -19,7 +20,7 @@ class HomePage extends ConsumerStatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
+class _HomePageState extends ConsumerState<HomePage> {
   late final StateNotifierProvider<HomePageViewModel, HomePageViewState>
       homePageViewModel;
   late final HomePageViewModel _viewModel;
@@ -30,9 +31,8 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
     homePageViewModel =
         StateNotifierProvider<HomePageViewModel, HomePageViewState>(
       (ref) => HomePageViewModel(
-        ref.read(getFoodEntriesOfUseCase),
-        ref.read(addFoodEntryOfUserUseCase),
-        ref.read(userProvider.notifier),
+        ref.read(appUserProvider.notifier),
+        ref.read(userFoodConsumptionProvider.notifier),
       ),
     );
     _viewModel = ref.read(homePageViewModel.notifier);
@@ -76,7 +76,7 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
       appBar: AppBar(
         title: const Text("Your Intake Overview"),
         actions: state.maybeWhen(
-          ready: () => [
+          ready: (_) => [
             IconButton(
               onPressed: () => _viewModel.logOut,
               icon: const Icon(Icons.exit_to_app),
@@ -86,7 +86,7 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
         ),
       ),
       floatingActionButton: state.maybeWhen(
-        ready: () => FloatingActionButton(
+        ready: (_) => FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () => _viewModel.openAddFoodEntrySheet(),
         ),
@@ -98,11 +98,11 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
             builder: (context) => state.maybeWhen(
               loading: () =>
                   const Center(child: LoadingIndicators.basicLoadingIndicator),
-              ready: () => Expanded(
+              ready: (foodEntries) => Expanded(
                 child: ListView.builder(
-                  itemCount: _viewModel.foodEntries.length,
+                  itemCount: foodEntries.length,
                   itemBuilder: (context, index) {
-                    final foodEntry = _viewModel.foodEntries[index];
+                    final foodEntry = foodEntries[index];
                     return ListTile(
                       title: Text(foodEntry.name),
                       subtitle:
@@ -145,16 +145,6 @@ class _HomePageState extends ConsumerState<HomePage> implements HomePageView {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  @override
-  void showSnackbar(String message, {Color? color}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: color,
       ),
     );
   }

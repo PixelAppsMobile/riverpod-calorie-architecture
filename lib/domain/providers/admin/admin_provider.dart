@@ -32,7 +32,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
     this._updateFoodEntryOfUserUseCase,
   ) : super(value);
 
-  Future<Either<AppError, List<UserProfile>>> fetchUsers() async {
+  Future<Either<AppError, AppSuccess>> fetchUsers() async {
     final result = await _getAllUsersUseCase();
 
     return result.fold(
@@ -42,7 +42,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
       },
       (r) {
         state = r.map((e) => e).toList().cast<UserProfile>();
-        return Right(state!);
+        return Right(AppSuccess());
       },
     );
   }
@@ -73,7 +73,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
     );
   }
 
-  Future<Either<AppError, void>> deleteFoodEntry(
+  Future<Either<AppError, AppSuccess>> deleteFoodEntry(
       FoodEntry entry, String uid) async {
     final either = await _deleteFoodEntryOfUserUseCase(
       DeleteFoodEntryOfUserUseCaseParam(
@@ -100,7 +100,7 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
     );
   }
 
-  Future<Either<AppError, void>> updateFoodEntry(
+  Future<Either<AppError, AppSuccess>> updateFoodEntry(
       FoodEntry entry, String uid) async {
     final either = await _updateFoodEntryOfUserUseCase(
       UpdateFoodEntryOfUserUseCaseParam(
