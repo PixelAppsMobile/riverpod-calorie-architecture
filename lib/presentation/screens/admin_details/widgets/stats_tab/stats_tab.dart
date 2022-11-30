@@ -13,81 +13,79 @@ class StatsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Calorie intake per day (by week)',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Calorie intake per day (by week)',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(
-                height: 20.0,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            SizedBox(
+              height: 200,
+              child: charts.BarChart(
+                [
+                  charts.Series<WeeklyCalorieStat, String>(
+                    id: 'Calorie Intake',
+                    colorFn: (_, __) =>
+                        charts.MaterialPalette.blue.shadeDefault,
+                    domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
+                        ? 'Today'
+                        : (stat.weekNo == 0)
+                            ? 'Last 7 days'
+                            : 'Week before',
+                    measureFn: (WeeklyCalorieStat stat, _) =>
+                        stat.avgCalorieIntake,
+                    data: stats.weeklyCalorieStats,
+                  )
+                ],
+                animate: true,
               ),
-              SizedBox(
-                height: 200,
-                child: charts.BarChart(
-                  [
-                    charts.Series<WeeklyCalorieStat, String>(
-                      id: 'Calorie Intake',
-                      colorFn: (_, __) =>
-                          charts.MaterialPalette.blue.shadeDefault,
-                      domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
-                          ? 'Today'
-                          : (stat.weekNo == 0)
-                              ? 'Last 7 days'
-                              : 'Week before',
-                      measureFn: (WeeklyCalorieStat stat, _) =>
-                          stat.avgCalorieIntake,
-                      data: stats.weeklyCalorieStats,
-                    )
-                  ],
-                  animate: true,
-                ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            const Text(
+              'No of food entries added (by week)',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(
-                height: 20.0,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            SizedBox(
+              height: 200,
+              child: charts.BarChart(
+                [
+                  charts.Series<WeeklyCalorieStat, String>(
+                    id: 'No of entries added',
+                    colorFn: (_, __) =>
+                        charts.MaterialPalette.green.shadeDefault,
+                    domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
+                        ? 'Today'
+                        : (stat.weekNo == 0)
+                            ? 'Last 7 days'
+                            : 'Week before',
+                    measureFn: (WeeklyCalorieStat stat, _) =>
+                        stat.foodEntries.length,
+                    data: stats.weeklyCalorieStats,
+                  )
+                ],
+                animate: true,
               ),
-              const Text(
-                'No of food entries added (by week)',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              SizedBox(
-                height: 200,
-                child: charts.BarChart(
-                  [
-                    charts.Series<WeeklyCalorieStat, String>(
-                      id: 'No of entries added',
-                      colorFn: (_, __) =>
-                          charts.MaterialPalette.green.shadeDefault,
-                      domainFn: (WeeklyCalorieStat stat, _) => stat.weekNo == -1
-                          ? 'Today'
-                          : (stat.weekNo == 0)
-                              ? 'Last 7 days'
-                              : 'Week before',
-                      measureFn: (WeeklyCalorieStat stat, _) =>
-                          stat.foodEntries.length,
-                      data: stats.weeklyCalorieStats,
-                    )
-                  ],
-                  animate: true,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

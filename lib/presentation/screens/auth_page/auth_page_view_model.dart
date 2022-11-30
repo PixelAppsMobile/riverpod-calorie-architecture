@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 
 class AuthPageViewModel extends StateNotifier<AuthPageViewState> {
   final TextEditingController _controller = TextEditingController();
-  final UserProvider _userProvider;
+  final AppUserProvider _appUserProvider;
 
-  AuthPageViewModel(this._userProvider)
+  AuthPageViewModel(this._appUserProvider)
       : super(const AuthPageViewState.init()) {
     _controller.addListener(
       () {
@@ -24,7 +24,7 @@ class AuthPageViewModel extends StateNotifier<AuthPageViewState> {
   Future loginUsingToken() async {
     state = const AuthPageViewState.loading();
 
-    final _result = await _userProvider.signIn(_controller.text);
+    final _result = await _appUserProvider.signIn(_controller.text);
     _result.fold(
       (l) {
         state = AuthPageViewState.error(l.title);

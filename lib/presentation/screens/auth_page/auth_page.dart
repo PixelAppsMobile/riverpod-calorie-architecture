@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
+import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/screens/auth_page/auth_page_view_model.dart';
 import 'package:totaltest/presentation/screens/auth_page/state/auth_page_view_state.dart';
 import 'package:totaltest/presentation/shared_widgets/buttons.dart';
@@ -23,7 +23,7 @@ class AuthPageState extends ConsumerState<AuthPage> {
     authPageViewModel =
         StateNotifierProvider<AuthPageViewModel, AuthPageViewState>(
       (ref) => AuthPageViewModel(
-        ref.read(userProvider.notifier),
+        ref.read(appUserProvider.notifier),
       ),
     );
     _viewModel = ref.read(authPageViewModel.notifier);

@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
 import 'package:totaltest/domain/data_sources/local/storage/local_storage_data_source.dart';
+import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
-import 'package:totaltest/presentation/providers/user_provider.dart';
 
 @GenerateMocks([LocalStorageDataSource])
 void main() {
@@ -16,7 +16,7 @@ void main() {
     final ProviderContainer container = ProviderContainer();
     await container.read(localStorageDataSource).init();
     final _signInResponse =
-        await container.read(userProvider.notifier).signIn(userToken);
+        await container.read(appUserProvider.notifier).signIn(userToken);
     expect(_signInResponse.isRight(), true, reason: "Couldn't sign in user");
     final _result = await container.read(foodConsumptionRepo).getFoodEntries();
     expect(_result.isRight(), true,
