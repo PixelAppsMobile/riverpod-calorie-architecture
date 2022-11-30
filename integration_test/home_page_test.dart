@@ -27,14 +27,7 @@ void main() {
       "A logged in user sees home page with food list items after opening the app",
       (WidgetTester tester) async {
     await Firebase.initializeApp();
-    final mockUser = MockBaseUser();
-    final mockAppUserProviderInstance = MockAppUserProvider(
-        AppUser(user: mockUser, calorieLimit: 2100, role: UserRole.normal));
     final mockFoodConsumptionRepoInstance = MockFoodConsumptionRepoImpl();
-
-    final mockAppUserProvider =
-        StateNotifierProvider<AppUserProvider, AppUser?>(
-            (ref) => mockAppUserProviderInstance);
 
     when(mockFoodConsumptionRepoInstance.getFoodEntries()).thenAnswer(
         (realInvocation) =>
@@ -48,7 +41,7 @@ void main() {
                     ])));
     await tester.pumpWidget(ProviderScope(overrides: [
       foodConsumptionRepo.overrideWithValue(mockFoodConsumptionRepoInstance),
-      appUserProvider.overrideWithProvider(mockAppUserProvider),
+      appUserProvider.overrideWith(MockAppUserProvider.new),
     ], child: const MyApp()));
 
     await tester.pumpAndSettle();
@@ -57,10 +50,8 @@ void main() {
   });
 }
 
-class MockAppUserProvider extends StateNotifier<AppUser?>
+class MockAppUserProvider extends AsyncNotifier<AppUser?>
     implements AppUserProvider {
-  MockAppUserProvider(AppUser? state) : super(state);
-
   @override
   Future<void> initialize() async {}
 
@@ -81,4 +72,13 @@ class MockAppUserProvider extends StateNotifier<AppUser?>
     // TODO: implement updateCalorieLimit
     throw UnimplementedError();
   }
+
+  @override
+  AppUser? build() {
+    return AppUser(
+        user: MockBaseUser(), calorieLimit: 2100, role: UserRole.normal);
+  }
+
+  @override
+  AppUser? get currentUser => state.value;
 }

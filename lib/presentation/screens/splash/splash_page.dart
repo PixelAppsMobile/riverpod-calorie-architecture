@@ -8,6 +8,7 @@ import 'package:totaltest/presentation/screens/auth_page/auth_page.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page.dart';
 import 'package:totaltest/presentation/screens/splash/splash_page_view_model.dart';
 import 'package:totaltest/presentation/screens/splash/state/splash_page_view_state.dart';
+import 'package:totaltest/presentation/shared_widgets/auth_builder/auth_builder.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -50,11 +51,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
           ),
         ),
       ),
-      ready: (user) => user != null
-          ? (user.role == UserRole.admin)
-              ? const AdminOverview()
-              : const HomePage()
-          : const AuthPage(),
+      ready: () => const AuthBuilder(),
     );
   }
 }

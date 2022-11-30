@@ -19,19 +19,19 @@ mixin _$SplashPageViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AppUser? user) ready,
+    required TResult Function() ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AppUser? user)? ready,
+    TResult? Function()? ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AppUser? user)? ready,
+    TResult Function()? ready,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +117,7 @@ class _$_SplashPageViewStateLoading implements _SplashPageViewStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AppUser? user) ready,
+    required TResult Function() ready,
   }) {
     return loading();
   }
@@ -126,7 +126,7 @@ class _$_SplashPageViewStateLoading implements _SplashPageViewStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AppUser? user)? ready,
+    TResult? Function()? ready,
   }) {
     return loading?.call();
   }
@@ -135,7 +135,7 @@ class _$_SplashPageViewStateLoading implements _SplashPageViewStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AppUser? user)? ready,
+    TResult Function()? ready,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -186,10 +186,6 @@ abstract class _$$_SplashPageViewStateReadyCopyWith<$Res> {
           _$_SplashPageViewStateReady value,
           $Res Function(_$_SplashPageViewStateReady) then) =
       __$$_SplashPageViewStateReadyCopyWithImpl<$Res>;
-  @useResult
-  $Res call({AppUser? user});
-
-  $AppUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -199,91 +195,55 @@ class __$$_SplashPageViewStateReadyCopyWithImpl<$Res>
   __$$_SplashPageViewStateReadyCopyWithImpl(_$_SplashPageViewStateReady _value,
       $Res Function(_$_SplashPageViewStateReady) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-  }) {
-    return _then(_$_SplashPageViewStateReady(
-      freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as AppUser?,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AppUserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $AppUserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_SplashPageViewStateReady implements _SplashPageViewStateReady {
-  const _$_SplashPageViewStateReady(this.user);
-
-  @override
-  final AppUser? user;
+  const _$_SplashPageViewStateReady();
 
   @override
   String toString() {
-    return 'SplashPageViewState.ready(user: $user)';
+    return 'SplashPageViewState.ready()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SplashPageViewStateReady &&
-            (identical(other.user, user) || other.user == user));
+            other is _$_SplashPageViewStateReady);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SplashPageViewStateReadyCopyWith<_$_SplashPageViewStateReady>
-      get copyWith => __$$_SplashPageViewStateReadyCopyWithImpl<
-          _$_SplashPageViewStateReady>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(AppUser? user) ready,
+    required TResult Function() ready,
   }) {
-    return ready(user);
+    return ready();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(AppUser? user)? ready,
+    TResult? Function()? ready,
   }) {
-    return ready?.call(user);
+    return ready?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(AppUser? user)? ready,
+    TResult Function()? ready,
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready(user);
+      return ready();
     }
     return orElse();
   }
@@ -321,11 +281,5 @@ class _$_SplashPageViewStateReady implements _SplashPageViewStateReady {
 }
 
 abstract class _SplashPageViewStateReady implements SplashPageViewState {
-  const factory _SplashPageViewStateReady(final AppUser? user) =
-      _$_SplashPageViewStateReady;
-
-  AppUser? get user;
-  @JsonKey(ignore: true)
-  _$$_SplashPageViewStateReadyCopyWith<_$_SplashPageViewStateReady>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory _SplashPageViewStateReady() = _$_SplashPageViewStateReady;
 }

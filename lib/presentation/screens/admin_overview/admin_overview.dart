@@ -6,6 +6,7 @@ import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details.dart';
 import 'package:totaltest/presentation/screens/admin_overview/admin_overview_view_model.dart';
 import 'package:totaltest/presentation/screens/admin_overview/state/admin_overview_view_state.dart';
+import 'package:totaltest/presentation/shared_widgets/loading_indicator.dart';
 
 class AdminOverview extends ConsumerStatefulWidget {
   const AdminOverview({Key? key}) : super(key: key);
@@ -52,10 +53,9 @@ class AdminOverviewState extends ConsumerState<AdminOverview> {
       ),
       body: Builder(
         builder: (context) {
-          return state.when(
-            init: () => Container(),
+          return state.maybeWhen(
             loading: () => const Center(
-              child: CircularProgressIndicator(),
+              child: LoadingIndicators.basicLoadingIndicator,
             ),
             error: (errorText) => Center(child: Text(errorText)),
             ready: (users) => Scaffold(
@@ -88,6 +88,7 @@ class AdminOverviewState extends ConsumerState<AdminOverview> {
                 },
               ),
             ),
+            orElse: () => Container(),
           );
         },
       ),

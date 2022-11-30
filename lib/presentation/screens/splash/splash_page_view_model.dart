@@ -20,8 +20,6 @@ class SplashPageViewModel extends StateNotifier<SplashPageViewState> {
     await _initServicesProvider.initialise();
     await _appUserProvider.initialize();
 
-    _appUserProvider.addListener((user) {
-      state = SplashPageViewState.ready(user);
-    });
+    state = const SplashPageViewState.ready();
   }
 }
