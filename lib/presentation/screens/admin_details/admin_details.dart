@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/providers/admin/admin_provider.dart';
+import 'package:totaltest/domain/providers/food_consumption/admin_food_consumption_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details_view_model.dart';
 import 'package:totaltest/presentation/screens/admin_details/state/admin_details_view_state.dart';
 import 'package:totaltest/presentation/screens/admin_details/widgets/food_entries_tab/food_entries_tab.dart';
@@ -33,6 +34,7 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
       (ref) => AdminDetailsViewModel(
         widget.uid,
         ref.read(adminProvider.notifier),
+        ref.read(adminFoodConsumptionProvider),
         this,
       ),
     );
@@ -120,6 +122,7 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
                                 style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),
@@ -129,6 +132,7 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
                                 style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),

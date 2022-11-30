@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
-import 'package:totaltest/domain/providers/admin/admin_provider.dart';
+import 'package:totaltest/domain/providers/food_consumption/admin_food_consumption_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/widgets/update_food_entry_bottom_sheet/state/update_food_entry_bottom_sheet_view_state.dart';
 import 'package:totaltest/presentation/screens/admin_details/widgets/update_food_entry_bottom_sheet/update_food_entry_bottom_sheet_view_model.dart';
 
@@ -36,7 +36,7 @@ class _UpdateFoodEntryBottomSheetState
         UpdateFoodEntryBottomSheetViewState>(
       (ref) => UpdateFoodEntryBottomSheetViewModel(
         widget.foodEntry,
-        ref.read(adminProvider.notifier),
+        ref.read(adminFoodConsumptionProvider),
       ),
     );
     _viewModel = ref.read(updateFoodEntryBottomSheetViewModel.notifier);

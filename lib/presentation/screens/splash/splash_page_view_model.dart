@@ -7,8 +7,10 @@ class SplashPageViewModel extends StateNotifier<SplashPageViewState> {
   final AppUserProvider _appUserProvider;
   final InitServicesProvider _initServicesProvider;
 
-  SplashPageViewModel(this._appUserProvider, this._initServicesProvider)
-      : super(const SplashPageViewState.loading()) {
+  SplashPageViewModel(
+    this._appUserProvider,
+    this._initServicesProvider,
+  ) : super(const SplashPageViewState.loading()) {
     _initialize();
   }
 

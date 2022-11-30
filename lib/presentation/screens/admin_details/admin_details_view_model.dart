@@ -4,11 +4,13 @@ import 'package:totaltest/domain/entities/calorie_stat.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
 import 'package:totaltest/domain/providers/admin/admin_provider.dart';
+import 'package:totaltest/domain/providers/food_consumption/admin_food_consumption_provider.dart';
 import 'package:totaltest/presentation/screens/admin_details/state/admin_details_view_state.dart';
 
 class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
   late UserProfile _currentUser;
   final AdminProvider _adminProvider;
+  final AdminFoodConsumptionProvider _adminFoodConsumptionProvider;
 
   final String _uid;
   final TickerProvider _vsync;
@@ -18,8 +20,12 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
 
   late AdminDetailsViewState cachedState;
 
-  AdminDetailsViewModel(this._uid, this._adminProvider, this._vsync)
-      : super(const AdminDetailsViewState.init()) {
+  AdminDetailsViewModel(
+    this._uid,
+    this._adminProvider,
+    this._adminFoodConsumptionProvider,
+    this._vsync,
+  ) : super(const AdminDetailsViewState.init()) {
     _initialize();
   }
 
@@ -30,13 +36,15 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
   Future<void> _initialize() async {
     state = const AdminDetailsViewState.loading();
 
-    _tabController = TabController(initialIndex: 0, length: 2, vsync: _vsync);
+    _tabController = TabController(
+      initialIndex: 0,
+      length: 2,
+      vsync: _vsync,
+    );
 
-    await _adminProvider.fetchFoodEntriesForUser(_uid);
+    await _adminFoodConsumptionProvider.fetchFoodEntriesForUser(_uid);
 
     _updateFoodEntries();
-
-    _adminProvider.addListener((state) => _updateFoodEntries());
   }
 
   void _updateFoodEntries() {
@@ -58,15 +66,20 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
   }
 
   Future<void> deleteFoodEntry(FoodEntry entry) async {
-    final either =
-        await _adminProvider.deleteFoodEntry(entry, _currentUser.userId);
+    final either = await _adminFoodConsumptionProvider.deleteFoodEntry(
+      entry,
+      _currentUser.userId,
+    );
     return either.fold(
       (l) {
         cachedState = state;
         state = AdminDetailsViewState.showAlert(l.title);
         state = cachedState;
       },
-      (r) => getStats(),
+      (r) {
+        _updateFoodEntries();
+        getStats();
+      },
     );
   }
 
@@ -75,8 +88,16 @@ class AdminDetailsViewModel extends StateNotifier<AdminDetailsViewState> {
     state = AdminDetailsViewState.openBottomSheet(
       entry: entry,
       uid: _currentUser.userId,
-      onPop: () => getStats(),
+      onPop: () {
+        _updateFoodEntries();
+        getStats();
+      },
     );
     state = cachedState;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

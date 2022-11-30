@@ -1,35 +1,22 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
-import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
 import 'package:totaltest/domain/use_cases/admin/get_all_users_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/delete_food_entry_of_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/update_food_entry_of_user_use_case.dart';
 
 final adminProvider = StateNotifierProvider(
   (ref) => AdminProvider(
     [],
     ref.read(getAllUsersUseCase),
-    ref.read(getFoodEntriesOfUseCase),
-    ref.read(deleteFoodEntryOfUserUseCase),
-    ref.read(updateFoodEntryOfUserUseCase),
   ),
 );
 
 class AdminProvider extends StateNotifier<List<UserProfile>?> {
   final GetAllUsersUseCase _getAllUsersUseCase;
-  final GetFoodEntriesOfUseCase _getFoodEntriesOfUseCase;
-  final DeleteFoodEntryOfUserUseCase _deleteFoodEntryOfUserUseCase;
-  final UpdateFoodEntryOfUserUseCase _updateFoodEntryOfUserUseCase;
 
   AdminProvider(
     List<UserProfile>? value,
     this._getAllUsersUseCase,
-    this._getFoodEntriesOfUseCase,
-    this._deleteFoodEntryOfUserUseCase,
-    this._updateFoodEntryOfUserUseCase,
   ) : super(value);
 
   Future<Either<AppError, AppSuccess>> fetchUsers() async {
@@ -51,91 +38,15 @@ class AdminProvider extends StateNotifier<List<UserProfile>?> {
     return state!.where((element) => element.userId == uid).toList().first;
   }
 
-  Future<void> fetchFoodEntriesForUser(String uid) async {
-    if (state == null) {
-      return;
-    }
-    final index = state!.indexWhere((element) => element.userId == uid);
-    final foodEntries = await _getFoodEntriesOfUseCase(uid);
-
-    foodEntries.fold(
-      (l) {
-        print("ERROR: ${l.title}");
-        if (index != -1) {
-          state![index] = state![index].copyWith(foodEntries: []);
-        }
-      },
-      (r) {
-        if (index != -1) {
-          state![index] = state![index].copyWith(foodEntries: r);
-        }
-      },
-    );
-  }
-
-  Future<Either<AppError, AppSuccess>> deleteFoodEntry(
-      FoodEntry entry, String uid) async {
-    final either = await _deleteFoodEntryOfUserUseCase(
-      DeleteFoodEntryOfUserUseCaseParam(
-        documentId: entry.documentId!,
-        uid: uid,
-      ),
+  void updateUserProfile(UserProfile newUserProfile) {
+    int userProfileIndex = state!.indexWhere(
+      (element) => element.userId == newUserProfile.userId,
     );
 
-    return either.fold(
-      (l) => Left(l),
-      (r) {
-        // Update local record
-        UserProfile userProfile = state!
-            .where(
-              (element) => element.userId == uid,
-            )
-            .first;
-        int foodEntryIndex = userProfile.foodEntries!
-            .indexWhere((element) => element.documentId == entry.documentId);
-        userProfile.foodEntries!.removeAt(foodEntryIndex);
+    List<UserProfile> newUserProfileListState = [...state!];
 
-        return Right(r);
-      },
-    );
-  }
+    newUserProfileListState[userProfileIndex] = newUserProfile;
 
-  Future<Either<AppError, AppSuccess>> updateFoodEntry(
-      FoodEntry entry, String uid) async {
-    final either = await _updateFoodEntryOfUserUseCase(
-      UpdateFoodEntryOfUserUseCaseParam(
-        foodEntry: entry,
-        uid: uid,
-      ),
-    );
-    return either.fold(
-      (l) => Left(l),
-      (r) {
-        // Update local record
-        int userProfileIndex = state!.indexWhere(
-          (element) => element.userId == uid,
-        );
-
-        UserProfile userProfile = state![userProfileIndex];
-
-        int foodEntryIndex = userProfile.foodEntries!
-            .indexWhere((element) => element.documentId == entry.documentId);
-
-        List<FoodEntry> newFoodEntries = [...userProfile.foodEntries!];
-
-        newFoodEntries[foodEntryIndex] = entry;
-
-        UserProfile newUserProfile =
-            userProfile.copyWith(foodEntries: newFoodEntries);
-
-        List<UserProfile> newUserProfileListState = [...state!];
-
-        newUserProfileListState[userProfileIndex] = newUserProfile;
-
-        state = newUserProfileListState;
-
-        return Right(r);
-      },
-    );
+    state = newUserProfileListState;
   }
 }
