@@ -1,4 +1,4 @@
-class FirestoreStrings {
+class FirestoreConstants {
   static const String usersCollection = "users";
   static const String foodEntryCollection = "food_entries";
 

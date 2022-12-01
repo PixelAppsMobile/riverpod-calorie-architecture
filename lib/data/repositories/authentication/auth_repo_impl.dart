@@ -1,5 +1,5 @@
-import 'package:totaltest/core/constants/firestore_strings.dart';
-import 'package:totaltest/core/constants/preference_strings.dart';
+import 'package:totaltest/core/constants/firestore_constants.dart';
+import 'package:totaltest/core/constants/local_storage_constants.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:dartz/dartz.dart';
 import 'package:totaltest/data/dto/app_user_dto.dart';
@@ -27,14 +27,14 @@ class AuthRepoImpl implements AuthRepo {
 
     if (_baseUser != null) {
       final getCalorieLimitResult = await _localStorageDataSource
-          .getDouble(SharedPreferences.calorieLimit);
+          .getDouble(LocalStorageConstants.calorieLimit);
 
       return getCalorieLimitResult.fold(
         (l) => Left(l),
         (r) async {
           double calorieLimit = r ?? 2100.0;
-          final isAdminResult =
-              await _localStorageDataSource.getBool(SharedPreferences.isAdmin);
+          final isAdminResult = await _localStorageDataSource
+              .getBool(LocalStorageConstants.isAdmin);
 
           return isAdminResult.fold(
             (l) => Left(l),
@@ -69,10 +69,10 @@ class AuthRepoImpl implements AuthRepo {
           (l) => Left(l),
           (r) async {
             await _localStorageDataSource.setBool(
-                SharedPreferences.isAdmin, r[FirestoreStrings.isAdmin]);
+                LocalStorageConstants.isAdmin, r[FirestoreConstants.isAdmin]);
             await _localStorageDataSource.setDouble(
-                SharedPreferences.calorieLimit,
-                r[FirestoreStrings.calorieLimit]);
+                LocalStorageConstants.calorieLimit,
+                r[FirestoreConstants.calorieLimit]);
             return Right(baseUser);
           },
         );
