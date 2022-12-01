@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/add_food_entry_of_user_use_case.dart';
-import 'package:totaltest/domain/use_cases/food_consumption/get_food_entries_of_user_use_case.dart';
 import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/res/colors.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page_view_model.dart';

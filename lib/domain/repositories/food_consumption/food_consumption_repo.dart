@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
