@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 
 class Buttons {
   static Widget expandedFlatButton(Function()? callback, String buttonText) =>
@@ -14,7 +15,7 @@ class Buttons {
       ElevatedButton(
         onPressed: callback,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorsRes.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),

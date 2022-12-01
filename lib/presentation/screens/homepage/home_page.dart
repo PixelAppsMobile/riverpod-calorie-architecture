@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
 import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
-import 'package:totaltest/presentation/res/colors.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page_view_model.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
 import 'package:totaltest/presentation/screens/homepage/widgets/calories_entry_form.dart';
@@ -119,13 +119,13 @@ class _HomePageState extends ConsumerState<HomePage> {
               showCaloriesLimitExceededWarning: () => Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                color: AppColor.errorRed,
+                color: ColorsRes.errorRed,
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
                         "You are ${_viewModel.extraCalories} calories over your daily limit",
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: ColorsRes.white),
                       ),
                     ),
                     Buttons.whiteElevatedButton(

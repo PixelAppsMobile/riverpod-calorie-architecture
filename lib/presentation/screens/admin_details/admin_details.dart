@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/providers/admin/admin_provider.dart';
 import 'package:totaltest/domain/providers/food_consumption/admin_food_consumption_provider.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details_view_model.dart';
 import 'package:totaltest/presentation/screens/admin_details/state/admin_details_view_state.dart';
 import 'package:totaltest/presentation/screens/admin_details/widgets/food_entries_tab/food_entries_tab.dart';
@@ -148,12 +149,12 @@ class AdminDetailsScreenState extends ConsumerState<AdminDetailsScreen>
                         children: [
                           const Divider(
                             height: 20.0,
-                            color: Colors.grey,
+                            color: ColorsRes.grey,
                           ),
                           TabBar(
                             controller: controller,
-                            labelColor: Colors.blue,
-                            unselectedLabelColor: Colors.grey,
+                            labelColor: ColorsRes.blue,
+                            unselectedLabelColor: ColorsRes.grey,
                             labelStyle: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.w600,

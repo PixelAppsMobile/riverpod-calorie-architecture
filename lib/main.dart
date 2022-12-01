@@ -5,6 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:totaltest/data/data_sources/local/storage/local_storage_data_source_impl.dart';
 import 'package:totaltest/data/repositories/food_consumption/food_consumption_repo_impl.dart';
 import 'package:totaltest/domain/entities/base_user.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/splash/splash_page.dart';
 
 import 'data/repositories/authentication/auth_repo_impl.dart';
@@ -27,12 +28,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Calories Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const SplashPage(),
+      home: SplashPage(),
     );
   }
 }

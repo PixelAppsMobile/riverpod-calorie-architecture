@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
 import 'package:totaltest/domain/extenstions/datetime_ext.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details_view_model.dart';
 
 class FoodEntriesTab extends StatelessWidget {
@@ -60,7 +61,7 @@ class FoodEntriesTab extends StatelessWidget {
                 icon: const Icon(
                   Icons.edit,
                   size: 16.0,
-                  color: Colors.grey,
+                  color: ColorsRes.grey,
                 ),
               ),
               IconButton(
@@ -71,7 +72,7 @@ class FoodEntriesTab extends StatelessWidget {
                 icon: const Icon(
                   Icons.delete_forever_rounded,
                   size: 16.0,
-                  color: Colors.redAccent,
+                  color: ColorsRes.redAccent,
                 ),
               )
             ],

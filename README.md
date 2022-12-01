@@ -105,9 +105,9 @@ Presentation-layer directory structure:
 
 ```
 presentation
-|- constants
+|- res
 |   |- colors
-|       |- app_colors.dart
+|       |- colors_res.dart
 |- screens
 |   |- auth_page
 |       |- states
