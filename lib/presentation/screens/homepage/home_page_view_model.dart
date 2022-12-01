@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/food_entry.dart';
 import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
 import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
-import 'package:totaltest/presentation/res/colors.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
 
 class HomePageViewModel extends StateNotifier<HomePageViewState> {
@@ -64,7 +64,7 @@ class HomePageViewModel extends StateNotifier<HomePageViewState> {
 
         state = const HomePageViewState.showSnackBar(
           message: "Entry added succesfully",
-          backgroundColor: AppColor.successGreen,
+          backgroundColor: ColorsRes.successGreen,
         );
 
         state = _cachedState;
@@ -87,7 +87,7 @@ class HomePageViewModel extends StateNotifier<HomePageViewState> {
         _cachedState = state;
         state = const HomePageViewState.showSnackBar(
           message: "Error Updating Limit",
-          backgroundColor: AppColor.errorRed,
+          backgroundColor: ColorsRes.errorRed,
         );
         state = _cachedState;
       },
@@ -96,7 +96,7 @@ class HomePageViewModel extends StateNotifier<HomePageViewState> {
 
         state = const HomePageViewState.showSnackBar(
           message: "Daily Limit Updated Successfully",
-          backgroundColor: AppColor.successGreen,
+          backgroundColor: ColorsRes.successGreen,
         );
         state = _cachedState;
 

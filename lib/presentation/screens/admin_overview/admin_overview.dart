@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/domain/entities/user_profile.dart';
 import 'package:totaltest/domain/providers/admin/admin_provider.dart';
 import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
+import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/admin_details/admin_details.dart';
 import 'package:totaltest/presentation/screens/admin_overview/admin_overview_view_model.dart';
 import 'package:totaltest/presentation/screens/admin_overview/state/admin_overview_view_state.dart';
@@ -81,7 +82,7 @@ class AdminOverviewState extends ConsumerState<AdminOverview> {
                         },
                       ),
                       const Divider(
-                        color: Colors.grey,
+                        color: ColorsRes.grey,
                       ),
                     ],
                   );
