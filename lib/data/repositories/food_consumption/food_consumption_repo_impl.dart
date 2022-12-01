@@ -6,7 +6,7 @@ import 'package:totaltest/domain/data_sources/remote/authentication/authenticati
 import 'package:totaltest/domain/data_sources/remote/database/remote_database_data_source.dart';
 import 'package:totaltest/domain/repositories/food_consumption/food_consumption_repo.dart';
 
-import '../../../core/constants/preference_strings.dart';
+import '../../../core/constants/local_storage_constants.dart';
 
 class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
   final AuthenticationDataSource _authenticationDataSource;
@@ -63,7 +63,7 @@ class FoodConsumptionRepoImpl extends FoodConsumptionRepo {
         (l) => Left(l),
         (r) {
           _localStorageDataSource.setDouble(
-              SharedPreferences.calorieLimit, calories);
+              LocalStorageConstants.calorieLimit, calories);
           return Right(AppSuccess());
         },
       );

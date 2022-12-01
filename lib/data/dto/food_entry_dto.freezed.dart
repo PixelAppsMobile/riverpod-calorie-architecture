@@ -20,11 +20,13 @@ FoodEntryDto _$FoodEntryDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FoodEntryDto {
-  String get name => throw _privateConstructorUsedError;
+  String get name =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: "entry_time")
   DateTime get time => throw _privateConstructorUsedError;
   double get calorificValue => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  String? get imageUrl =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: "document_id")
   String? get documentId => throw _privateConstructorUsedError;
 
@@ -165,6 +167,7 @@ class _$_FoodEntryDto implements _FoodEntryDto {
 
   @override
   final String name;
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: "entry_time")
   final DateTime time;
@@ -172,6 +175,7 @@ class _$_FoodEntryDto implements _FoodEntryDto {
   final double calorificValue;
   @override
   final String? imageUrl;
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: "document_id")
   final String? documentId;
@@ -229,14 +233,14 @@ abstract class _FoodEntryDto implements FoodEntryDto {
 
   @override
   String get name;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: "entry_time")
   DateTime get time;
   @override
   double get calorificValue;
   @override
   String? get imageUrl;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: "document_id")
   String? get documentId;
   @override

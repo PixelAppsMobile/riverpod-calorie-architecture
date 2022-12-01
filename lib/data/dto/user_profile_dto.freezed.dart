@@ -20,11 +20,11 @@ UserProfileDto _$UserProfileDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserProfileDto {
-  @JsonKey(name: FirestoreStrings.isAdmin)
+  @JsonKey(name: FirestoreConstants.isAdmin)
   bool get isAdmin => throw _privateConstructorUsedError;
-  @JsonKey(name: FirestoreStrings.calorieLimit)
+  @JsonKey(name: FirestoreConstants.calorieLimit)
   double get calorieLimit => throw _privateConstructorUsedError;
-  @JsonKey(name: FirestoreStrings.userId)
+  @JsonKey(name: FirestoreConstants.userId)
   String get userId => throw _privateConstructorUsedError;
   List<FoodEntry>? get foodEntries => throw _privateConstructorUsedError;
 
@@ -41,9 +41,9 @@ abstract class $UserProfileDtoCopyWith<$Res> {
       _$UserProfileDtoCopyWithImpl<$Res, UserProfileDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: FirestoreStrings.isAdmin) bool isAdmin,
-      @JsonKey(name: FirestoreStrings.calorieLimit) double calorieLimit,
-      @JsonKey(name: FirestoreStrings.userId) String userId,
+      {@JsonKey(name: FirestoreConstants.isAdmin) bool isAdmin,
+      @JsonKey(name: FirestoreConstants.calorieLimit) double calorieLimit,
+      @JsonKey(name: FirestoreConstants.userId) String userId,
       List<FoodEntry>? foodEntries});
 }
 
@@ -95,9 +95,9 @@ abstract class _$$_UserProfileDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: FirestoreStrings.isAdmin) bool isAdmin,
-      @JsonKey(name: FirestoreStrings.calorieLimit) double calorieLimit,
-      @JsonKey(name: FirestoreStrings.userId) String userId,
+      {@JsonKey(name: FirestoreConstants.isAdmin) bool isAdmin,
+      @JsonKey(name: FirestoreConstants.calorieLimit) double calorieLimit,
+      @JsonKey(name: FirestoreConstants.userId) String userId,
       List<FoodEntry>? foodEntries});
 }
 
@@ -142,9 +142,12 @@ class __$$_UserProfileDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserProfileDto implements _UserProfileDto {
   const _$_UserProfileDto(
-      {@JsonKey(name: FirestoreStrings.isAdmin) required this.isAdmin,
-      @JsonKey(name: FirestoreStrings.calorieLimit) required this.calorieLimit,
-      @JsonKey(name: FirestoreStrings.userId) required this.userId,
+      {@JsonKey(name: FirestoreConstants.isAdmin)
+          required this.isAdmin,
+      @JsonKey(name: FirestoreConstants.calorieLimit)
+          required this.calorieLimit,
+      @JsonKey(name: FirestoreConstants.userId)
+          required this.userId,
       final List<FoodEntry>? foodEntries})
       : _foodEntries = foodEntries;
 
@@ -152,13 +155,13 @@ class _$_UserProfileDto implements _UserProfileDto {
       _$$_UserProfileDtoFromJson(json);
 
   @override
-  @JsonKey(name: FirestoreStrings.isAdmin)
+  @JsonKey(name: FirestoreConstants.isAdmin)
   final bool isAdmin;
   @override
-  @JsonKey(name: FirestoreStrings.calorieLimit)
+  @JsonKey(name: FirestoreConstants.calorieLimit)
   final double calorieLimit;
   @override
-  @JsonKey(name: FirestoreStrings.userId)
+  @JsonKey(name: FirestoreConstants.userId)
   final String userId;
   final List<FoodEntry>? _foodEntries;
   @override
@@ -208,11 +211,11 @@ class _$_UserProfileDto implements _UserProfileDto {
 
 abstract class _UserProfileDto implements UserProfileDto {
   const factory _UserProfileDto(
-      {@JsonKey(name: FirestoreStrings.isAdmin)
+      {@JsonKey(name: FirestoreConstants.isAdmin)
           required final bool isAdmin,
-      @JsonKey(name: FirestoreStrings.calorieLimit)
+      @JsonKey(name: FirestoreConstants.calorieLimit)
           required final double calorieLimit,
-      @JsonKey(name: FirestoreStrings.userId)
+      @JsonKey(name: FirestoreConstants.userId)
           required final String userId,
       final List<FoodEntry>? foodEntries}) = _$_UserProfileDto;
 
@@ -220,13 +223,13 @@ abstract class _UserProfileDto implements UserProfileDto {
       _$_UserProfileDto.fromJson;
 
   @override
-  @JsonKey(name: FirestoreStrings.isAdmin)
+  @JsonKey(name: FirestoreConstants.isAdmin)
   bool get isAdmin;
   @override
-  @JsonKey(name: FirestoreStrings.calorieLimit)
+  @JsonKey(name: FirestoreConstants.calorieLimit)
   double get calorieLimit;
   @override
-  @JsonKey(name: FirestoreStrings.userId)
+  @JsonKey(name: FirestoreConstants.userId)
   String get userId;
   @override
   List<FoodEntry>? get foodEntries;

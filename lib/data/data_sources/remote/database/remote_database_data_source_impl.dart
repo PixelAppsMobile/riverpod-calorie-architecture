@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:totaltest/core/constants/firestore_strings.dart';
+import 'package:totaltest/core/constants/firestore_constants.dart';
 import 'package:totaltest/core/result_type.dart';
 import 'package:totaltest/data/dto/food_entry_dto.dart';
 import 'package:totaltest/data/dto/user_profile_dto.dart';
@@ -19,9 +19,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
       String uid, FoodEntryDto entry) async {
     try {
       final reference = await _firestore
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .doc(uid)
-          .collection(FirestoreStrings.foodEntryCollection)
+          .collection(FirestoreConstants.foodEntryCollection)
           .add(entry.toJson());
       final document = await reference.get();
       return Right(FoodEntryDto.fromJson(document.dataWithDocID));
@@ -35,9 +35,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
       String uid, String id) async {
     try {
       await _firestore
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .doc(uid)
-          .collection(FirestoreStrings.foodEntryCollection)
+          .collection(FirestoreConstants.foodEntryCollection)
           .doc(id)
           .delete();
       return Right(AppSuccess());
@@ -51,9 +51,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
       String uid) async {
     try {
       final snapshot = await _firestore
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .doc(uid)
-          .collection(FirestoreStrings.foodEntryCollection)
+          .collection(FirestoreConstants.foodEntryCollection)
           .orderBy("entry_time", descending: true)
           .get();
 
@@ -68,7 +68,7 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
   @override
   Future<Either<AppError, Map<String, dynamic>>> getUser(String uid) async {
     final doc = await FirebaseFirestore.instance
-        .collection(FirestoreStrings.usersCollection)
+        .collection(FirestoreConstants.usersCollection)
         .doc(uid)
         .get();
     return Right(doc.data()!);
@@ -79,9 +79,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
       String uid, double calories) async {
     try {
       await _firestore
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .doc(uid)
-          .update({FirestoreStrings.calorieLimit: calories});
+          .update({FirestoreConstants.calorieLimit: calories});
       return Right(AppSuccess());
     } catch (e) {
       return Left(AppError(title: e.toString()));
@@ -93,9 +93,9 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
       String uid, FoodEntryDto entry) async {
     try {
       await _firestore
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .doc(uid)
-          .collection(FirestoreStrings.foodEntryCollection)
+          .collection(FirestoreConstants.foodEntryCollection)
           .doc(entry.documentId)
           .update(entry.toJson().stripDocID);
       log("UPDATE COMPLETE");
@@ -109,7 +109,7 @@ class RemoteDatabaseDataSourceImpl implements RemoteDatabaseDataSource {
   Future<Either<AppError, List<UserProfileDto>>> fetchAllUsers() async {
     try {
       final snapshots = await FirebaseFirestore.instance
-          .collection(FirestoreStrings.usersCollection)
+          .collection(FirestoreConstants.usersCollection)
           .get();
       List<UserProfileDto> usersDtoList = snapshots.docs
           .map<UserProfileDto>((e) => e.userProfileFromDocSnapshot)
