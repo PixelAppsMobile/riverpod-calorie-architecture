@@ -127,6 +127,96 @@ Data flows from a Data Source to a View in the following way:
 
 View Model and Provider both maintain states but are different in their responsibilities. A View Model maintains a state of all the interactive components on the screen such as Text Field, Buttons, Loading Indicator. While a provider maintains the state of the actual data. For example, `App User Provider` maintains the state of the App User while `Auth Page View Model` is responsible for showing loaders or carrying out form-operations.
 
+### Exception Handling
+
+It is not the best choice to let exceptions freely propagate, having to remember to catch them somewhere else in the code. Instead, we want to catch exceptions as early as possible (in the Repository) and then return Failure objects from the methods in question.
+
+The [dartz](https://pub.dev/packages/dartz) package, brings functional programming (FP) to Dart.
+`Either<L, R>` type can be used to represent any two types at the same time and it's just perfect for error handling, where `L` is the Failure and `R` is the data. This way, the Failures don't have their own special "error flow" like exceptions do. They will get handled as any other data without using try/catch.
+
+Before we can proceed with writing the Use Cases, we have to define the Failures first, since they will be one part of Either return type. Failures will be used across multiple app features and layers, so let's create them in the core folder under a new error subfolder.
+
+```dart
+class Failure {
+  final String message;
+
+  Failure({this.message = "Unknown Error"});
+}
+```
+
+To demonstrate what repository contract, repository implementation, data source contract and data source contract should like, we will take Weather App as an example.
+
+**Repository contract:**
+
+```dart
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../entities/number_trivia.dart';
+
+abstract class WeatherRepository {
+  Future<Either<Failure, WeatherModel>> getWeatherNearMe();
+}
+```
+
+**Remote Data Source contract:**
+
+```dart
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/number_trivia.dart';
+
+abstract class RemoteDataSource {
+  Future<Either<Failure, WeatherModel>> getWeatherNearMe();
+}
+```
+
+**Remote Data Source Implementation:**
+
+```dart
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../../domain/repositories/remote_data_source.dart';
+
+class RemoteDataSourceImpl implements RemoteDataSource {
+  Future<Either<Failure, WeatherModel>> getWeatherNearMe() async {
+    try {
+      // DO SOMETHING
+      // SUCCESS
+      return Right(WeatherModel());
+      // FAILURE
+      return Left(Failure(message = <FAILURE_MESSAGE>));
+    }
+    catch(e) (
+      return Left(Failure());
+    }
+  }
+}
+```
+
+**Repository Implementation:**
+
+```dart
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/number_trivia.dart';
+
+class WeatherRepositoryImpl {
+  final RemoteDataSource _remoteDataSource; // Initialised using Dependency Injection
+
+  Future<Either<Failure, WeatherModel>> getWeatherNearMe() async {
+    final either = await _remoteDataSource.getWeatherNearMe();
+    return either.fold(
+            (l) => l,   // ON FAILURE
+            (r) => r,   // ON SUCCESS
+            );
+  }
+```
+
 ## References
 
 - [The Clean Architecture by Robert C. Martin (Uncle Bob)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
