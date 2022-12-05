@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:totaltest/core/result_type.dart';
@@ -18,13 +20,17 @@ class AppUserProvider extends AsyncNotifier<AppUser?> {
   late final UpdateCalorieLimitUseCase _updateCalorieLimitUseCase;
 
   @override
-  AppUser? build() {
+  FutureOr<AppUser?> build() async {
     _getAppUserUseCase = ref.read(getAppUserUseCase);
     _signOutUseCase = ref.read(signOutUseCase);
     _signInUsingCustomTokenUseCase = ref.read(signInUsingCustomTokenUseCase);
     _updateCalorieLimitUseCase = ref.read(updateCalorieLimitUseCase);
 
-    return null;
+    final result = await _getAppUserUseCase();
+    return result.fold(
+      (l) => null,
+      (r) => r,
+    );
   }
 
   //? The project contains Non-AsyncNotifier providers. This getter is made public
@@ -58,14 +64,6 @@ class AppUserProvider extends AsyncNotifier<AppUser?> {
     result.fold(
       (l) => AsyncError(l, StackTrace.current),
       (r) => state = const AsyncData(null),
-    );
-  }
-
-  Future<void> initialize() async {
-    final result = await _getAppUserUseCase();
-    state = result.fold(
-      (l) => AsyncError(l, StackTrace.current),
-      (r) => AsyncData(r),
     );
   }
 
