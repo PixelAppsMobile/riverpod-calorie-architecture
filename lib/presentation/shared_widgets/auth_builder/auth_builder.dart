@@ -25,17 +25,14 @@ class _AuthBuilderState extends ConsumerState<AuthBuilder> {
     authBuilderViewModel =
         StateNotifierProvider<AuthBuilderViewModel, AuthBuilderViewState>(
       (ref) {
-        AsyncValue userAsyncValue = ref.watch(appUserProvider);
-        AppUser? user;
+        AsyncValue<AppUser?> userAsyncValue = ref.watch(appUserProvider);
 
-        if (!userAsyncValue.isLoading && !userAsyncValue.hasError) {
-          user = userAsyncValue.value;
-        }
-
-        //* By checking userAsyncValue.hasError, we could also show error state on the screen.
-        //* Since, we do not have a error state for AuthBuilderView, we're not handling that here.
-
-        return AuthBuilderViewModel(user);
+        return userAsyncValue.maybeWhen(
+          data: (user) => AuthBuilderViewModel(user),
+          error: (error, stackTrace) => AuthBuilderViewModel(null),
+          loading: () => AuthBuilderViewModel(null),
+          orElse: () => AuthBuilderViewModel(null),
+        );
       },
     );
   }

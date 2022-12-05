@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:totaltest/domain/providers/food_consumption/user_food_consumption_provider.dart';
 import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
-import 'package:totaltest/presentation/res/colors/colors_res.dart';
 import 'package:totaltest/presentation/screens/homepage/home_page_view_model.dart';
 import 'package:totaltest/presentation/screens/homepage/state/home_page_view_state.dart';
 import 'package:totaltest/presentation/screens/homepage/widgets/calories_entry_form.dart';
+import 'package:totaltest/presentation/screens/homepage/widgets/calories_limit_exceeded_warning.dart';
+import 'package:totaltest/presentation/screens/homepage/widgets/food_entries_list.dart';
 import 'package:totaltest/presentation/screens/homepage/widgets/food_entry_form.dart';
-import 'package:totaltest/presentation/shared_widgets/buttons.dart';
 import 'package:totaltest/presentation/shared_widgets/loading_indicator.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -40,6 +39,54 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     HomePageViewState state = ref.watch(homePageViewModel);
 
+    _stateListeners();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Your Intake Overview"),
+        actions: state.maybeWhen(
+          ready: (_) => [
+            IconButton(
+              onPressed: () => _viewModel.logOut(),
+              icon: const Icon(Icons.exit_to_app),
+            ),
+          ],
+          orElse: () => null,
+        ),
+      ),
+      floatingActionButton: state.maybeWhen(
+        ready: (_) => FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => _viewModel.openAddFoodEntrySheet(),
+        ),
+        orElse: () => null,
+      ),
+      body: Column(
+        children: [
+          Builder(
+            builder: (context) => state.maybeWhen(
+              loading: () => const Center(
+                child: LoadingIndicators.basicLoadingIndicator,
+              ),
+              ready: (foodEntries) => FoodEntriesList(
+                foodEntries: foodEntries,
+              ),
+              showCaloriesLimitExceededWarning: () =>
+                  CaloriesLimiExceededWarning(
+                viewModel: _viewModel,
+              ),
+              error: (message) => Center(
+                child: Text(message),
+              ),
+              orElse: () => Container(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _stateListeners() {
     ref.listen<HomePageViewState>(
       homePageViewModel,
       (_, state) => state.maybeWhen(
@@ -67,82 +114,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           },
         ),
         orElse: () => null,
-      ),
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Your Intake Overview"),
-        actions: state.maybeWhen(
-          ready: (_) => [
-            IconButton(
-              onPressed: () => _viewModel.logOut(),
-              icon: const Icon(Icons.exit_to_app),
-            ),
-          ],
-          orElse: () => null,
-        ),
-      ),
-      floatingActionButton: state.maybeWhen(
-        ready: (_) => FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => _viewModel.openAddFoodEntrySheet(),
-        ),
-        orElse: () => null,
-      ),
-      body: Column(
-        children: [
-          Builder(
-            builder: (context) => state.maybeWhen(
-              loading: () =>
-                  const Center(child: LoadingIndicators.basicLoadingIndicator),
-              ready: (foodEntries) => Expanded(
-                child: ListView.builder(
-                  itemCount: foodEntries.length,
-                  itemBuilder: (context, index) {
-                    final foodEntry = foodEntries[index];
-                    return ListTile(
-                      title: Text(foodEntry.name),
-                      subtitle:
-                          Text(DateFormat.yMMMMEEEEd().format(foodEntry.time)),
-                      leading: Text(
-                        "${foodEntry.calorificValue} C",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              showCaloriesLimitExceededWarning: () => Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                color: ColorsRes.errorRed,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "You are ${_viewModel.extraCalories} calories over your daily limit",
-                        style: const TextStyle(color: ColorsRes.white),
-                      ),
-                    ),
-                    Buttons.whiteElevatedButton(
-                      () => _viewModel.openUpdateCalorieLimitSheet(),
-                      "Change",
-                      context,
-                    )
-                  ],
-                ),
-              ),
-              error: (message) => Center(
-                child: Text(message),
-              ),
-              orElse: () => Container(),
-            ),
-          ),
-        ],
       ),
     );
   }

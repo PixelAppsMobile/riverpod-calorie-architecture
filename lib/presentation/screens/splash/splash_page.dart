@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:totaltest/domain/providers/init_services/init_services_provider.dart';
-import 'package:totaltest/domain/providers/app_user/app_user_provider.dart';
 import 'package:totaltest/presentation/screens/splash/splash_page_view_model.dart';
 import 'package:totaltest/presentation/screens/splash/state/splash_page_view_state.dart';
 import 'package:totaltest/presentation/shared_widgets/auth_builder/auth_builder.dart';
@@ -23,7 +22,6 @@ class SplashPageState extends ConsumerState<SplashPage> {
     splashPageViewModel =
         StateNotifierProvider<SplashPageViewModel, SplashPageViewState>(
       (ref) => SplashPageViewModel(
-        ref.read(appUserProvider.notifier),
         ref.read(initServicesProvider),
       ),
     );

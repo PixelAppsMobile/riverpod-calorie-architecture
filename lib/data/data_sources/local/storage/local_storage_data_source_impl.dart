@@ -12,6 +12,7 @@ class LocalStorageDataSourceImpl implements LocalStorageDataSource {
   @override
   Future<Either<AppError, AppSuccess>> init() async {
     try {
+      await Future.delayed(const Duration(seconds: 5));
       preferences = await SharedPreferences.getInstance();
       return Right(AppSuccess());
     } catch (e) {
