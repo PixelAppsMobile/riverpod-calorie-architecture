@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:totaltest/domain/providers/init_services/init_services_provider.dart';
+import 'package:totaltest/presentation/res/routes/router.dart';
 import 'package:totaltest/presentation/screens/splash/splash_page_view_model.dart';
 import 'package:totaltest/presentation/screens/splash/state/splash_page_view_state.dart';
-import 'package:totaltest/presentation/shared_widgets/auth_builder/auth_builder.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -29,23 +30,25 @@ class SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final SplashPageViewState state =
-        ref.watch<SplashPageViewState>(splashPageViewModel);
+    ref.listen<SplashPageViewState>(
+      splashPageViewModel,
+      (_, state) => state.maybeWhen(
+        ready: () => context.go(AppRouter.rootRoute),
+        orElse: () => null,
+      ),
+    );
 
-    return state.when(
-      loading: () => const Scaffold(
-        body: Center(
-          child: Text(
-            "Calories Tracker",
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic,
-            ),
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "Calories Tracker",
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
           ),
         ),
       ),
-      ready: () => const AuthBuilder(),
     );
   }
 }
